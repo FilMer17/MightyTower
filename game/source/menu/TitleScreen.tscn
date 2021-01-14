@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/menu/TitleScreen.gd" type="Script" id=1]
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 0.8, 0.8 )
+centered = false
+
+[node name="LeftContainer" type="MarginContainer" parent="."]
+anchor_right = 0.781
+anchor_bottom = 1.0
+margin_right = 0.319946
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Sprite" parent="LeftContainer"]
+position = Vector2( 468, 120 )
+centered = false
+
+[node name="RightContainer" type="MarginContainer" parent="."]
+anchor_left = 0.781
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="VBoxContainer" parent="RightContainer"]
+margin_left = 140.0
+margin_top = 285.0
+margin_right = 140.0
+margin_bottom = 435.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 50
+
+[node name="NewGame" type="TextureButton" parent="RightContainer/ButtonContainer"]
+
+[node name="LoadGame" type="TextureButton" parent="RightContainer/ButtonContainer"]
+margin_top = 50.0
+margin_bottom = 50.0
+
+[node name="Settings" type="TextureButton" parent="RightContainer/ButtonContainer"]
+margin_top = 100.0
+margin_bottom = 100.0
+
+[node name="Quit" type="TextureButton" parent="RightContainer/ButtonContainer"]
+margin_top = 150.0
+margin_bottom = 150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="RightContainer/ButtonContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="RightContainer/ButtonContainer/LoadGame" to="." method="_on_LoadGame_pressed"]
+[connection signal="pressed" from="RightContainer/ButtonContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="RightContainer/ButtonContainer/Quit" to="." method="_on_Quit_pressed"]
