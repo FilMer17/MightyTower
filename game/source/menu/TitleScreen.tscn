@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/menu/TitleScreen.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -35,27 +36,33 @@ __meta__ = {
 }
 
 [node name="ButtonContainer" type="VBoxContainer" parent="RightContainer"]
-margin_left = 140.0
-margin_top = 285.0
-margin_right = 140.0
-margin_bottom = 435.0
+margin_left = 108.0
+margin_top = 253.0
+margin_right = 172.0
+margin_bottom = 467.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/separation = 50
 
 [node name="NewGame" type="TextureButton" parent="RightContainer/ButtonContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 2 )
 
 [node name="LoadGame" type="TextureButton" parent="RightContainer/ButtonContainer"]
-margin_top = 50.0
-margin_bottom = 50.0
+margin_top = 114.0
+margin_right = 64.0
+margin_bottom = 114.0
 
 [node name="Settings" type="TextureButton" parent="RightContainer/ButtonContainer"]
-margin_top = 100.0
-margin_bottom = 100.0
+margin_top = 164.0
+margin_right = 64.0
+margin_bottom = 164.0
 
 [node name="Quit" type="TextureButton" parent="RightContainer/ButtonContainer"]
-margin_top = 150.0
-margin_bottom = 150.0
+margin_top = 214.0
+margin_right = 64.0
+margin_bottom = 214.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

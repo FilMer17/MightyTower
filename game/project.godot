@@ -10,17 +10,30 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Iso",
+"language": "GDScript",
+"path": "res://source/map/Iso.gd"
+}, {
+"base": "Reference",
 "class": "Loader",
 "language": "GDScript",
 "path": "res://source/global/Loader.gd"
+}, {
+"base": "Resource",
+"class": "MapData",
+"language": "GDScript",
+"path": "res://source/data/MapData.gd"
 } ]
 _global_script_class_icons={
-"Loader": ""
+"Iso": "",
+"Loader": "",
+"MapData": ""
 }
 
 [application]
 
 config/name="MightyTower"
+run/main_scene="res://source/menu/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]

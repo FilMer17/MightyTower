@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/menu/NewGameMenu.gd" type="Script" id=1]
+
+[node name="NewGameMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+margin_left = 0.225037
+margin_top = 2.37842
+margin_right = 0.225098
+margin_bottom = 2.37842
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 0.2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="Panel/HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 200, 30 )
+
+[node name="ItemList" type="ItemList" parent="Panel/HBoxContainer"]
+margin_left = 204.0
+margin_right = 254.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+margin_left = 258.0
+margin_right = 318.0
+margin_bottom = 100.0
+alignment = 1
+
+[node name="Play" type="Button" parent="Panel/HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 60.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 60, 30 )
+text = "Play"
+
+[node name="Back" type="Button" parent="Panel/HBoxContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 60.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 60, 30 )
+text = "Back"
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/Back" to="." method="_on_Back_pressed"]

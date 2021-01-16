@@ -1,7 +1,8 @@
 extends Node
 
 var scenes := {
-	"TitleScreen" : "res://source/menu/TitleScreen.tscn"
+	"TitleScreen" : "res://source/menu/TitleScreen.tscn",
+	"NewGameMenu" : "res://source/menu/NewGameMenu.tscn"
 }
 
 func change(scene_name: String) -> void:
