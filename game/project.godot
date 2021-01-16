@@ -10,14 +10,19 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
-"class": "Iso",
+"class": "IsoGrid",
 "language": "GDScript",
-"path": "res://source/map/Iso.gd"
+"path": "res://source/map/IsoGrid.gd"
 }, {
 "base": "Reference",
 "class": "Loader",
 "language": "GDScript",
 "path": "res://source/global/Loader.gd"
+}, {
+"base": "Node2D",
+"class": "Map",
+"language": "GDScript",
+"path": "res://source/map/Map.gd"
 }, {
 "base": "Resource",
 "class": "MapData",
@@ -25,8 +30,9 @@ _global_script_classes=[ {
 "path": "res://source/data/MapData.gd"
 } ]
 _global_script_class_icons={
-"Iso": "",
+"IsoGrid": "",
 "Loader": "",
+"Map": "",
 "MapData": ""
 }
 
