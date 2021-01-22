@@ -20,3 +20,6 @@ export var max_amount := {
 	"material" : 0,
 	"ore" : 0
 }
+
+func _init(diffic: int) -> void:
+	pass

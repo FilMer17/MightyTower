@@ -4,8 +4,21 @@ class_name WorldData
 enum DIFFICULTY { easy, medium, hard }
 
 export var alias: String = ""
-export var settings: Resource = null
-export var resources: Resource = null
-export var map: Resource = null
+export var settings: Dictionary = {}
+export var resources: Dictionary = {}
+export var map: Dictionary = {}
+export var buildings: Dictionary = {}
+
+var settings_data: SettingsData = null
+var resources_data: ResourcesData = null
+var map_data: MapData = null
+var building_data: BuildingData = null
 
 export(DIFFICULTY) var difficulty = DIFFICULTY.easy
+
+func _init(diffic: int, als: String, mp_sz: int) -> void:
+	alias = als
+	settings_data = SettingsData.new()
+	resources_data = ResourcesData.new(diffic)
+	map_data = MapData.new(mp_sz)
+	building_data = BuildingData.new()

@@ -21,3 +21,4 @@ __meta__ = {
 [node name="GameUI" parent="." instance=ExtResource( 3 )]
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
+current = true
