@@ -18,7 +18,9 @@ export(DIFFICULTY) var difficulty = DIFFICULTY.easy
 
 func _init(diffic: int, als: String, mp_sz: int) -> void:
 	alias = als
+	difficulty = diffic
+	
 	settings_data = SettingsData.new()
-	resources_data = ResourcesData.new(diffic)
+	resources_data = ResourcesData.new()
 	map_data = MapData.new(mp_sz)
 	building_data = BuildingData.new()

@@ -9,7 +9,7 @@ var init_mouse_pos := Vector2()
 export var speed := 3500   # 4000 default
 export var zoom_step := 0.5   # 0.5 default
 export var zoom_max_in := 0.2   # 0.5 default
-export var zoom_max_out := 1.4   # 2.0 default
+export var zoom_max_out := 2.5   # 2.0 default
 
 onready var tween := $Tween
 

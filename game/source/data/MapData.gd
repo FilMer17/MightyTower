@@ -17,13 +17,13 @@ func create_terrain(_map_size: int) -> void:
 	map_size = _map_size
 	match map_size:
 		0:
-			width = 20 * 3
+			width = 30 * 3
 			height = width
 		1:
 			width = 50 * 3
 			height = width
 		2:
-			width = 80 * 3
+			width = 70 * 3
 			height = width
 	
 	var noise: OpenSimplexNoise = _create_noise()
@@ -51,7 +51,7 @@ func _get_terrain_data(noise_sample) -> TerrainData:
 	
 	if noise_sample < -0.1:
 		return TerrainData.new(terr.water)
-	if noise_sample < 0.0:
+	if noise_sample < -0.02:
 		return TerrainData.new(terr.sand)
 	if noise_sample < 0.3:
 		return TerrainData.new(terr.grass)
