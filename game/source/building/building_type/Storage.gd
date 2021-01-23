@@ -1,0 +1,2 @@
+extends BuildingType
+class_name Storage
