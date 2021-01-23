@@ -9,15 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
-"class": "BuildingData",
-"language": "GDScript",
-"path": "res://source/data/BuildingData.gd"
-}, {
 "base": "StaticBody2D",
 "class": "BuildingType",
 "language": "GDScript",
-"path": "res://source/building/building_type/BuildingType.gd"
+"path": "res://source/building/BuildingType.gd"
 }, {
 "base": "Node2D",
 "class": "GameWorld",
@@ -34,10 +29,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/data/MapData.gd"
 }, {
+"base": "Node",
+"class": "Resources",
+"language": "GDScript",
+"path": "res://source/world/Resources.gd"
+}, {
 "base": "Resource",
 "class": "ResourcesData",
 "language": "GDScript",
 "path": "res://source/data/ResourcesData.gd"
+}, {
+"base": "Node",
+"class": "Settings",
+"language": "GDScript",
+"path": "res://source/world/Settings.gd"
 }, {
 "base": "Resource",
 "class": "SettingsData",
@@ -60,12 +65,13 @@ _global_script_classes=[ {
 "path": "res://source/data/WorldData.gd"
 } ]
 _global_script_class_icons={
-"BuildingData": "",
 "BuildingType": "",
 "GameWorld": "",
 "IsoGrid": "",
 "MapData": "",
+"Resources": "",
 "ResourcesData": "",
+"Settings": "",
 "SettingsData": "",
 "Storage": "",
 "TerrainData": "",

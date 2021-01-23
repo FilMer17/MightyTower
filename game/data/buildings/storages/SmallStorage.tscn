@@ -6,6 +6,11 @@
 [node name="SmallStorage" type="StaticBody2D"]
 position = Vector2( 0, -16 )
 script = ExtResource( 2 )
+alias = "SmallStorage"
+size = Vector2( 2, 2 )
+cost = {
+"wood": 20
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

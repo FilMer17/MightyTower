@@ -12,7 +12,7 @@ export var buildings: Dictionary = {}
 var settings_data: SettingsData = null
 var resources_data: ResourcesData = null
 var map_data: MapData = null
-var building_data: BuildingData = null
+#var building_data: BuildingData = null
 
 export(DIFFICULTY) var difficulty = DIFFICULTY.easy
 
@@ -23,4 +23,4 @@ func _init(diffic: int, als: String, mp_sz: int) -> void:
 	settings_data = SettingsData.new()
 	resources_data = ResourcesData.new()
 	map_data = MapData.new(mp_sz)
-	building_data = BuildingData.new()
+#	building_data = BuildingData.new()
