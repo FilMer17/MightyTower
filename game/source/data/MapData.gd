@@ -8,9 +8,28 @@ export var width := 0
 export var height := 0
 
 export var terrain := {}
+export var buildings := {}
 
 func _init(mp_sz: int) -> void:
 	create_terrain(mp_sz)
+
+
+func save() -> Dictionary:
+	var data := {}
+	
+	data["map_size"] = map_size
+	data["width"] = width
+	data["height"] = height
+	data["terrain"] = terrain
+	data["buildings"] = buildings
+	
+	return data
+
+
+func load_data(data: Dictionary) -> void:
+	
+	
+	pass
 
 
 func create_terrain(_map_size: int) -> void:

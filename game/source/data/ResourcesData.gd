@@ -20,3 +20,20 @@ export var max_amount := {
 	"material" : 0,
 	"ore" : 0
 }
+
+func save() -> Dictionary:
+	var data := {}
+	
+	data["food"] = food
+	data["people"] = people
+	data["material"] = material
+	data["ore"] = ore
+	data["max_amount"] = max_amount
+	
+	return data
+
+
+func load_data(data: Dictionary) -> void:
+	
+	
+	pass
