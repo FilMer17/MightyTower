@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Buildings" type="YSort"]
+
+[node name="Residences" type="YSort" parent="."]
+
+[node name="Stores" type="YSort" parent="."]
+
+[node name="Houses" type="YSort" parent="."]
