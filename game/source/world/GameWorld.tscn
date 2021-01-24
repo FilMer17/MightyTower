@@ -1,4 +1,7 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/buildings/Buildings.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/map/Map.tscn" type="PackedScene" id=2]
 
 [node name="GameWorld" type="Node2D"]
 
@@ -10,4 +13,8 @@
 
 [node name="MapContainer" type="Node2D" parent="."]
 
+[node name="Map" parent="MapContainer" instance=ExtResource( 2 )]
+
 [node name="BuildingContainer" type="Node2D" parent="."]
+
+[node name="Buildings" parent="BuildingContainer" instance=ExtResource( 1 )]
