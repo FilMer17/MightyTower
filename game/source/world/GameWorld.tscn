@@ -6,6 +6,8 @@
 
 [node name="Resources" type="Node" parent="."]
 
+[node name="BuilderGrid" type="Node2D" parent="."]
+
 [node name="MapContainer" type="Node2D" parent="."]
 
 [node name="BuildingContainer" type="Node2D" parent="."]
