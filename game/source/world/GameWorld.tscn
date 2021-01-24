@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="GameWorld" type="Node2D"]
+
+[node name="Settings" type="Node" parent="."]
+
+[node name="Resources" type="Node" parent="."]
+
+[node name="MapContainer" type="Node2D" parent="."]
+
+[node name="BuildingContainer" type="Node2D" parent="."]
