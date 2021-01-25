@@ -17,11 +17,15 @@ func create(size: String) -> void:
 		for y in map_size:
 			terrain[Vector2(x, y)] = _get_terrain_data(noise.get_noise_2d(float(x), float(y)))
 	
+	save_data()
+
+func save_data() -> Dictionary:
 	data = {
 		"map_size" : map_size,
 		"terrain" : terrain
 	}
-	# save data to .save file
+	
+	return data
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()

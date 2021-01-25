@@ -23,6 +23,7 @@ export var max_amount := {
 var data: Dictionary = {}
 
 func create() -> void:
+	# set all data values
 	data = {
 		"food" : food,
 		"people" : people,
@@ -30,4 +31,17 @@ func create() -> void:
 		"ore" : ore,
 		"max_amount" : max_amount
 	}
-	# save data to .save file
+	# set all data values
+	
+	save_data()
+
+func save_data() -> Dictionary:
+	data = {
+		"food" : food,
+		"people" : people,
+		"material" : material,
+		"ore" : ore,
+		"max_amount" : max_amount
+	}
+	
+	return data

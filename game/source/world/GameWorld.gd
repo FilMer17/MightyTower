@@ -11,10 +11,27 @@ onready var buildings := $BuildingContainer/Buildings
 
 var sel_world: Dictionary = {}
 var path := "user://worlds/"
-
+var data: Dictionary = {}
 
 func _ready() -> void:
 	_load_game_data()
+
+func save_data() -> Dictionary:
+	data = {
+		"alias" : alias,
+		"settings" : settings.save_data(),
+		"resources" : resources.save_data(),
+		"map" : map.save_data()
+	}
+	
+	return data
+
+func _save_data_to_file() -> void:
+	world_data = save_data()
+	path += alias + ".save"
+	print(path)
+	
+	Data.save_dict_data(path, world_data)
 
 func _load_game_data() -> void:
 	sel_world = Global.selected_world
@@ -25,6 +42,8 @@ func _load_game_data() -> void:
 		resources.create()
 		var size = sel_world["map_size"]
 		map.create(size)
+		
+		_save_data_to_file()
 	else:
 #		path += alias + ".save"
 #		world_data = Data.load_data(path)
