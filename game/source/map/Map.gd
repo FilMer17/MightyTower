@@ -27,9 +27,13 @@ func save_data() -> Dictionary:
 	
 	return data
 
+func load_data(_data: Dictionary) -> void:
+	data = _data
+	map_size = _data["map_size"]
+	terrain = _data["terrain"]
+
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
-
 	var _noise := OpenSimplexNoise.new()
 	
 	_noise.seed = randi()

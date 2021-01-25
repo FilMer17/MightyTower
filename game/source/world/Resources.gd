@@ -2,7 +2,7 @@ extends Node
 
 export var food := 0
 export var people := {
-	"idle" : 5,
+	"idle" : 0,
 	"busy" : 0
 }
 export var material := {
@@ -45,3 +45,11 @@ func save_data() -> Dictionary:
 	}
 	
 	return data
+
+func load_data(_data: Dictionary) -> void:
+	data = _data
+	food = _data["food"]
+	people = _data["people"]
+	material = _data["material"]
+	ore = _data["ore"]
+	max_amount = _data["max_amount"]

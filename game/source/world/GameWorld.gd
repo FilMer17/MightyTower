@@ -28,28 +28,25 @@ func save_data() -> Dictionary:
 
 func _save_data_to_file() -> void:
 	world_data = save_data()
-	path += alias + ".save"
-	print(path)
 	
 	Data.save_dict_data(path, world_data)
 
 func _load_game_data() -> void:
 	sel_world = Global.selected_world
-	alias = sel_world.keys()[0] 
+	alias = sel_world.keys()[0]
+	path += alias + ".save"
 
 	if sel_world[alias]:
+		var size = sel_world["map_size"]
 		settings.create()
 		resources.create()
-		var size = sel_world["map_size"]
 		map.create(size)
-		
-		_save_data_to_file()
-	else:
-#		path += alias + ".save"
-#		world_data = Data.load_data(path)
 
-#		settings.data = world_data["settings"]
-#		resources.data = world_data["resources"]
-#		map.data = world_data["map"]
-#		buildings.data = world_data["buildings"]
+		_save_data_to_file()
 		pass
+	else:
+		world_data = Data.load_dict_data(path)
+		
+		settings.load_data(world_data["settings"])
+		resources.load_data(world_data["resources"])
+		map.load_data(world_data["map"])
