@@ -6,7 +6,9 @@ enum TERRAINS { grass, sand, stone, water }
 export(MAP_SIZE) var map_size: int = MAP_SIZE["M"]
 export var terrain: Dictionary = {}
 
-func create_terrain(size: String) -> void:
+var data: Dictionary = {}
+
+func create(size: String) -> void:
 	map_size = MAP_SIZE[size]
 	
 	var noise: OpenSimplexNoise = _create_noise()
@@ -14,6 +16,12 @@ func create_terrain(size: String) -> void:
 	for x in map_size:
 		for y in map_size:
 			terrain[Vector2(x, y)] = _get_terrain_data(noise.get_noise_2d(float(x), float(y)))
+	
+	data = {
+		"map_size" : map_size,
+		"terrain" : terrain
+	}
+	# save data to .save file
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
