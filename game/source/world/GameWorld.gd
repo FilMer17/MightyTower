@@ -1,5 +1,4 @@
 extends Node2D
-class_name GameWorld
 
 export var alias: String = ""
 
@@ -21,7 +20,7 @@ func _load_game_data() -> void:
 	alias = sel_world.keys()[0] 
 
 	if sel_world[alias]:
-		pass
+		create_map()
 	else:
 #		path += alias + ".save"
 #		world_data = Data.load_data(path)
@@ -31,3 +30,7 @@ func _load_game_data() -> void:
 #		map.data = world_data["map"]
 #		buildings.data = world_data["buildings"]
 		pass
+
+func create_map() -> void:
+	var size = sel_world["map_size"]
+	map.create_terrain(size)
