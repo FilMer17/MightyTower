@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://source/global/Global.gd"
+Data="*res://source/global/Data.gd"
 
 [display]
 
