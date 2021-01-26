@@ -27,4 +27,3 @@ func load_data(_data: Dictionary) -> void:
 	data = _data
 	screen_size = _data["screen_size"]
 	volume = _data["volume"]
-

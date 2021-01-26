@@ -6,10 +6,30 @@ export var day: int = 1
 export var hour: int = 0
 export var minute: int = 0
 
+var data: Dictionary = {}
+
 onready var clock: Timer = $Clock
 
 func _ready():
-	clock.start()
+#	clock.start()
+	pass
+
+func save_data() -> void:
+	data = {
+		"year" : year,
+		"month" : month,
+		"day" : day,
+		"hour" : hour,
+		"minute" : minute
+	}
+
+func load_data(_data: Dictionary) -> void:
+	data =  _data
+	year = _data["year"]
+	month = _data["month"]
+	day = _data["day"]
+	hour = _data["hour"]
+	minute = _data["minute"]
 
 func _on_Clock_timeout() -> void:
 	minute += 1

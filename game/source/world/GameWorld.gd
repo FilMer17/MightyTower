@@ -4,6 +4,7 @@ export var alias: String = ""
 export var world_data: Dictionary = {}
 
 onready var settings := $Settings
+onready var time := $Time
 onready var resources := $Resources
 onready var build_grid := $BuilderGrid
 onready var map := $MapContainer/Map
@@ -35,13 +36,14 @@ func _load_game_data() -> void:
 	sel_world = Global.selected_world
 	alias = sel_world.keys()[0]
 	path += alias + ".save"
-
+	
 	if sel_world[alias]:
 		var size = sel_world["map_size"]
 		settings.create()
 		resources.create()
 		map.create(size)
-
+		# timer is set to default
+		
 		_save_data_to_file()
 		pass
 	else:
@@ -50,3 +52,4 @@ func _load_game_data() -> void:
 		settings.load_data(world_data["settings"])
 		resources.load_data(world_data["resources"])
 		map.load_data(world_data["map"])
+		time.load_data(world_data["time"])
