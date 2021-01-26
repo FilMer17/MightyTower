@@ -13,11 +13,14 @@ script = ExtResource( 3 )
 [node name="Settings" type="Node" parent="."]
 script = ExtResource( 4 )
 
-[node name="Resources" type="Node" parent="."]
-script = ExtResource( 5 )
-
 [node name="Time" type="Node" parent="."]
 script = ExtResource( 6 )
+
+[node name="Clock" type="Timer" parent="Time"]
+wait_time = 0.001
+
+[node name="Resources" type="Node" parent="."]
+script = ExtResource( 5 )
 
 [node name="BuilderGrid" type="Node2D" parent="."]
 
@@ -28,3 +31,4 @@ script = ExtResource( 6 )
 [node name="BuildingContainer" type="Node2D" parent="."]
 
 [node name="Buildings" parent="BuildingContainer" instance=ExtResource( 1 )]
+[connection signal="timeout" from="Time/Clock" to="Time" method="_on_Clock_timeout"]
