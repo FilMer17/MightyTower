@@ -12,7 +12,7 @@ onready var clock: Timer = $Clock
 
 func _ready():
 #	clock.start()
-	pass
+	var __ = save_data()
 
 func save_data() -> void:
 	data = {
