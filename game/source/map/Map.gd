@@ -17,7 +17,7 @@ func create(size: String) -> void:
 		for y in map_size:
 			terrain[Vector2(x, y)] = _get_terrain_data(noise.get_noise_2d(float(x), float(y)))
 	
-	save_data()
+	var __ = save_data()
 
 func save_data() -> Dictionary:
 	data = {

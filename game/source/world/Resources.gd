@@ -33,7 +33,7 @@ func create() -> void:
 	}
 	# set all data values
 	
-	save_data()
+	var __ = save_data()
 
 func save_data() -> Dictionary:
 	data = {
