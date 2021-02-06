@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "ResourcesData",
+"language": "GDScript",
+"path": "res://source/data/ResourcesData.gd"
+}, {
+"base": "Resource",
 "class": "SettingsData",
 "language": "GDScript",
 "path": "res://source/data/SettingsData.gd"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://source/data/TimeData.gd"
 } ]
 _global_script_class_icons={
+"ResourcesData": "",
 "SettingsData": "",
 "TimeData": ""
 }
