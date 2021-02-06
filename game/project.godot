@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "SettingsData",
 "language": "GDScript",
 "path": "res://source/data/SettingsData.gd"
+}, {
+"base": "Resource",
+"class": "TimeData",
+"language": "GDScript",
+"path": "res://source/data/TimeData.gd"
 } ]
 _global_script_class_icons={
-"SettingsData": ""
+"SettingsData": "",
+"TimeData": ""
 }
 
 [application]
