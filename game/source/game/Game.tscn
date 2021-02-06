@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Game" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="TimeShader" type="CanvasLayer" parent="."]
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="GameCamera" type="Camera2D" parent="."]
