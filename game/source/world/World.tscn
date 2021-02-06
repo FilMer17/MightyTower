@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="World" type="Node2D"]
+
+[node name="Settings" type="Node" parent="."]
+
+[node name="Time" type="Node" parent="."]
+
+[node name="Resources" type="Node" parent="."]
+
+[node name="Map" type="Node2D" parent="."]
