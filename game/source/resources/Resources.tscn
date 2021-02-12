@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://source/resources/Resources.gd" type="Script" id=1]
+[ext_resource path="res://source/data/ResourcesData.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+food = 0
+people = {
+"busy": 0,
+"idle": 0
+}
+material = {
+"stone": 0,
+"wood": 0
+}
+ore = {
+"coal": 0,
+"iron": 0
+}
+max_amount = {
+"food": 0,
+"material": 0,
+"ore": 0,
+"people": 0
+}
+
+[node name="Resources" type="Node"]
+script = ExtResource( 1 )
+data = SubResource( 1 )
