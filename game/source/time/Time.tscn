@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://source/time/Time.gd" type="Script" id=1]
+[ext_resource path="res://source/data/TimeData.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+year = 1
+month = 1
+day = 1
+hour = 0
+minute = 0
+
+[node name="Time" type="Node"]
+script = ExtResource( 1 )
+data = SubResource( 1 )
