@@ -6,6 +6,10 @@ var worlds: Dictionary = {}
 var buildings: Dictionary = {}
 var entities: Dictionary = {}
 
+func _ready() -> void:
+	scan()
+
+
 func scan() -> void:
 	_load_worlds()
 	_load_buildings()
@@ -15,8 +19,8 @@ func scan() -> void:
 func _load_worlds() -> void:
 	worlds.clear()
 	
-	for file_data in FileSystem.load_dir("user://worlds", ["save", "data"]):
-		pass
+	for file_data in FileSystem.load_dir("user://worlds", ["save", "data"], false):
+		worlds[file_data.id] = file_data.data
 
 
 func _load_buildings() -> void:
