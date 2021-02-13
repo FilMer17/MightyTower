@@ -8,11 +8,19 @@ onready var resources = $Resources
 onready var map = $Map
 
 func _ready() -> void:
-	if GlobalData.selected_world["is_new"]:
-		pass
-	else:
-		data = GlobalData.selected_world["world"]
-		_load_world_data()
+	_create_world_data("S")
+	
+#	if GlobalData.selected_world["is_new"]:
+#		pass
+#	else:
+#		data = GlobalData.selected_world["world"]
+#		_load_world_data()
+
+func _create_world_data(diffic: String) -> void:
+	# settings default
+	# time default
+	resources.create_data(diffic)
+	map.create_data(diffic)
 
 func _load_world_data() -> void:
 	settings.load_data(data.settings)

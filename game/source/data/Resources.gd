@@ -35,3 +35,6 @@ func load_data(data: Dictionary) -> void:
 	material = data["material"]
 	ore = data["ore"]
 	max_amount = data["max_amount"]
+
+func create_data(_diffic: String) -> void:
+	pass
