@@ -6,7 +6,6 @@ onready var settings = $Settings
 onready var time = $Time
 onready var resources = $Resources
 onready var map = $Map
-onready var res_w_data := get_tree().get_nodes_in_group("res_world_data")
 
 func _ready() -> void:
 	if GlobalData.selected_world["is_new"]:
@@ -24,5 +23,7 @@ func _load_world_data() -> void:
 	data.name = GlobalData.selected_world["name"]
 
 func _save_world_data() -> void:
-	for w_data in res_w_data:
-		w_data.save_data()
+	data.settings = settings.save_data(data.settings)
+	data.time = time.save_data(data.time)
+	data.resources = resources.save_data(data.resources)
+	data.map = map.save_data(data.map)
