@@ -1,7 +1,8 @@
 extends Resource
 class_name WorldData
 
-export var settings: Resource = null
-export var time: Resource = null
-export var resources: Resource = null
-export var map: Resource = null
+export var name: String = ""
+export var settings: Dictionary = {}
+export var time: Dictionary = {}
+export var resources: Dictionary = {}
+export var map: Dictionary = {}

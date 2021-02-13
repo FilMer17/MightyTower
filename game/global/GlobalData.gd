@@ -1,6 +1,10 @@
 extends Node
 
-var selected_world: WorldData = null
+var selected_world: Dictionary = {
+	"is_new" : true,
+	"name" : "world1",
+	"world" : WorldData.new()
+}
 
 var worlds: Dictionary = {}
 var buildings: Dictionary = {}
