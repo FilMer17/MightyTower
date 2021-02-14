@@ -9,25 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
-"class": "BuildingTData",
-"language": "GDScript",
-"path": "res://source/buildings/BuildingTData.gd"
-}, {
 "base": "Node",
 "class": "IsoGrid",
 "language": "GDScript",
 "path": "res://source/map/grid/IsoGrid.gd"
-}, {
-"base": "StaticBody2D",
-"class": "Storage",
-"language": "GDScript",
-"path": "res://source/buildings/types/Storage.gd"
-}, {
-"base": "BuildingTData",
-"class": "StorageTData",
-"language": "GDScript",
-"path": "res://source/buildings/tdata/StorageTData.gd"
 }, {
 "base": "Resource",
 "class": "WorldData",
@@ -35,10 +20,7 @@ _global_script_classes=[ {
 "path": "res://source/data/WorldData.gd"
 } ]
 _global_script_class_icons={
-"BuildingTData": "",
 "IsoGrid": "",
-"Storage": "",
-"StorageTData": "",
 "WorldData": ""
 }
 

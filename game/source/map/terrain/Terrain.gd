@@ -7,10 +7,12 @@ export(MAP_SIZE) var map_size: int = MAP_SIZE["S"]
 
 export var data: Dictionary = {}
 
+var noise: OpenSimplexNoise = null
+
 func create_terrain(size: String) -> void:
 	map_size = MAP_SIZE[size]
 	
-	var noise: OpenSimplexNoise = _create_noise()
+	noise = _create_noise()
 	
 	for x in map_size:
 		for y in map_size:
