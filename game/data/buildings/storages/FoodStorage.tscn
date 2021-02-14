@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/buildings/types/Storage.gd" type="Script" id=1]
+
+[node name="FoodStorage" type="StaticBody2D"]
+script = ExtResource( 1 )
+alias = "Food Storage"
+size = Vector2( 2, 2 )
+type = 1
+capacity = 20
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
