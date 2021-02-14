@@ -17,7 +17,6 @@ func create_entities(terrain, diffic: String) -> void:
 			if not temp_data[Vector2(x, y)] == null:
 				data[Vector2(x, y)] = temp_data[Vector2(x, y)]
 	
-	data[Vector2(0, 0)] = GlobalData.entities["Stone"]
 	_place_entities(grid)
 
 func _create_noise() -> OpenSimplexNoise:

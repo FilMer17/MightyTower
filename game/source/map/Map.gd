@@ -13,7 +13,7 @@ func save_data() -> Dictionary:
 	var data := {}
 	data["terrain"] = terrain.data
 #	data["buildings"] = buildings.data
-#	data["entities"] = entities.data
+	data["entities"] = entities.data
 	
 	return data
 
