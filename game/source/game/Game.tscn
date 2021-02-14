@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/world/World.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/game/camera/GameCamera.tscn" type="PackedScene" id=2]
 
 [node name="Game" type="Node2D"]
 
@@ -10,4 +11,5 @@
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
-[node name="GameCamera" type="Camera2D" parent="."]
+[node name="GameCamera" parent="." instance=ExtResource( 2 )]
+current = true
