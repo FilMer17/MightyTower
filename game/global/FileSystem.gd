@@ -8,11 +8,11 @@ func _get_directory_data(path: String, directory_data: Array, extentions: Array,
 	var directory := Directory.new()
 
 	if not directory.open(path) == OK:
-		print("Loader: failed to load ", path, ", return [] (open)")
+		print("FileSystem: failed to load ", path, ", return [] (open)")
 		return []
 
 	if not directory.list_dir_begin(true, true) == OK:
-		print("Loader: failed to load ", path, ", return [] (list_dir_begin)")
+		print("FileSystem: failed to load ", path, ", return [] (list_dir_begin)")
 		return []
 
 	var sub_path := ""

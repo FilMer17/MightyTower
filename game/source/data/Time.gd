@@ -35,6 +35,9 @@ func change_clock_state() -> void:
 	else:
 		clock.stop()
 
+func change_clock_speed(_speed: int) -> void:
+	speed = _speed
+	clock.wait_time = speed
 
 func _on_Clock_timeout():
 	minute += 1

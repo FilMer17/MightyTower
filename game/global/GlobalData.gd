@@ -36,3 +36,6 @@ func _load_buildings() -> void:
 
 func _load_entities() -> void:
 	entities.clear()
+	
+	for file_data in FileSystem.load_dir("res://data/entities", ["tscn", "scn"]):
+		entities[file_data.data.instance().name] = file_data.data
