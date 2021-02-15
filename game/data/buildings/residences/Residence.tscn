@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/buildings/types/Residence.gd" type="Script" id=1]
+[ext_resource path="res://graphics/buildings/residences/Wood.png" type="Texture" id=2]
+
+[node name="Residence" type="StaticBody2D"]
+script = ExtResource( 1 )
+alias = "Residence"
+size = Vector2( 2, 2 )
+cost = {
+
+}
+food_storage = 10
+material_storage = 10
+people = 5
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]

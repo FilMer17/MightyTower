@@ -13,6 +13,8 @@ export(TYPE) var type: int = TYPE.residence
 onready var sprite := $Sprite
 onready var collider := $Collider
 
+var is_placed: bool = false
+
 func _enter_tree():
 	if not $Sprite:
 		sprite = Sprite.new()
