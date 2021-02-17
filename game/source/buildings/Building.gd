@@ -8,6 +8,7 @@ export var alias: String = ""
 export var size := Vector2()
 export var cost: Dictionary = {}
 export var level: int = 1
+export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 0}
 export(TYPE) var type: int = TYPE.residence
 
 onready var sprite := $Sprite

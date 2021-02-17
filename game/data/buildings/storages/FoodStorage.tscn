@@ -6,6 +6,13 @@
 script = ExtResource( 1 )
 alias = "Food Storage"
 size = Vector2( 2, 2 )
+cost = {
+
+}
+cooldown = {
+"day": 0,
+"hour": 0
+}
 type = 1
 capacity = 20
 

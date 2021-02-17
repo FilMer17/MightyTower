@@ -13,3 +13,6 @@
 
 [node name="GameCamera" parent="." instance=ExtResource( 2 )]
 current = true
+zoom_step = 0.2
+zoom_max_in = 0.2
+zoom_max_out = 0.6

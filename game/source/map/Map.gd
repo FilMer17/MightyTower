@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var grid := $IsoGrid
 onready var terrain := $Terrain
 onready var buildings := $Buildings
 onready var entities := $Entities
+onready var builder := $Builder
 
 func load_data(data: Dictionary) -> void:
 	terrain.data = data["terrain"]
@@ -19,5 +19,5 @@ func save_data() -> Dictionary:
 
 func create_data(diffic: String) -> void:
 	terrain.create_terrain(diffic)
-#	buildings.build_building("Residence")
+	builder.build("Residence")
 	entities.create_entities(terrain.data, diffic)

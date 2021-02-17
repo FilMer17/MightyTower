@@ -10,6 +10,10 @@ size = Vector2( 2, 2 )
 cost = {
 
 }
+cooldown = {
+"day": 0,
+"hour": 0
+}
 food_storage = 10
 material_storage = 10
 people = 5

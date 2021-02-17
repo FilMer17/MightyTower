@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/popup/PopupPlaceMenu.gd" type="Script" id=1]
+
+[node name="PopupPlaceMenu" type="PopupPanel"]
+rect_min_size = Vector2( 73, 38 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HContainer" type="HBoxContainer" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 74.0
+margin_bottom = 36.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Yes" type="Button" parent="HContainer"]
+margin_right = 33.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+action_mode = 0
+text = "YES"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="No" type="Button" parent="HContainer"]
+margin_left = 37.0
+margin_right = 70.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+action_mode = 0
+text = "NO"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -27,7 +27,6 @@ func load_data(data: Dictionary) -> void:
 	hour = data["hour"]
 	minute = data["minute"]
 
-
 func change_clock_state() -> void:
 	is_paused = !is_paused
 	if not is_paused:

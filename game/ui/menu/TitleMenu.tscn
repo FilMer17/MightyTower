@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://graphics/menu/buttons/NewGameButton.png" type="Texture" id=2]
+[ext_resource path="res://ui/menu/TitleMenu.gd" type="Script" id=3]
+
+[node name="TitleMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="TextureRect" parent="."]
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.6
+anchor_bottom = 0.3
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.7
+anchor_right = 0.9
+anchor_bottom = 1.0
+custom_constants/separation = 70
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="TextureButton" parent="VBoxContainer"]
+margin_top = 127.0
+margin_right = 256.0
+margin_bottom = 191.0
+rect_min_size = Vector2( 256, 64 )
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="LoadGame" type="TextureButton" parent="VBoxContainer"]
+margin_top = 261.0
+margin_right = 256.0
+margin_bottom = 325.0
+rect_min_size = Vector2( 256, 64 )
+disabled = true
+texture_normal = ExtResource( 1 )
+expand = true
+
+[node name="Settings" type="TextureButton" parent="VBoxContainer"]
+margin_top = 395.0
+margin_right = 256.0
+margin_bottom = 459.0
+rect_min_size = Vector2( 256, 64 )
+disabled = true
+texture_normal = ExtResource( 1 )
+expand = true
+
+[node name="Quit" type="TextureButton" parent="VBoxContainer"]
+margin_top = 529.0
+margin_right = 256.0
+margin_bottom = 593.0
+rect_min_size = Vector2( 256, 64 )
+texture_normal = ExtResource( 2 )
+expand = true
+[connection signal="pressed" from="VBoxContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

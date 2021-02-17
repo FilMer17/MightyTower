@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "IsoGrid",
 "language": "GDScript",
-"path": "res://source/map/grid/IsoGrid.gd"
+"path": "res://source/map/IsoGrid.gd"
 }, {
 "base": "Building",
 "class": "Residence",
@@ -51,12 +51,14 @@ _global_script_class_icons={
 [application]
 
 config/name="MightyTower"
+run/main_scene="res://ui/menu/TitleMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GlobalData="*res://global/GlobalData.gd"
 FileSystem="*res://global/FileSystem.gd"
+Scene="*res://global/Scene.gd"
 
 [display]
 
@@ -77,6 +79,11 @@ scroll_up={
 scroll_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+place_building={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

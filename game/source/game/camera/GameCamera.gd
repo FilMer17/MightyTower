@@ -13,6 +13,9 @@ export var zoom_max_out := 2.0
 
 onready var tween := $Tween
 
+func _ready() -> void:
+	zoom = Vector2(zoom_max_out / 2, zoom_max_out / 2)
+
 func _input(event: InputEvent) -> void:
 	_handle_pitch_to_zoom(event)
 	_handle_pan_gesture(event)
