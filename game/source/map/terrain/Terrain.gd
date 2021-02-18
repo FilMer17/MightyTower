@@ -20,7 +20,7 @@ func create_terrain(size: String) -> void:
 
 func draw_terrain() -> void:
 	for pos in data.keys():
-		set_cellv(pos, data[pos])
+		set_cellv(pos, data[pos]["terrain"])
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
@@ -34,12 +34,12 @@ func _create_noise() -> OpenSimplexNoise:
 	
 	return _noise
 
-func _get_new_terrain_data(noise_sample: float) -> int:
+func _get_new_terrain_data(noise_sample: float) -> Dictionary:
 	if noise_sample < -0.1:
-		return TERRAINS.water
+		return {"terrain" : TERRAINS.water, "placed" : ""}
 	if noise_sample < -0.02:
-		return TERRAINS.sand
+		return {"terrain" : TERRAINS.sand, "placed" : ""}
 	if noise_sample < 0.3:
-		return TERRAINS.grass
+		return {"terrain" : TERRAINS.grass, "placed" : ""}
 	
-	return TERRAINS.stone
+	return {"terrain" : TERRAINS.stone, "placed" : ""}

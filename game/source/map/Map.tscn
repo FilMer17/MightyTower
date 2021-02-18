@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://source/map/Builder.gd" type="Script" id=1]
 [ext_resource path="res://source/map/Map.gd" type="Script" id=2]
@@ -68,6 +68,20 @@
 3/shapes = [  ]
 3/z_index = 0
 
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 current_color: hint_color;
+
+void fragment() {
+	vec4 final = mix(texture(TEXTURE, UV), current_color, texture(TEXTURE, UV).a);
+	COLOR = final;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/current_color = null
+
 [node name="Map" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -80,8 +94,11 @@ tile_set = SubResource( 1 )
 
 [node name="Builder" type="Node2D" parent="."]
 script = ExtResource( 1 )
+right_color = Color( 0.862745, 0.705882, 0.196078, 0.666667 )
+wrong_color = Color( 0.901961, 0.156863, 0.156863, 0.666667 )
 
 [node name="Sprite" type="Sprite" parent="Builder"]
 visible = false
+material = SubResource( 3 )
 
 [node name="MenuContainer" type="Node2D" parent="Builder"]

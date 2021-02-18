@@ -20,4 +20,4 @@ func save_data() -> Dictionary:
 func create_data(diffic: String) -> void:
 	terrain.create_terrain(diffic)
 	builder.build("Residence")
-	entities.create_entities(terrain.data, diffic)
+	entities.create_entities(diffic)
