@@ -12,10 +12,12 @@ var w_name: String = ""
 func _ready() -> void:
 	if GlobalData.selected_world["is_new"]:
 		_create_world_data("S")
+		time.change_clock_state()
 	
 	else:
 		data = GlobalData.selected_world["world"]
 		_load_world_data()
+		time.change_clock_state()
 
 func _create_world_data(diffic: String) -> void:
 	# settings default
@@ -23,7 +25,6 @@ func _create_world_data(diffic: String) -> void:
 	w_name = GlobalData.selected_world["name"]
 	resources.create_data(diffic)
 	map.create_data(diffic)
-
 
 func _load_world_data() -> void:
 	w_name = GlobalData.selected_world["name"]

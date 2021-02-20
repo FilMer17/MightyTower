@@ -7,9 +7,7 @@ export var people := {
 }
 export var material := {
 	"wood" : 0,
-	"stone" : 0
-}
-export var ore := {
+	"stone" : 0,
 	"coal" : 0,
 	"iron" : 0
 }
@@ -25,7 +23,6 @@ func save_data() -> Dictionary:
 	data["food"] = food
 	data["people"] = people
 	data["material"] = material
-	data["ore"] = ore
 	data["max_amount"] = max_amount
 	return data
 
@@ -33,7 +30,6 @@ func load_data(data: Dictionary) -> void:
 	food = data["food"]
 	people = data["people"]
 	material = data["material"]
-	ore = data["ore"]
 	max_amount = data["max_amount"]
 
 func create_data(_diffic: String) -> void:

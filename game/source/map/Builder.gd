@@ -43,9 +43,10 @@ func _input(event):
 
 func _place_building(to_build: bool) -> void:
 	if to_build:
-		sprite.visible = false
-		buildings.place_building(building.name, grid.map_to_world(grid.world_to_map(sprite.position)))
-		building = null
+		var pos = grid.map_to_world(grid.world_to_map(sprite.position))
+		if buildings.place_building(building.name, pos):
+			sprite.visible = false
+			building = null
 
 	_clear_menu_container()
 	in_menu = false

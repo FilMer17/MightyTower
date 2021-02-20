@@ -8,17 +8,29 @@ script = ExtResource( 1 )
 alias = "Residence"
 size = Vector2( 2, 2 )
 cost = {
-
+"stone": 10,
+"wood": 10
 }
-cooldown = {
+build_cld = {
 "day": 0,
-"hour": 0
+"hour": 0,
+"minute": 5
 }
-food_storage = 10
-material_storage = 10
-people = 5
+material_storage = 50
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="Collider" type="CollisionPolygon2D" parent="."]
+
+[node name="Clock" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="CooldownLabel" type="Label" parent="."]
+margin_left = -24.0045
+margin_top = 2.50056
+margin_right = -24.0045
+margin_bottom = 16.5006
+__meta__ = {
+"_edit_use_anchors_": false
+}

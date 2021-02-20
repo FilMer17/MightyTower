@@ -6,7 +6,7 @@ export var day: int = 1
 export var hour: int = 0
 export var minute: int = 0
 
-export var speed: float = 0.1
+export var speed: float = 0.3
 export var is_paused := true
 
 onready var clock: Timer = $Clock

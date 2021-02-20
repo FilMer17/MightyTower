@@ -4,3 +4,9 @@
 
 [node name="Resources" type="Node"]
 script = ExtResource( 1 )
+material = {
+"coal": 0,
+"iron": 0,
+"stone": 10,
+"wood": 10
+}
