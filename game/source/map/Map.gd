@@ -21,3 +21,7 @@ func create_data(diffic: String) -> void:
 	terrain.create_terrain(diffic)
 	builder.build("Residence")
 	entities.create_entities(diffic)
+
+func _input(event):
+	if event.is_action_pressed("ui_home"):
+		builder.build("Residence")

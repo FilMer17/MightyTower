@@ -8,13 +8,13 @@ script = ExtResource( 1 )
 alias = "Residence"
 size = Vector2( 2, 2 )
 cost = {
-"stone": 10,
-"wood": 10
+"stone": 2,
+"wood": 2
 }
-build_cld = {
+cooldown = {
 "day": 0,
 "hour": 0,
-"minute": 5
+"minute": 20
 }
 material_storage = 50
 

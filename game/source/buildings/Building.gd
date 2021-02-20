@@ -8,7 +8,7 @@ export var alias: String = ""
 export var size := Vector2()
 export var cost: Dictionary = {}
 export var level: int = 1
-export var build_cld: Dictionary = { "day" : 0, "hour" : 0, "minute" : 0 }
+export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 0 }
 export(TYPE) var type: int = TYPE.residence
 
 onready var sprite := $Sprite
@@ -17,36 +17,38 @@ onready var clock := $Clock
 onready var cld_label := $CooldownLabel
 
 var is_built: bool = false
+var cld_temp: Dictionary = {}
 
 func _ready() -> void:
+	cld_temp = cooldown.duplicate()
 	var __ = clock.connect("timeout", self, "_on_build_cooldown")
 	clock.start()
 
 func _on_build_cooldown() -> void:
-	for key in build_cld.keys():
-		if build_cld[key] == 0:
-			var __ = build_cld.erase(key)
+	for key in cld_temp.keys():
+		if cld_temp[key] == 0:
+			var __ = cld_temp.erase(key)
 			if key == "minute":
 				_building_is_built()
 				return
 
-	build_cld.minute -= 1
-	if build_cld.minute == 0:
-		if build_cld.keys().size() <= 1:
+	cld_temp.minute -= 1
+	if cld_temp.minute == 0:
+		if cld_temp.keys().size() <= 1:
 			_building_is_built()
 			return
 		else:
-			build_cld.minute = 59
-			build_cld.hour -= 1
-			if build_cld.keys().has("day") and build_cld.hour <= 0:
-				build_cld.day -= 1
-				build_cld.hour = 24
+			cld_temp.minute = 59
+			cld_temp.hour -= 1
+			if cld_temp.keys().has("day") and cld_temp.hour <= 0:
+				cld_temp.day -= 1
+				cld_temp.hour = 24
 
 	var output = []
-	for key in build_cld.keys():
-		if  build_cld.has(key):
-			output.append(String(build_cld[key]))
-	for i in range(0, build_cld.size()):
+	for key in cld_temp.keys():
+		if  cld_temp.has(key):
+			output.append(String(cld_temp[key]))
+	for i in range(0, cld_temp.size()):
 		if str(output[i]).length() == 1:
 			output[i] = "0" + String(output[i])
 	cld_label.text = PoolStringArray(output).join(":")
