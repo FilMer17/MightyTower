@@ -1,4 +1,4 @@
-extends Node2D
+extends YSort
 
 onready var resources := get_parent().get_parent().get_node("Resources")
 

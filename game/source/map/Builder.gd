@@ -45,6 +45,16 @@ func _place_building(to_build: bool) -> void:
 	if to_build:
 		var pos = grid.map_to_world(grid.world_to_map(sprite.position))
 		if buildings.place_building(building.name, pos):
+			var terrdir = IsoGrid.NEIGHBOR_TABLE
+			var b_pos = grid.world_to_map(sprite.position)
+			var terrains := [b_pos]
+			for i in range(1, building.size.x):
+				for j in range(3, 6):
+					terrains.append(b_pos + terrdir[j] * i)
+			
+			for terr in terrains:
+				terrain.data[terr]["placed"] = building.name
+			
 			sprite.visible = false
 			building = null
 

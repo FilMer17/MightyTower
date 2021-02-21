@@ -2,5 +2,5 @@
 
 [ext_resource path="res://source/map/buildings/Buildings.gd" type="Script" id=1]
 
-[node name="Buildings" type="Node2D"]
+[node name="Buildings" type="YSort"]
 script = ExtResource( 1 )

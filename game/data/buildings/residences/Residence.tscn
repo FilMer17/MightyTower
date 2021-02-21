@@ -27,10 +27,11 @@ texture = ExtResource( 2 )
 wait_time = 0.3
 
 [node name="CooldownLabel" type="Label" parent="."]
-margin_left = -24.0045
-margin_top = 2.50056
-margin_right = -24.0045
-margin_bottom = 16.5006
+margin_left = -24.0
+margin_top = 3.0
+margin_right = 25.0
+margin_bottom = 17.0
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
