@@ -2,27 +2,62 @@ tool
 extends StaticBody2D
 class_name Building
 
+onready var cooldown_bar_scene := preload("res://ui/bar/CooldownBar.tscn")
+
 enum TYPE { residence, storage, house }
 
 export var alias: String = ""
-export var size := Vector2()
+export var size := Vector2(1, 1)
 export var cost: Dictionary = {}
 export var level: int = 1
-export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 0 }
+export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1 }
 export(TYPE) var type: int = TYPE.residence
 
 onready var sprite := $Sprite
 onready var collider := $Collider
 onready var clock := $Clock
-onready var cld_label := $CooldownLabel
+onready var tween := $Tween as Tween
+
+var cld_bar = null
+var progress = null
 
 var is_built: bool = false
 var cld_temp: Dictionary = {}
+var cld_all_min: int = 0
+var cld_all_min_temp: int = 0
 
 func _ready() -> void:
+	var cld_bar_scene = cooldown_bar_scene.instance()
+	cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 4) * size.x + 5
+	cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 4) * size.x - 5
+	cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 4) * size.y
+	cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 4) * size.y
+
+	add_child(cld_bar_scene)
+	
+	cld_bar = get_node("CooldownBar")
+	progress = cld_bar.get_node("Progress")
+	
+	var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
+	font.size = 5 #font.size - fmod(size.x, 4)
+	cld_bar.get_node("Countdown").text = ""
+	
 	cld_temp = cooldown.duplicate()
 	var __ = clock.connect("timeout", self, "_on_build_cooldown")
 	clock.start()
+	
+	for i in range(0, 3):
+		match i:
+			0:
+				cld_all_min += cld_temp["day"] * 60 * 24
+			1:
+				cld_all_min += cld_temp["hour"] * 60
+			2:
+				cld_all_min += cld_temp["minute"]
+	
+	cld_all_min_temp = cld_all_min
+	progress.max_value = cld_all_min
+	progress.value = cld_all_min
 
 func _on_build_cooldown() -> void:
 	for key in cld_temp.keys():
@@ -31,7 +66,7 @@ func _on_build_cooldown() -> void:
 			if key == "minute":
 				_building_is_built()
 				return
-
+	
 	cld_temp.minute -= 1
 	if cld_temp.minute == 0:
 		if cld_temp.keys().size() <= 1:
@@ -43,25 +78,31 @@ func _on_build_cooldown() -> void:
 			if cld_temp.keys().has("day") and cld_temp.hour <= 0:
 				cld_temp.day -= 1
 				cld_temp.hour = 24
-
+	
 	var output = []
+	var countdown = cld_bar.get_node("Countdown")
 	for key in cld_temp.keys():
 		if  cld_temp.has(key):
-			output.append(String(cld_temp[key]))
+			output.append(String(cld_temp[key]) + key[0])
 	for i in range(0, cld_temp.size()):
 		if str(output[i]).length() == 1:
 			output[i] = "0" + String(output[i])
-	cld_label.text = PoolStringArray(output).join(":")
+	countdown.text = PoolStringArray(output).join(":")
+	
+	cld_all_min_temp -= 1
+	_on_cooldown_changed(cld_all_min_temp)
 
 func _building_is_built() -> void:
 	clock.stop()
 	print(alias, " was build")
 	is_built = true
-	cld_label.text = ""
+	cld_bar.visible = false
 
-
-func _set_max_amount() -> void:
-	pass
+func _on_cooldown_changed(value: int) -> void:
+	var __
+	__ = tween.stop(progress, "value")
+	__ = tween.interpolate_property(progress, "value", cld_all_min_temp, value, 0.3, Tween.TRANS_SINE, Tween.EASE_OUT)
+	__ = tween.start()
 
 func _enter_tree():
 	if not $Sprite:
@@ -86,9 +127,9 @@ func _enter_tree():
 		print("Node added: %s" % clock.name)
 		clock.wait_time = 0.3
 
-	if not $CooldownLabel:
-		cld_label = Label.new()
-		cld_label.name = "CooldownLabel"
-		add_child(cld_label)
-		cld_label.owner = get_tree().edited_scene_root
-		print("Node added: %s" % cld_label.name)
+	if not $Tween:
+		tween = Tween.new()
+		tween.name = "Tween"
+		add_child(tween)
+		tween.owner = get_tree().edited_scene_root
+		print("Node added: %s" % tween.name)

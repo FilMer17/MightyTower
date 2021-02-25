@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://graphics/interface/white.png" type="Texture" id=1]
+[ext_resource path="res://graphics/font/Pixeled.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+resource_local_to_scene = true
+size = 7
+extra_spacing_top = -2
+font_data = ExtResource( 2 )
+
+[node name="CooldownBar" type="Control"]
+margin_left = -64.0
+margin_top = -24.0
+margin_right = 64.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Progress" type="TextureProgress" parent="."]
+anchor_top = 0.33
+anchor_right = 1.0
+anchor_bottom = 0.66
+value = 75.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0, 0, 0, 0.588235 )
+tint_progress = Color( 1, 0, 0, 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Countdown" type="Label" parent="."]
+anchor_top = 0.33
+anchor_right = 1.0
+anchor_bottom = 0.66
+custom_fonts/font = SubResource( 1 )
+text = "00:00:00"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

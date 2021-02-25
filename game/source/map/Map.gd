@@ -19,7 +19,7 @@ func save_data() -> Dictionary:
 
 func create_data(diffic: String) -> void:
 	terrain.create_terrain(diffic)
-	builder.build("Residence")
+	builder.build("FoodStorage")
 	entities.create_entities(diffic)
 
 func _input(event):

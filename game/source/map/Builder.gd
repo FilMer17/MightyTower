@@ -15,9 +15,9 @@ var is_right_color: bool = false
 var building: Building = null
 
 func build(b_name: String) -> void:
-	sprite.visible = true
 	building = GlobalData.buildings[b_name].instance()
 	sprite.texture = building.get_node("Sprite").texture
+	sprite.visible = true
 
 func _physics_process(_delta):
 	if sprite.visible and !in_menu:
