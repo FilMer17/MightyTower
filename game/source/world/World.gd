@@ -13,7 +13,6 @@ func _ready() -> void:
 	if GlobalData.selected_world["is_new"]:
 		_create_world_data("S")
 		time.change_clock_state()
-	
 	else:
 		data = GlobalData.selected_world["world"]
 		_load_world_data()

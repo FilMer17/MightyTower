@@ -13,10 +13,11 @@ export var level: int = 1
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1 }
 export(TYPE) var type: int = TYPE.residence
 
-onready var sprite := $Sprite
-onready var collider := $Collider
-onready var clock := $Clock
+onready var sprite := $Sprite as Sprite
+onready var collider := $Collider as CollisionPolygon2D
+onready var clock := $Clock as Timer
 onready var tween := $Tween as Tween
+onready var gui_container := $GUIContainer as Node2D
 
 var cld_bar = null
 var progress = null
@@ -27,23 +28,31 @@ var cld_all_min: int = 0
 var cld_all_min_temp: int = 0
 
 func _ready() -> void:
-	var cld_bar_scene = cooldown_bar_scene.instance()
-	cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 4) * size.x + 5
-	cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 4) * size.x - 5
-	cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 4) * size.y
-	cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 4) * size.y
-
-	add_child(cld_bar_scene)
+	var __
 	
-	cld_bar = get_node("CooldownBar")
+	sprite.material = load("res://graphics/shader/BuildingMaterial.tres").duplicate()
+	
+	input_pickable = true
+	__ = connect("mouse_entered", self, "_on_Mouse_entered")
+	__ = connect("mouse_exited", self, "_on_Mouse_exited")
+	
+	var cld_bar_scene = cooldown_bar_scene.instance()
+	cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 4)
+	cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 4)
+	cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 6)
+	cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 6)
+
+	gui_container.add_child(cld_bar_scene)
+	
+	cld_bar = gui_container.get_node("CooldownBar")
 	progress = cld_bar.get_node("Progress")
 	
 	var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-	font.size = 5 #font.size - fmod(size.x, 4)
+	font.size = 5
 	cld_bar.get_node("Countdown").text = ""
 	
 	cld_temp = cooldown.duplicate()
-	var __ = clock.connect("timeout", self, "_on_build_cooldown")
+	__ = clock.connect("timeout", self, "_on_build_cooldown")
 	clock.start()
 	
 	for i in range(0, 3):
@@ -104,20 +113,19 @@ func _on_cooldown_changed(value: int) -> void:
 	__ = tween.interpolate_property(progress, "value", cld_all_min_temp, value, 0.3, Tween.TRANS_SINE, Tween.EASE_OUT)
 	__ = tween.start()
 
-func _enter_tree():
-	if not $Sprite:
-		sprite = Sprite.new()
-		sprite.name = "Sprite"
-		add_child(sprite)
-		sprite.owner = get_tree().edited_scene_root
-		print("Node added: %s" % sprite.name)
+func _on_Mouse_entered() -> void:
+	sprite.material.set_shader_param("is_hovered", true)
 
-	if not $Collider:
-		collider = CollisionPolygon2D.new()
-		collider.name = "Collider"
-		add_child(collider)
-		collider.owner = get_tree().edited_scene_root
-		print("Node added: %s" % collider.name)
+func _on_Mouse_exited() -> void:
+	sprite.material.set_shader_param("is_hovered", false)
+
+func _enter_tree():
+	if not $Tween:
+		tween = Tween.new()
+		tween.name = "Tween"
+		add_child(tween)
+		tween.owner = get_tree().edited_scene_root
+		print("Node added: %s" % tween.name)
 
 	if not $Clock:
 		clock = Timer.new()
@@ -127,9 +135,23 @@ func _enter_tree():
 		print("Node added: %s" % clock.name)
 		clock.wait_time = 0.3
 
-	if not $Tween:
-		tween = Tween.new()
-		tween.name = "Tween"
-		add_child(tween)
-		tween.owner = get_tree().edited_scene_root
-		print("Node added: %s" % tween.name)
+	if not $Sprite:
+		sprite = Sprite.new()
+		sprite.name = "Sprite"
+		add_child(sprite)
+		sprite.owner = get_tree().edited_scene_root
+		print("Node added: %s" % sprite.name)
+
+	if not $GUIContainer:
+		gui_container = Node2D.new()
+		gui_container.name = "GUIContainer"
+		add_child(gui_container)
+		gui_container.owner = get_tree().edited_scene_root
+		print("Node added: %s" % gui_container.name)
+
+	if not $Collider:
+		collider = CollisionPolygon2D.new()
+		collider.name = "Collider"
+		add_child(collider)
+		collider.owner = get_tree().edited_scene_root
+		print("Node added: %s" % collider.name)

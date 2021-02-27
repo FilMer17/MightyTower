@@ -1,9 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/buildings/types/Residence.gd" type="Script" id=1]
 [ext_resource path="res://graphics/buildings/residences/Wood.png" type="Texture" id=2]
+[ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/width = 1.0
+shader_param/pattern = 0
+shader_param/inside = false
+shader_param/add_margins = true
+shader_param/is_hovered = false
 
 [node name="Residence" type="StaticBody2D"]
+input_pickable = true
 script = ExtResource( 1 )
 alias = "Residence"
 size = Vector2( 2, 2 )
@@ -16,14 +27,19 @@ cooldown = {
 "hour": 1,
 "minute": 20
 }
+food_storage = 2
 material_storage = 50
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-
-[node name="Collider" type="CollisionPolygon2D" parent="."]
-
 [node name="Clock" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+texture = ExtResource( 2 )
+
+[node name="GUIContainer" type="Node2D" parent="."]
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 32, -32, 16, 0, 0, 32, 16 )
