@@ -19,16 +19,17 @@ script = ExtResource( 1 )
 alias = "Residence"
 size = Vector2( 2, 2 )
 cost = {
-"stone": 2,
-"wood": 2
+"stone": 10,
+"wood": 10
 }
 cooldown = {
 "day": 0,
-"hour": 1,
-"minute": 20
+"hour": 0,
+"minute": 5
 }
-food_storage = 2
+food_storage = 20
 material_storage = 50
+people_storage = 10
 
 [node name="Tween" type="Tween" parent="."]
 

@@ -40,6 +40,10 @@ func _input(event):
 			var menu = popup_place_menu.instance()
 			menu.rect_position = sprite.position + Vector2(30, -30)
 			$MenuContainer.add_child(menu)
+	if event.is_action_pressed("cancel_action") and sprite.visible:
+		_clear_menu_container()
+		in_menu = false
+		sprite.visible = false
 
 func _place_building(to_build: bool) -> void:
 	if to_build:

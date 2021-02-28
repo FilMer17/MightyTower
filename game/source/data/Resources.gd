@@ -15,7 +15,6 @@ export var max_amount := {
 	"food" : 0,
 	"people" : 0,
 	"material" : 0,
-	"ore" : 0
 }
 
 func save_data() -> Dictionary:
@@ -34,3 +33,46 @@ func load_data(data: Dictionary) -> void:
 
 func create_data(_diffic: String) -> void:
 	pass
+
+func add_resource(group: String, number: int, resource: String = "") -> void:
+	match group:
+		"food":
+			food += number
+			if food > max_amount["food"]:
+				food = max_amount["food"]
+				_check_max_amount("food")
+				return
+		"people":
+			if not resource == "":
+				people[resource] += number
+				_check_max_amount("people", resource)
+				return
+		"material":
+			if not resource == "":
+				material[resource] += number
+				_check_max_amount("material", resource)
+				return
+		"max_amount":
+			if not resource == "":
+				max_amount[resource] += number
+				return
+	
+	print(group + " or " + resource + " is wrong!")
+
+func _check_max_amount(group: String, resource: String = "") -> void:
+	match group:
+		"food":
+			if food > max_amount.food:
+				food = max_amount.food
+		"people":
+			var all_people := 0
+			for key in people.keys():
+				all_people += people[key]
+			if all_people > max_amount.people:
+				people[resource] -= (all_people - max_amount.people)
+		"material":
+			var all_material := 0
+			for key in material.keys():
+				all_material += material[key]
+			if all_material > max_amount.material:
+				material[resource] -= (all_material - max_amount.material)
