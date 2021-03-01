@@ -2,6 +2,7 @@ extends Node
 
 var scenes := {
 	"TitleScreen" : "res://ui/menu/TitleMenu.tscn",
+	"NewGameMenu" : "res://ui/menu/NewGameMenu.tscn",
 	"Game" : "res://source/game/Game.tscn"
 }
 

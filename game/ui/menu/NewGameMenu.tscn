@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://graphics/font/Pixeled.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/menu/NewGameMenu.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 10
+extra_spacing_top = -1
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 10
+font_data = ExtResource( 2 )
+
+[node name="NewGameMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+margin_left = 447.0
+margin_top = 328.0
+margin_right = 833.0
+margin_bottom = 392.0
+
+[node name="Name" type="LineEdit" parent="CenterContainer/HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+placeholder_text = "name"
+
+[node name="Size" type="OptionButton" parent="CenterContainer/HBoxContainer"]
+margin_left = 204.0
+margin_right = 243.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 2 )
+text = "S"
+flat = true
+items = [ "S", null, false, 0, null, "M", null, false, 1, null, "L", null, false, 2, null ]
+selected = 0
+
+[node name="Difficulty" type="OptionButton" parent="CenterContainer/HBoxContainer"]
+margin_left = 247.0
+margin_right = 318.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 3 )
+text = "EASY"
+flat = true
+items = [ "EASY", null, false, 0, null, "MEDIUM", null, false, 1, null, "HARD", null, false, 2, null ]
+selected = 0
+
+[node name="Play" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+margin_left = 322.0
+margin_right = 386.0
+margin_bottom = 64.0
+action_mode = 0
+texture_normal = ExtResource( 1 )
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Play" to="." method="_on_Play_pressed"]

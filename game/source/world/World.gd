@@ -11,7 +11,7 @@ var w_name: String = ""
 
 func _ready() -> void:
 	if GlobalData.selected_world["is_new"]:
-		_create_world_data("S")
+		_create_world_data(GlobalData.selected_world["size"])
 		time.change_clock_state()
 	else:
 		data = GlobalData.selected_world["world"]
