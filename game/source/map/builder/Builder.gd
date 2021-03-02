@@ -16,7 +16,7 @@ var building: Building = null
 
 func build(b_name: String) -> void:
 	building = GlobalData.buildings[b_name].instance()
-	sprite.texture = building.get_node("Sprite").texture
+	sprite.texture = building.get_node("BuildingContainer").get_node("Sprite").texture
 	sprite.visible = true
 
 func _physics_process(_delta):

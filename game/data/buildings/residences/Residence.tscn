@@ -8,7 +8,7 @@
 shader = ExtResource( 3 )
 shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/width = 1.0
-shader_param/pattern = 0
+shader_param/pattern = 1
 shader_param/inside = false
 shader_param/add_margins = true
 shader_param/is_hovered = false
@@ -31,16 +31,18 @@ food_storage = 20
 material_storage = 50
 people_storage = 10
 
-[node name="Tween" type="Tween" parent="."]
+[node name="BuildingContainer" type="Node2D" parent="."]
 
-[node name="Clock" type="Timer" parent="."]
+[node name="Tween" type="Tween" parent="BuildingContainer"]
+
+[node name="Clock" type="Timer" parent="BuildingContainer"]
 wait_time = 0.3
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="BuildingContainer"]
 material = SubResource( 1 )
 texture = ExtResource( 2 )
 
-[node name="GUIContainer" type="Node2D" parent="."]
+[node name="GUIContainer" type="Node2D" parent="BuildingContainer"]
 
 [node name="Collider" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( 0, 32, -32, 16, 0, 0, 32, 16 )

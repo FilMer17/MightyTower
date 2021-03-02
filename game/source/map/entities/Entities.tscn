@@ -2,5 +2,5 @@
 
 [ext_resource path="res://source/map/entities/Entities.gd" type="Script" id=1]
 
-[node name="Entities" type="Node2D"]
+[node name="Entities" type="YSort"]
 script = ExtResource( 1 )

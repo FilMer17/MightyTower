@@ -26,8 +26,10 @@ __meta__ = {
 [node name="Title" type="TextureRect" parent="."]
 anchor_left = 0.1
 anchor_top = 0.1
-anchor_right = 0.6
-anchor_bottom = 0.3
+anchor_right = 0.1
+anchor_bottom = 0.1
+margin_right = 621.0
+margin_bottom = 151.0
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -36,8 +38,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.7
-anchor_right = 0.9
-anchor_bottom = 1.0
+anchor_right = 0.7
+margin_right = 256.0
+margin_bottom = 720.0
 custom_constants/separation = 70
 alignment = 1
 __meta__ = {

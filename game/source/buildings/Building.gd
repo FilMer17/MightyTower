@@ -13,11 +13,12 @@ export var level: int = 1
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1 }
 export(TYPE) var type: int = TYPE.residence
 
-onready var sprite := $Sprite as Sprite
+onready var b_cont := $BuildingContainer
+onready var sprite := $BuildingContainer/Sprite as Sprite
 onready var collider := $Collider as CollisionPolygon2D
-onready var clock := $Clock as Timer
-onready var tween := $Tween as Tween
-onready var gui_container := $GUIContainer as Node2D
+onready var clock := $BuildingContainer/Clock as Timer
+onready var tween := $BuildingContainer/Tween as Tween
+onready var gui_container := $BuildingContainer/GUIContainer as Node2D
 
 var cld_bar = null
 var progress = null
@@ -120,32 +121,39 @@ func _on_Mouse_exited() -> void:
 	sprite.material.set_shader_param("is_hovered", false)
 
 func _enter_tree():
-	if not $Tween:
+	if not $BuildingContainer:
+		b_cont = Node2D.new()
+		b_cont.name = "BuildingContainer"
+		add_child(b_cont)
+		b_cont.owner = get_tree().edited_scene_root
+		print("Node added: %s" % b_cont.name)
+
+	if not $BuildingContainer/Tween:
 		tween = Tween.new()
 		tween.name = "Tween"
-		add_child(tween)
+		get_node("BuildingContainer").add_child(tween)
 		tween.owner = get_tree().edited_scene_root
 		print("Node added: %s" % tween.name)
 
-	if not $Clock:
+	if not $BuildingContainer/Clock:
 		clock = Timer.new()
 		clock.name = "Clock"
-		add_child(clock)
+		get_node("BuildingContainer").add_child(clock)
 		clock.owner = get_tree().edited_scene_root
 		print("Node added: %s" % clock.name)
 		clock.wait_time = 0.3
 
-	if not $Sprite:
+	if not $BuildingContainer/Sprite:
 		sprite = Sprite.new()
 		sprite.name = "Sprite"
-		add_child(sprite)
+		get_node("BuildingContainer").add_child(sprite)
 		sprite.owner = get_tree().edited_scene_root
 		print("Node added: %s" % sprite.name)
 
-	if not $GUIContainer:
+	if not $BuildingContainer/GUIContainer:
 		gui_container = Node2D.new()
 		gui_container.name = "GUIContainer"
-		add_child(gui_container)
+		get_node("BuildingContainer").add_child(gui_container)
 		gui_container.owner = get_tree().edited_scene_root
 		print("Node added: %s" % gui_container.name)
 
