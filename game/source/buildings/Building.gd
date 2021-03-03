@@ -13,12 +13,12 @@ export var level: int = 1
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1 }
 export(TYPE) var type: int = TYPE.residence
 
-onready var b_cont := $BuildingContainer
+onready var build_cont := $BuildingContainer
 onready var sprite := $BuildingContainer/Sprite as Sprite
-onready var collider := $Collider as CollisionPolygon2D
 onready var clock := $BuildingContainer/Clock as Timer
 onready var tween := $BuildingContainer/Tween as Tween
 onready var gui_container := $BuildingContainer/GUIContainer as Node2D
+onready var collider := $Collider as CollisionPolygon2D
 
 var cld_bar = null
 var progress = null
@@ -122,11 +122,11 @@ func _on_Mouse_exited() -> void:
 
 func _enter_tree():
 	if not $BuildingContainer:
-		b_cont = Node2D.new()
-		b_cont.name = "BuildingContainer"
-		add_child(b_cont)
-		b_cont.owner = get_tree().edited_scene_root
-		print("Node added: %s" % b_cont.name)
+		build_cont = Node2D.new()
+		build_cont.name = "BuildingContainer"
+		add_child(build_cont)
+		build_cont.owner = get_tree().edited_scene_root
+		print("Node added: %s" % build_cont.name)
 
 	if not $BuildingContainer/Tween:
 		tween = Tween.new()

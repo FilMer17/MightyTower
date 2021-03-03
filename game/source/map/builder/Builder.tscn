@@ -17,3 +17,10 @@ visible = false
 material = SubResource( 1 )
 
 [node name="MenuContainer" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, 16 )
+
+[node name="Zone" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( 0, 16, -32, 0, 0, -16, 32, 0 )
+disabled = true

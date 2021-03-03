@@ -18,10 +18,11 @@ func build(b_name: String) -> void:
 	building = GlobalData.buildings[b_name].instance()
 	sprite.texture = building.get_node("BuildingContainer").get_node("Sprite").texture
 	sprite.visible = true
+	$Area2D/Zone.disabled = false
 
 func _physics_process(_delta):
 	if sprite.visible and !in_menu:
-		sprite.position = grid.map_to_world(grid.world_to_map(get_global_mouse_position()))
+		position = grid.map_to_world(grid.world_to_map(get_global_mouse_position()))
 		var map_pos := grid.world_to_map(get_global_mouse_position())
 		if _check_placeable(map_pos):
 			is_right_color = true
@@ -38,19 +39,21 @@ func _input(event):
 		else:
 			in_menu = true
 			var menu = popup_place_menu.instance()
-			menu.rect_position = sprite.position + Vector2(30, -30)
+			menu.rect_position = position + Vector2(30, -30)
 			$MenuContainer.add_child(menu)
+	
 	if event.is_action_pressed("cancel_action") and sprite.visible:
 		_clear_menu_container()
 		in_menu = false
 		sprite.visible = false
+		$Area2D/Zone.disabled = true
 
 func _place_building(to_build: bool) -> void:
 	if to_build:
-		var pos = grid.map_to_world(grid.world_to_map(sprite.position))
+		var pos = grid.map_to_world(grid.world_to_map(position))
 		if buildings.place_building(building.name, pos):
 			var terrdir = IsoGrid.NEIGHBOR_TABLE
-			var b_pos = grid.world_to_map(sprite.position)
+			var b_pos = grid.world_to_map(position)
 			var terrains := [b_pos]
 			for i in range(1, building.size.x):
 				for j in range(3, 6):
@@ -59,6 +62,7 @@ func _place_building(to_build: bool) -> void:
 			for terr in terrains:
 				terrain.data[terr]["placed"] = building.name
 			
+			$Area2D/Zone.disabled = true
 			sprite.visible = false
 			building = null
 

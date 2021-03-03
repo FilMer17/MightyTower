@@ -8,7 +8,7 @@
 shader = ExtResource( 3 )
 shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/width = 1.0
-shader_param/pattern = 0
+shader_param/pattern = 1
 shader_param/inside = false
 shader_param/add_margins = true
 shader_param/is_hovered = false
