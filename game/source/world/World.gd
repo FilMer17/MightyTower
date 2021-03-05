@@ -23,10 +23,10 @@ func _ready() -> void:
 		time.change_clock_state()
 
 func _on_Find_person() -> void:
-	if not resources.max_amount["people"] <= resources.people["idle"] + resources.people["busy"]:
+	if not resources.max_amount["people"] <= resources.get_all_people():
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		var rnum = rng.randi_range(1, 3)
+		var rnum = rng.randi_range(1, 2)
 		
 		if rnum == 1:
 			resources.add_resource("people", 1, "idle")

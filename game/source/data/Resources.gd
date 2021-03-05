@@ -3,7 +3,8 @@ extends Node
 export var food := 0
 export var people := {
 	"idle" : 0,
-	"busy" : 0
+	"busy" : 0,
+	"employed" : 0
 }
 export var material := {
 	"wood" : 0,
@@ -16,6 +17,8 @@ export var max_amount := {
 	"people" : 0,
 	"material" : 0,
 }
+
+var all_people := 0
 
 func save_data() -> Dictionary:
 	var data := {}
@@ -59,15 +62,19 @@ func add_resource(group: String, number: int, resource: String = "") -> void:
 	
 	print(group + " or " + resource + " is wrong!")
 
+func get_all_people() -> int:
+	for key in people.keys():
+		all_people += people[key]
+	
+	return all_people
+
 func _check_max_amount(group: String, resource: String = "") -> void:
 	match group:
 		"food":
 			if food > max_amount.food:
 				food = max_amount.food
 		"people":
-			var all_people := 0
-			for key in people.keys():
-				all_people += people[key]
+			var __ = get_all_people()
 			if all_people > max_amount.people:
 				people[resource] -= (all_people - max_amount.people)
 		"material":

@@ -5,6 +5,8 @@ onready var buildings := $Buildings
 onready var entities := $Entities
 onready var builder := $Builder
 
+var in_builder: bool = false
+
 func load_data(data: Dictionary) -> void:
 	terrain.data = data["terrain"]
 	terrain.draw_terrain()

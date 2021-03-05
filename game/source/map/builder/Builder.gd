@@ -13,8 +13,9 @@ onready var popup_place_menu := preload("res://ui/popup/PopupPlaceMenu.tscn")
 onready var sprite := $Sprite
 onready var area_zone := $Area/Zone
 onready var grid := IsoGrid.new()
-onready var buildings := get_parent().get_node("Buildings")
-onready var terrain := get_parent().get_node("Terrain")
+onready var map := get_parent()
+onready var buildings := map.get_node("Buildings")
+onready var terrain := map.get_node("Terrain")
 
 var in_menu: bool = false
 var is_right_color: bool = false
@@ -36,6 +37,7 @@ func build(b_name: String) -> void:
 	for i in range(0, 4):
 		area_zone.polygon[i] = const_zone_pos[i] * building.size
 	
+	map.in_builder = true
 	sprite.visible = true
 	area_zone.disabled = false
 
@@ -51,7 +53,7 @@ func _physics_process(_delta):
 			sprite.material.set_shader_param("current_color", wrong_color)
 
 func _input(event):
-	if event.is_action_pressed("place_building") and sprite.visible and is_right_color:
+	if event.is_action_pressed("select_option") and sprite.visible and is_right_color:
 		if $MenuContainer.get_child_count() > 0:
 			_clear_menu_container()
 			in_menu = false
@@ -63,6 +65,7 @@ func _input(event):
 	
 	if event.is_action_pressed("cancel_action") and sprite.visible:
 		_clear_menu_container()
+		map.in_builder = false
 		in_menu = false
 		sprite.visible = false
 		area_zone.disabled = true
@@ -83,6 +86,7 @@ func _place_building(to_build: bool) -> void:
 			for terr in terrains:
 				terrain.data[terr]["placed"] = building.name
 			
+			map.in_builder = false
 			area_zone.disabled = true
 			sprite.visible = false
 			building.queue_free()
@@ -109,9 +113,8 @@ func _check_placeable(pos: Vector2) -> bool:
 			elif not terrain.data[terr]["placed"] == "":
 				return false
 			elif det_areas.empty():
-				if buildings.get_child_count() <= 0:
-					return true
-				return false
+				if not buildings.get_child_count() <= 0:
+					return false
 		else:
 			return false
 	
