@@ -35,7 +35,6 @@ func build(b_name: String) -> void:
 	
 	for i in range(0, 4):
 		area_zone.polygon[i] = const_zone_pos[i] * building.size
-		
 	
 	sprite.visible = true
 	area_zone.disabled = false
@@ -67,6 +66,8 @@ func _input(event):
 		in_menu = false
 		sprite.visible = false
 		area_zone.disabled = true
+		building.queue_free()
+		building = null
 
 func _place_building(to_build: bool) -> void:
 	if to_build:
@@ -84,6 +85,7 @@ func _place_building(to_build: bool) -> void:
 			
 			area_zone.disabled = true
 			sprite.visible = false
+			building.queue_free()
 			building = null
 
 	_clear_menu_container()

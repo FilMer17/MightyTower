@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://source/buildings/types/House.gd" type="Script" id=1]
+[ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=2]
+[ext_resource path="res://graphics/buildings/residences/Wood.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/width = 1.0
+shader_param/pattern = 1
+shader_param/inside = false
+shader_param/add_margins = true
+shader_param/is_hovered = false
+
+[node name="SmallHouse" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource( 1 )
+alias = "Small House"
+size = Vector2( 2, 2 )
+cost = {
+"stone": 5,
+"wood": 5
+}
+cooldown = {
+"day": 0,
+"hour": 1,
+"minute": 1
+}
+type = 2
+people_storage = 5
+
+[node name="BuildingContainer" type="Node2D" parent="."]
+
+[node name="Tween" type="Tween" parent="BuildingContainer"]
+
+[node name="Clock" type="Timer" parent="BuildingContainer"]
+wait_time = 0.3
+
+[node name="Sprite" type="Sprite" parent="BuildingContainer"]
+material = SubResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="GUIContainer" type="Node2D" parent="BuildingContainer"]
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 0, -32, 16, 0, 32, 32, 16 )

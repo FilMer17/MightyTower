@@ -1,5 +1,8 @@
 extends Node2D
 
+# warning-ignore:unused_signal
+signal find_person
+
 var data: WorldData = null
 
 onready var settings = $Settings
@@ -10,6 +13,7 @@ onready var map = $Map
 var w_name: String = ""
 
 func _ready() -> void:
+	var __ = connect("find_person", self, "_on_Find_person")
 	if GlobalData.selected_world["is_new"]:
 		_create_world_data(GlobalData.selected_world["size"])
 		time.change_clock_state()
@@ -17,6 +21,18 @@ func _ready() -> void:
 		data = GlobalData.selected_world["world"]
 		_load_world_data()
 		time.change_clock_state()
+
+func _on_Find_person() -> void:
+	if not resources.max_amount["people"] <= resources.people["idle"] + resources.people["busy"]:
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+		var rnum = rng.randi_range(1, 3)
+		
+		if rnum == 1:
+			resources.add_resource("people", 1, "idle")
+			print("idle person added")
+		else:
+			print("nobody was added")
 
 func _create_world_data(diffic: String) -> void:
 	# settings default
