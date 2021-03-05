@@ -1,11 +1,17 @@
 extends Node2D
 
+# warning-ignore:unused_signal
+signal entered_build_area
+# warning-ignore:unused_signal
+signal exited_build_area
+
 export(Color, RGBA) var right_color := Color.white
 export(Color, RGBA) var wrong_color := Color.black
 
 onready var popup_place_menu := preload("res://ui/popup/PopupPlaceMenu.tscn")
 
 onready var sprite := $Sprite
+onready var area_zone := $Area/Zone
 onready var grid := IsoGrid.new()
 onready var buildings := get_parent().get_node("Buildings")
 onready var terrain := get_parent().get_node("Terrain")
@@ -13,12 +19,26 @@ onready var terrain := get_parent().get_node("Terrain")
 var in_menu: bool = false
 var is_right_color: bool = false
 var building: Building = null
+var det_areas: Array = []
+var const_zone_pos: Array
+
+func _ready() -> void:
+	var __
+	__ = connect("entered_build_area", self, "_in_Area")
+	__ = connect("exited_build_area", self, "_out_Area")
+	
+	const_zone_pos = area_zone.polygon
 
 func build(b_name: String) -> void:
 	building = GlobalData.buildings[b_name].instance()
 	sprite.texture = building.get_node("BuildingContainer").get_node("Sprite").texture
+	
+	for i in range(0, 4):
+		area_zone.polygon[i] = const_zone_pos[i] * building.size
+		
+	
 	sprite.visible = true
-	$Area2D/Zone.disabled = false
+	area_zone.disabled = false
 
 func _physics_process(_delta):
 	if sprite.visible and !in_menu:
@@ -46,7 +66,7 @@ func _input(event):
 		_clear_menu_container()
 		in_menu = false
 		sprite.visible = false
-		$Area2D/Zone.disabled = true
+		area_zone.disabled = true
 
 func _place_building(to_build: bool) -> void:
 	if to_build:
@@ -62,7 +82,7 @@ func _place_building(to_build: bool) -> void:
 			for terr in terrains:
 				terrain.data[terr]["placed"] = building.name
 			
-			$Area2D/Zone.disabled = true
+			area_zone.disabled = true
 			sprite.visible = false
 			building = null
 
@@ -86,7 +106,17 @@ func _check_placeable(pos: Vector2) -> bool:
 				return false
 			elif not terrain.data[terr]["placed"] == "":
 				return false
+			elif det_areas.empty():
+				if buildings.get_child_count() <= 0:
+					return true
+				return false
 		else:
 			return false
 	
 	return true
+
+func _in_Area() -> void:
+	det_areas.append("area")
+
+func _out_Area() -> void:
+	det_areas.pop_back()

@@ -7,16 +7,23 @@ export var material_storage: int = 0
 export var people_storage: int = 0
 
 onready var resources := get_parent().get_parent().get_parent().get_node("Resources")
+onready var builder := get_parent().get_parent().get_node("Builder")
 
 onready var area := $Area as Area2D
 onready var area_zone := $Area/Zone as CollisionShape2D
 
 func _ready() -> void:
-	var __ = area.connect("area_entered", self, "_on_Area_entered")
+	var __
+	__ = area.connect("area_entered", self, "_on_Area_entered")
+	__ = area.connect("area_exited", self, "_on_Area_exited")
 
 func _on_Area_entered(_area: Area2D) -> void:
 	if _area.get_parent().name == "Builder":
-		print("hi")
+		builder.emit_signal("entered_build_area")
+
+func _on_Area_exited(_area: Area2D) -> void:
+	if _area.get_parent().name == "Builder":
+		builder.emit_signal("exited_build_area")
 
 func _building_is_built() -> void:
 	._building_is_built()

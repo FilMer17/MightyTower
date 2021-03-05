@@ -18,9 +18,10 @@ material = SubResource( 1 )
 
 [node name="MenuContainer" type="Node2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area" type="Area2D" parent="."]
 position = Vector2( 0, 16 )
 
-[node name="Zone" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( 0, 16, -32, 0, 0, -16, 32, 0 )
+[node name="Zone" type="CollisionPolygon2D" parent="Area"]
+position = Vector2( 0, -16 )
+polygon = PoolVector2Array( 0, 0, -16, 8, 0, 16, 16, 8 )
 disabled = true
