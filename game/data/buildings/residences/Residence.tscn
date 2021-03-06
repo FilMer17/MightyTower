@@ -29,7 +29,7 @@ cost = {
 cooldown = {
 "day": 0,
 "hour": 0,
-"minute": 5
+"minute": 20
 }
 food_storage = 20
 material_storage = 50
@@ -38,7 +38,6 @@ people_storage = 10
 [node name="BuildingContainer" type="Node2D" parent="."]
 
 [node name="Tween" type="Tween" parent="BuildingContainer"]
-playback/active = true
 
 [node name="Clock" type="Timer" parent="BuildingContainer"]
 wait_time = 0.3
@@ -52,8 +51,8 @@ texture = ExtResource( 2 )
 [node name="Collider" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( 0, 32, -32, 16, 0, 0, 32, 16 )
 
-[node name="Area" type="Area2D" parent="."]
+[node name="BuildingArea" type="Area2D" parent="."]
 
-[node name="Zone" type="CollisionShape2D" parent="Area"]
+[node name="Zone" type="CollisionShape2D" parent="BuildingArea"]
 rotation = 1.5708
 shape = SubResource( 2 )

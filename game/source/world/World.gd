@@ -17,6 +17,7 @@ func _ready() -> void:
 	if GlobalData.selected_world["is_new"]:
 		_create_world_data(GlobalData.selected_world["size"])
 		time.change_clock_state()
+		data = WorldData.new()
 	else:
 		data = GlobalData.selected_world["world"]
 		_load_world_data()
@@ -49,7 +50,7 @@ func _load_world_data() -> void:
 	map.load_data(data.map)
 
 func _save_world_data() -> void:
-	data.settings = settings.save_data(data.settings)
-	data.time = time.save_data(data.time)
-	data.resources = resources.save_data(data.resources)
-	data.map = map.save_data(data.map)
+	data.settings = settings.save_data()
+	data.time = time.save_data()
+	data.resources = resources.save_data()
+	data.map = map.save_data()

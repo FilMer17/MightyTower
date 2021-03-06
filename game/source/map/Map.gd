@@ -14,7 +14,7 @@ func load_data(data: Dictionary) -> void:
 func save_data() -> Dictionary:
 	var data := {}
 	data["terrain"] = terrain.data
-#	data["buildings"] = buildings.data
+	data["buildings"] = buildings.save_data()
 	data["entities"] = entities.data
 	
 	return data
@@ -29,4 +29,3 @@ func _input(event):
 		builder.build("Residence")
 	if event.is_action_pressed("ui_page_down") and !builder.sprite.visible:
 		builder.build("SmallHouse")
-	

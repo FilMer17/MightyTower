@@ -9,8 +9,8 @@ export var people_storage: int = 0
 onready var resources := get_parent().get_parent().get_parent().get_node("Resources")
 onready var builder := get_parent().get_parent().get_node("Builder")
 
-onready var area := $Area as Area2D
-onready var area_zone := $Area/Zone as CollisionShape2D
+onready var area := $BuildingArea as Area2D
+onready var area_zone := $BuildingArea/Zone as CollisionShape2D
 
 func _ready() -> void:
 	var __
@@ -34,16 +34,16 @@ func _building_is_built() -> void:
 func _enter_tree() -> void:
 	._enter_tree()
 	
-	if not $Area:
+	if not $BuildingArea:
 		area = Area2D.new()
-		area.name = "Area"
+		area.name = "BuildingArea"
 		add_child(area)
 		area.owner = get_tree().edited_scene_root
 		print("Node added: %s" % area.name)
 
-	if not $Area/Zone:
+	if not $BuildingArea/Zone:
 		area_zone = CollisionShape2D.new()
 		area_zone.name = "Zone"
-		get_node("Area").add_child(area_zone)
+		area.add_child(area_zone)
 		area_zone.owner = get_tree().edited_scene_root
 		print("Node added: %s" % area_zone.name)

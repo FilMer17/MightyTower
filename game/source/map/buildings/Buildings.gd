@@ -18,9 +18,16 @@ func place_building(to_build: String, pos: Vector2) -> bool:
 		
 		building.add_to_group(group_name)
 		return true
-
-	building = null	
+	
+	building.queue_free()
+	building = null
 	return false
+
+func save_data() -> Array:
+	var data := []
+	for child in get_children():
+		data.append(child)
+	return data
 
 func _pay_building_cost() -> bool:
 	var mater = resources.material

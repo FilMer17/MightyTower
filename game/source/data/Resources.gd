@@ -20,23 +20,6 @@ export var max_amount := {
 
 var all_people := 0
 
-func save_data() -> Dictionary:
-	var data := {}
-	data["food"] = food
-	data["people"] = people
-	data["material"] = material
-	data["max_amount"] = max_amount
-	return data
-
-func load_data(data: Dictionary) -> void:
-	food = data["food"]
-	people = data["people"]
-	material = data["material"]
-	max_amount = data["max_amount"]
-
-func create_data(_diffic: String) -> void:
-	pass
-
 func add_resource(group: String, number: int, resource: String = "") -> void:
 	match group:
 		"food":
@@ -63,10 +46,28 @@ func add_resource(group: String, number: int, resource: String = "") -> void:
 	print(group + " or " + resource + " is wrong!")
 
 func get_all_people() -> int:
+	all_people = 0
 	for key in people.keys():
 		all_people += people[key]
 	
 	return all_people
+
+func save_data() -> Dictionary:
+	var data := {}
+	data["food"] = food
+	data["people"] = people
+	data["material"] = material
+	data["max_amount"] = max_amount
+	return data
+
+func load_data(data: Dictionary) -> void:
+	food = data["food"]
+	people = data["people"]
+	material = data["material"]
+	max_amount = data["max_amount"]
+
+func create_data(_diffic: String) -> void:
+	pass
 
 func _check_max_amount(group: String, resource: String = "") -> void:
 	match group:
