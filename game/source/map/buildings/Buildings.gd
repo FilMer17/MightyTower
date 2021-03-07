@@ -1,6 +1,6 @@
 extends YSort
 
-onready var resources := get_parent().get_parent().get_node("Resources")
+onready var resources := Scene.search("Resources")
 
 var building: Building = null
 

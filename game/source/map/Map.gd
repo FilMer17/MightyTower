@@ -6,6 +6,8 @@ onready var entities := $Entities
 onready var builder := $Builder
 
 var in_builder: bool = false
+var node_in_menu: bool = false
+var detected_areas: Array = []
 
 func load_data(data: Dictionary) -> void:
 	terrain.data = data["terrain"]

@@ -15,6 +15,8 @@ func create_terrain(size: String) -> void:
 	for x in map_size:
 		for y in map_size:
 			data[Vector2(x, y)] = _get_new_terrain_data(noise.get_noise_2d(float(x), float(y)))
+			if data[Vector2(x, y)]["terrain"] == TERRAINS.stone:
+				Scene.search("Entities").place_on_stone(Vector2(x, y))
 	
 	draw_terrain()
 

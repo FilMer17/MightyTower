@@ -6,8 +6,8 @@ export var food_storage: int = 0
 export var material_storage: int = 0
 export var people_storage: int = 0
 
-onready var resources := get_parent().get_parent().get_parent().get_node("Resources")
-onready var builder := get_parent().get_parent().get_node("Builder")
+onready var resources := Scene.search("Resources")
+onready var builder := Scene.search("Builder")
 
 onready var area := $BuildingArea as Area2D
 onready var area_zone := $BuildingArea/Zone as CollisionShape2D

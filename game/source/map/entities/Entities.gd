@@ -2,9 +2,10 @@ extends Node2D
 
 const MAP_SIZE := { "S" : 90, "M" : 120, "L" : 150 }
 
-onready var terrain := get_parent().get_node("Terrain")
+onready var terrain := Scene.search("Terrain")
 
 var data: Dictionary = {}
+var in_menu: bool = false
 
 func create_entities(diffic: String) -> void:
 	var grid = IsoGrid.new()
@@ -20,6 +21,9 @@ func create_entities(diffic: String) -> void:
 				data[Vector2(x, y)] = temp_data[Vector2(x, y)]
 	
 	_place_entities(grid)
+
+func place_on_stone(pos: Vector2) -> void:
+	data[pos] = GlobalData.entities["Stone"]
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
@@ -46,9 +50,9 @@ func _get_entity_data(_terrain: int, noise_sample: float) -> Entity:
 	rng.randomize()
 	var rnum = rng.randi_range(1, 3)
 	
-	if noise_sample > -0.2 and noise_sample < -0.1:
-		if not rnum == 1 and _terrain == 0:
-			return GlobalData.entities["Stone"]
+#	if noise_sample > -0.2 and noise_sample < -0.1:
+#		if not rnum == 1 and _terrain == 0:
+#			return GlobalData.entities["Stone"]
 	if noise_sample > 0 and noise_sample < 0.2:
 		if not rnum == 1 and _terrain == 0:
 			return GlobalData.entities["Tree"]

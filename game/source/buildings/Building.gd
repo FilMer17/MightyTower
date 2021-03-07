@@ -115,7 +115,7 @@ func _on_cooldown_changed(value: int) -> void:
 	__ = tween.start()
 
 func _on_Mouse_entered() -> void:
-	if not get_parent().get_parent().in_builder:
+	if not Scene.search("Map").in_builder:
 		sprite.material.set_shader_param("is_hovered", true)
 
 func _on_Mouse_exited() -> void:

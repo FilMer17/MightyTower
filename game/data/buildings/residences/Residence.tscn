@@ -29,7 +29,7 @@ cost = {
 cooldown = {
 "day": 0,
 "hour": 0,
-"minute": 20
+"minute": 5
 }
 food_storage = 20
 material_storage = 50

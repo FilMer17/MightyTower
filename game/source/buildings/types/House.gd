@@ -4,7 +4,7 @@ class_name House
 
 export var people_storage: int = 0
 
-onready var resources := get_parent().get_parent().get_parent().get_node("Resources")
+onready var resources := Scene.search("Resources")
 
 func _building_is_built() -> void:
 	._building_is_built()
