@@ -6,11 +6,14 @@ enum TYPE { stone, tree }
 
 export var level: int = 1
 export(TYPE) var type: int = TYPE.stone
+export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1}
 
 onready var popup_mine_menu := preload("res://ui/popup/PopupMineMenu.tscn")
 onready var resources := Scene.search("Resources")
 onready var cooldown_bar_scene := preload("res://ui/bar/CooldownBar.tscn")
 
+onready var tween := $Tween as Tween
+onready var clock := $Clock as Timer
 onready var sprite := $Sprite as Sprite
 onready var area := $Area as Area2D
 onready var collider := $Area/Collider as CollisionPolygon2D
@@ -22,6 +25,10 @@ var is_mining: bool = false
 
 var cld_bar = null
 var progress = null
+
+var cld_temp := {}
+var cld_all_min: int = 0
+var cld_all_min_temp: int = 0
 
 func _ready() -> void:
 	var __
@@ -69,6 +76,23 @@ func _mine_entity(to_mine: bool) -> void:
 		var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
 		font.size = 4
 		
+		cld_temp = cooldown.duplicate()
+		var __ = clock.connect("timeout", self, "_on_Mine_cooldown")
+		clock.start()
+		
+		for i in range(0, 3):
+			match i:
+				0:
+					cld_all_min += cld_temp["day"] * 60 * 24
+				1:
+					cld_all_min += cld_temp["hour"] * 60
+				2:
+					cld_all_min += cld_temp["minute"]
+		
+		cld_all_min_temp = cld_all_min
+		progress.max_value = cld_all_min
+		progress.value = cld_all_min
+		
 		is_mining = true
 		
 		print("People added to cut the tree")
@@ -86,6 +110,45 @@ func _clear_menu_container() -> void:
 	for menu in menu_container.get_children():
 		menu.queue_free()
 
+func _on_Mine_cooldown() -> void:
+	for key in cld_temp.keys():
+		if cld_temp[key] == 0:
+			var __ = cld_temp.erase(key)
+			if key == "minute":
+				pass # Logic of getting resources and destroy entity
+				return
+	
+	cld_temp.minute -= 1
+	if cld_temp.minute == 0:
+		if cld_temp.keys().size() <= 1:
+			pass # Logic of getting resources and destroy entity
+			return
+		else:
+			cld_temp.minute = 59
+			cld_temp.hour -= 1
+			if cld_temp.keys().has("day") and cld_temp.hour <= 0:
+				cld_temp.day -= 1
+				cld_temp.hour = 24
+	
+	var output = []
+	var countdown = cld_bar.get_node("Countdown")
+	for key in cld_temp.keys():
+		if  cld_temp.has(key):
+			output.append(String(cld_temp[key]) + key[0])
+	for i in range(0, cld_temp.size()):
+		if str(output[i]).length() == 1:
+			output[i] = "0" + String(output[i])
+	countdown.text = PoolStringArray(output).join(":")
+	
+	cld_all_min_temp -= 1
+	_on_cooldown_changed(cld_all_min_temp)
+
+func _on_cooldown_changed(value: int) -> void:
+	var __
+	__ = tween.stop(progress, "value")
+	__ = tween.interpolate_property(progress, "value", cld_all_min_temp, value, 0.3, Tween.TRANS_SINE, Tween.EASE_OUT)
+	__ = tween.start()
+
 func _on_Mouse_entered() -> void:
 	if not Scene.search("Map").in_builder and !Scene.search("Map").node_in_menu:
 		sprite.material.set_shader_param("is_hovered", true)
@@ -97,6 +160,21 @@ func _on_Mouse_exited() -> void:
 		is_hovered = false
 
 func _enter_tree():
+	if not $Tween:
+		tween = Tween.new()
+		tween.name = "Tween"
+		add_child(tween)
+		tween.owner = get_tree().edited_scene_root
+		print("Node added: %s" % tween.name)
+	
+	if not $Clock:
+		clock = Timer.new()
+		clock.name = "Clock"
+		add_child(clock)
+		clock.owner = get_tree().edited_scene_root
+		print("Node added: %s" % clock.name)
+		clock.wait_time = 0.3
+	
 	if not $Sprite:
 		sprite = Sprite.new()
 		sprite.name = "Sprite"
