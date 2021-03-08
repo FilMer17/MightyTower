@@ -24,5 +24,7 @@ alignment = 2
 margin_top = 345.0
 margin_right = 300.0
 margin_bottom = 360.0
+focus_mode = 2
 mouse_filter = 2
 fit_content_height = true
+selection_enabled = true

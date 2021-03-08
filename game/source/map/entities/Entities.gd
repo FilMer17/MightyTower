@@ -23,7 +23,7 @@ func create_entities(diffic: String) -> void:
 	_place_entities(grid)
 
 func place_on_stone(pos: Vector2) -> void:
-	data[pos] = GlobalData.entities["Stone"]
+	data[pos] = GlobalData.entities["Rock"]
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
@@ -52,7 +52,7 @@ func _get_entity_data(_terrain: int, noise_sample: float) -> Entity:
 	
 #	if noise_sample > -0.2 and noise_sample < -0.1:
 #		if not rnum == 1 and _terrain == 0:
-#			return GlobalData.entities["Stone"]
+#			return GlobalData.entities["Rock"]
 	if noise_sample > 0 and noise_sample < 0.2:
 		if not rnum == 1 and _terrain == 0:
 			return GlobalData.entities["Tree"]

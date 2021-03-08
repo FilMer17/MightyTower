@@ -45,6 +45,21 @@ func add_resource(group: String, number: int, resource: String = "") -> void:
 	
 	print(group + " or " + resource + " is wrong!")
 
+func check_with_max_amount(group: String, number: int) -> bool:
+	var temp = 0
+	match group:
+		"food":
+			temp = food + number
+			if temp > max_amount.food:
+				return false
+		"material":
+			for amount in material.values():
+				temp += amount
+			temp += number
+			if temp > max_amount.material:
+				return false
+	return true
+
 func get_all_people() -> int:
 	all_people = 0
 	for key in people.keys():

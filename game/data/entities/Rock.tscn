@@ -13,8 +13,9 @@ shader_param/inside = false
 shader_param/add_margins = true
 shader_param/is_hovered = false
 
-[node name="Stone" type="Node2D"]
+[node name="Rock" type="Node2D"]
 script = ExtResource( 1 )
+alias = "Rock"
 cooldown = {
 "day": 0,
 "hour": 3,

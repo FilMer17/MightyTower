@@ -2,10 +2,11 @@ tool
 extends Node2D
 class_name Entity
 
-enum TYPE { stone, tree }
+enum TYPE { stone, wood }
 
 export var level: int = 1
 export(TYPE) var type: int = TYPE.stone
+export var alias: String = ""
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1}
 
 onready var popup_mine_menu := preload("res://ui/popup/PopupMineMenu.tscn")
@@ -22,6 +23,7 @@ onready var menu_container := $MenuContainer as Node2D
 
 var is_hovered: bool = false
 var is_mining: bool = false
+var is_mined: bool = false
 
 var cld_bar = null
 var progress = null
@@ -42,7 +44,7 @@ func _ready() -> void:
 	__ = area.connect("input_event", self, "_on_Input_event")
 
 func _on_Input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if is_hovered and event.is_action_pressed("select_option") and !is_mining:
+	if is_hovered and event.is_action_pressed("select_option") and !is_mining and !is_mined:
 		for building in get_tree().get_nodes_in_group("residence"):
 			if area.overlaps_area(building.area):
 				if $MenuContainer.get_child_count() > 0:
@@ -55,6 +57,8 @@ func _on_Input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 					menu.rect_position = position + Vector2(0, -10)
 					menu_container.add_child(menu)
 					return
+	if is_hovered and event.is_action_pressed("select_option") and is_mined:
+		_mining_is_done()
 
 func _mine_entity(to_mine: bool) -> void:
 	if to_mine and resources.people["idle"] > 0:
@@ -95,8 +99,8 @@ func _mine_entity(to_mine: bool) -> void:
 		
 		is_mining = true
 		
-		print("People added to cut the tree")
-		Scene.search("Console").write("People added to cut the tree")
+		print("People added to mine the " + alias)
+		Scene.search("Console").write("People added to mine the " + alias)
 		
 	elif to_mine and resources.people["idle"] <= 0:
 		print("Not enough idle people")
@@ -115,13 +119,13 @@ func _on_Mine_cooldown() -> void:
 		if cld_temp[key] == 0:
 			var __ = cld_temp.erase(key)
 			if key == "minute":
-				pass # Logic of getting resources and destroy entity
+				_mining_is_done()
 				return
 	
 	cld_temp.minute -= 1
 	if cld_temp.minute == 0:
 		if cld_temp.keys().size() <= 1:
-			pass # Logic of getting resources and destroy entity
+			_mining_is_done()
 			return
 		else:
 			cld_temp.minute = 59
@@ -142,6 +146,27 @@ func _on_Mine_cooldown() -> void:
 	
 	cld_all_min_temp -= 1
 	_on_cooldown_changed(cld_all_min_temp)
+
+func _mining_is_done() -> void:
+	clock.stop()
+	resources.add_resource("people", -1, "busy")
+	resources.add_resource("people", 1, "idle")
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var rnum = rng.randi_range(5, 11)
+	
+	if not resources.check_with_max_amount("material", rnum):
+		progress.visible = false
+		cld_bar.get_node("Countdown").text = "Pick up"
+		is_mined = true
+		print("no space")
+		return
+	
+	print(alias, " was mined. Added " + str(rnum))
+	Scene.search("Console").write(alias + " was mined. Added " + str(rnum))
+	resources.add_resource("material", rnum, TYPE.keys()[type])
+	queue_free()
 
 func _on_cooldown_changed(value: int) -> void:
 	var __
