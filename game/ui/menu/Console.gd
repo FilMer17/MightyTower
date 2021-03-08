@@ -29,7 +29,8 @@ func _input(event) -> void:
 		anim_player.stop(true)
 	
 	if event.is_action_released("show_console"):
-		timer.start()
+		if not Scene.search("GameCamera").on_console:
+			timer.start()
 
 func write(text: String) -> void:
 	if text_output.rect_size.y >= size:
