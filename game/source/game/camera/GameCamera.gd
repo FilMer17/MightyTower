@@ -3,9 +3,6 @@ extends Camera2D
 signal position_changed
 signal zoom_changed
 
-var init_cam_pos := Vector2()
-var init_mouse_pos := Vector2()
-
 export var speed := 4000
 export var zoom_step := 0.5
 export var zoom_max_in := 0.5
@@ -13,14 +10,20 @@ export var zoom_max_out := 2.0
 
 onready var tween := $Tween
 
+var init_cam_pos := Vector2()
+var init_mouse_pos := Vector2()
+
+var on_console: bool = false
+
 func _ready() -> void:
 	zoom = Vector2(zoom_max_out / 2, zoom_max_out / 2)
 
 func _input(event: InputEvent) -> void:
-	_handle_pitch_to_zoom(event)
-	_handle_pan_gesture(event)
-	_handle_mouse_scroll(event)
-	_handle_middle_mouse(event)
+	if not on_console:
+		_handle_pitch_to_zoom(event)
+		_handle_pan_gesture(event)
+		_handle_mouse_scroll(event)
+		_handle_middle_mouse(event)
 
 func _process(delta: float) -> void:
 	_handle_keyboard_scroll(delta)

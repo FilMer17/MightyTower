@@ -105,6 +105,7 @@ func _on_build_cooldown() -> void:
 func _building_is_built() -> void:
 	clock.stop()
 	print(alias, " was build")
+	Scene.search("Console").write(alias + " was build")
 	is_built = true
 	cld_bar.visible = false
 
