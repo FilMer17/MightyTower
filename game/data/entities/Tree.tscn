@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/entities/Entity.gd" type="Script" id=1]
 [ext_resource path="res://graphics/entities/Tree.png" type="Texture" id=2]
 [ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=3]
+[ext_resource path="res://graphics/entities/TreeShadow.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -28,9 +29,14 @@ cooldown = {
 [node name="Clock" type="Timer" parent="."]
 wait_time = 0.3
 
+[node name="Shadow" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.623529 )
+position = Vector2( 1, 11.572 )
+texture = ExtResource( 4 )
+
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( 0, -8 )
+position = Vector2( 0, -4 )
 texture = ExtResource( 2 )
 
 [node name="MenuContainer" type="Node2D" parent="."]
@@ -38,6 +44,7 @@ texture = ExtResource( 2 )
 [node name="GUIContainer" type="Node2D" parent="."]
 
 [node name="Area" type="Area2D" parent="."]
+visible = false
 
 [node name="Collider" type="CollisionPolygon2D" parent="Area"]
 position = Vector2( 0, 8 )

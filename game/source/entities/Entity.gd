@@ -70,7 +70,6 @@ func _mine_entity(to_mine: bool) -> void:
 		cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 5)
 		cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 7)
 		cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 7)
-		cld_bar_scene.rect_position += Vector2(0, -15)
 		
 		gui_container.add_child(cld_bar_scene)
 		

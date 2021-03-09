@@ -23,6 +23,7 @@ func create_terrain(size: String) -> void:
 func draw_terrain() -> void:
 	for pos in data.keys():
 		set_cellv(pos, data[pos]["terrain"])
+		update_bitmask_area(pos)
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
