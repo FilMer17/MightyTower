@@ -30,7 +30,7 @@ wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( 0, -16 )
+position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 
 [node name="MenuContainer" type="Node2D" parent="."]
@@ -40,4 +40,5 @@ texture = ExtResource( 2 )
 [node name="Area" type="Area2D" parent="."]
 
 [node name="Collider" type="CollisionPolygon2D" parent="Area"]
+position = Vector2( 0, 8 )
 polygon = PoolVector2Array( 0, 8, -16, 0, 0, -8, 16, 0 )

@@ -40,7 +40,7 @@ func _create_noise() -> OpenSimplexNoise:
 func _place_entities(grid: IsoGrid) -> void:
 	for file_data in data:
 		var entity = data[file_data].instance()
-		entity.position = grid.map_to_world(file_data) + Vector2(0, 8)
+		entity.position = grid.map_to_world(file_data)
 		terrain.data[file_data]["placed"] = entity.name
 		add_child(entity)
 

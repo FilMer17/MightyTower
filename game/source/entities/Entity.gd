@@ -166,6 +166,10 @@ func _mining_is_done() -> void:
 	print(alias, " was mined. Added " + str(rnum))
 	Scene.search("Console").write(alias + " was mined. Added " + str(rnum))
 	resources.add_resource("material", rnum, TYPE.keys()[type])
+	var grid := IsoGrid.new()
+	var __ = Scene.search("Entities").data.erase(grid.world_to_map(position))
+	Scene.search("Terrain").data[grid.world_to_map(position)]["placed"] = ""
+	
 	queue_free()
 
 func _on_cooldown_changed(value: int) -> void:
