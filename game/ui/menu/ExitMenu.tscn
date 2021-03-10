@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://graphics/theme/Menu.theme" type="Theme" id=1]
+[ext_resource path="res://ui/menu/ExitMenu.gd" type="Script" id=2]
+
+[node name="ExitMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -220.0
+margin_top = -250.0
+margin_right = 220.0
+margin_bottom = 250.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Background"]
+anchor_right = 1.0
+margin_bottom = 119.0
+text = "Menu"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Background"]
+anchor_left = 0.15
+anchor_top = 0.25
+anchor_right = 0.85
+anchor_bottom = 0.3
+margin_bottom = 310.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="Background/ButtonContainer"]
+margin_right = 308.0
+margin_bottom = 53.0
+text = "Continue"
+
+[node name="SaveGame" type="Button" parent="Background/ButtonContainer"]
+margin_top = 83.0
+margin_right = 308.0
+margin_bottom = 136.0
+text = "Save game"
+
+[node name="Settings" type="Button" parent="Background/ButtonContainer"]
+margin_top = 166.0
+margin_right = 308.0
+margin_bottom = 219.0
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="Background/ButtonContainer"]
+margin_top = 249.0
+margin_right = 308.0
+margin_bottom = 302.0
+text = "Exit"
+[connection signal="pressed" from="Background/ButtonContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Background/ButtonContainer/Exit" to="." method="_on_Exit_pressed"]

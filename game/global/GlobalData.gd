@@ -12,6 +12,12 @@ var entities: Dictionary = {}
 
 func _ready() -> void:
 	scan()
+	pause_mode = Node.PAUSE_MODE_PROCESS
+
+
+func _input(event) -> void:
+	if event.is_action_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = not OS.window_fullscreen
 
 
 func scan() -> void:

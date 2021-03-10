@@ -44,7 +44,6 @@ texture = ExtResource( 2 )
 [node name="GUIContainer" type="Node2D" parent="."]
 
 [node name="Area" type="Area2D" parent="."]
-visible = false
 
 [node name="Collider" type="CollisionPolygon2D" parent="Area"]
 position = Vector2( 0, 8 )

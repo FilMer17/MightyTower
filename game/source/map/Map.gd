@@ -29,5 +29,3 @@ func create_data(diffic: String) -> void:
 func _input(event):
 	if event.is_action_pressed("ui_home") and !builder.sprite.visible:
 		builder.build("Residence")
-	if event.is_action_pressed("ui_page_down") and !builder.sprite.visible:
-		builder.build("SmallHouse")

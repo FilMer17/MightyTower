@@ -6,7 +6,7 @@ onready var anim_player := $Container/AnimationPlayer as AnimationPlayer
 onready var vbox := $Container/VBox as VBoxContainer
 onready var text_output := $Container/VBox/TextOutput as RichTextLabel
 
-export var size := 90
+export var size := 110
 
 var lines: Array = []
 

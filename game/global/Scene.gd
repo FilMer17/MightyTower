@@ -7,6 +7,7 @@ var scenes := {
 }
 
 var nodes := {
+	"Game" : "/root/Game",
 	"GameCamera" : "/root/Game/GameCamera",
 	"Console" : "/root/Game/GameUI/Console",
 	"Settings" : "/root/Game/World/Settings",
