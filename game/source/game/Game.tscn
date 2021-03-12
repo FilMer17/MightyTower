@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://source/world/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/game/camera/GameCamera.tscn" type="PackedScene" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://source/game/Game.gd" type="Script" id=4]
 [ext_resource path="res://graphics/font/PixelFont.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui/menu/ExitMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://source/game/Fog/Fog.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
-size = 112
+size = 54
 font_data = ExtResource( 5 )
 
 [node name="Game" type="Node2D"]
@@ -18,7 +19,7 @@ script = ExtResource( 4 )
 [node name="World" parent="." instance=ExtResource( 1 )]
 pause_mode = 1
 
-[node name="TimeShader" type="CanvasLayer" parent="."]
+[node name="Fog" parent="." instance=ExtResource( 7 )]
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -30,13 +31,14 @@ pause_mode = 1
 pause_mode = 1
 visible = false
 show_behind_parent = true
+margin_left = 1043.0
 margin_right = 1280.0
-margin_bottom = 720.0
+margin_bottom = 70.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 7
-custom_constants/shadow_offset_y = 7
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
 text = "PAUSE"
 align = 1
 valign = 1

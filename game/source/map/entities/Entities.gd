@@ -13,6 +13,18 @@ onready var rock_sprites := {
 	1 : preload("res://graphics/entities/Rock.png")
 }
 
+onready var coal_sprites := {
+	1 : preload("res://icon.png")
+}
+
+onready var gold_sprites := {
+	1 : preload("res://icon.png")
+}
+
+onready var iron_sprites := {
+	1 : preload("res://icon.png")
+}
+
 var data: Dictionary = {}
 var in_menu: bool = false
 
@@ -32,7 +44,16 @@ func create_entities(diffic: String) -> void:
 	_place_entities(grid)
 
 func place_on_stone(pos: Vector2) -> void:
-	data[pos] = { "type" : GlobalData.entities["Rock"], "sprite" : rock_sprites[1]}
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var rnum = rng.randi_range(1, 10)
+
+	if rnum in range(1, 5):
+		data[pos] = { "type" : GlobalData.entities["Coal"], "sprite" : coal_sprites[1]}
+	elif rnum in range(4, 7):
+		data[pos] = { "type" : GlobalData.entities["Iron"], "sprite" : iron_sprites[1]}
+	elif rnum == 7:
+		data[pos] = { "type" : GlobalData.entities["Gold"], "sprite" : gold_sprites[1]}
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
@@ -61,10 +82,10 @@ func _get_entity_data(_terrain: int, noise_sample: float) -> Dictionary:
 	var rnum = rng.randi_range(1, 3)
 	var rsprite_num = rng.randi_range(1, 3)
 	
-#	if noise_sample > -0.2 and noise_sample < -0.1:
-#		if not rnum == 1 and _terrain == 0:
-#			return GlobalData.entities["Rock"]
-	if noise_sample > 0 and noise_sample < 0.2:
+	if noise_sample > -0.2 and noise_sample < -0.1:
+		if not rnum == 1 and _terrain == 0:
+			return { "type" : GlobalData.entities["Rock"], "sprite" : rock_sprites[1]}
+	if noise_sample > 0 and noise_sample < 0.125:
 		if not rnum == 1 and _terrain == 0:
 			return { "type" : GlobalData.entities["Tree"], "sprite" : tree_sprites[rsprite_num]}
 	

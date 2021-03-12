@@ -38,6 +38,7 @@ people_storage = 10
 [node name="BuildingContainer" type="Node2D" parent="."]
 
 [node name="Tween" type="Tween" parent="BuildingContainer"]
+playback/active = true
 
 [node name="Clock" type="Timer" parent="BuildingContainer"]
 wait_time = 0.3

@@ -2,7 +2,7 @@ tool
 extends Node2D
 class_name Entity
 
-enum TYPE { stone, wood }
+enum TYPE { stone, wood, coal, gold, iron }
 
 export var level: int = 1
 export(TYPE) var type: int = TYPE.stone

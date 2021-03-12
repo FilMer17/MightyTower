@@ -10,7 +10,8 @@ export var material := {
 	"wood" : 0,
 	"stone" : 0,
 	"coal" : 0,
-	"iron" : 0
+	"iron" : 0,
+	"gold" : 0
 }
 export var max_amount := {
 	"food" : 0,
