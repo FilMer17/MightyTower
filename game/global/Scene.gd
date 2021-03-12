@@ -10,6 +10,7 @@ var nodes := {
 	"Game" : "/root/Game",
 	"GameCamera" : "/root/Game/GameCamera",
 	"Console" : "/root/Game/GameUI/Console",
+	"World" : "/root/Game/World",
 	"Settings" : "/root/Game/World/Settings",
 	"Time" : "/root/Game/World/Time",
 	"Resources" : "/root/Game/World/Resources",

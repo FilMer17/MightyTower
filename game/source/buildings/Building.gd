@@ -49,7 +49,7 @@ func _ready() -> void:
 	progress = cld_bar.get_node("Progress")
 	
 	var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-	font.size = 5
+	font.size = 6
 	cld_bar.get_node("Countdown").text = ""
 	
 	cld_temp = cooldown.duplicate()

@@ -46,7 +46,7 @@ func create_entities(diffic: String) -> void:
 func place_on_stone(pos: Vector2) -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var rnum = rng.randi_range(1, 10)
+	var rnum = rng.randi_range(1, 12)
 
 	if rnum in range(1, 5):
 		data[pos] = { "type" : GlobalData.entities["Coal"], "sprite" : coal_sprites[1]}

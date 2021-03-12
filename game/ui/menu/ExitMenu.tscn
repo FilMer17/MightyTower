@@ -73,4 +73,5 @@ margin_right = 308.0
 margin_bottom = 302.0
 text = "Exit"
 [connection signal="pressed" from="Background/ButtonContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Background/ButtonContainer/SaveGame" to="." method="_on_SaveGame_pressed"]
 [connection signal="pressed" from="Background/ButtonContainer/Exit" to="." method="_on_Exit_pressed"]

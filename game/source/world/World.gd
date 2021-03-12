@@ -49,7 +49,8 @@ func _load_world_data() -> void:
 	resources.load_data(data.resources)
 	map.load_data(data.map)
 
-func _save_world_data() -> void:
+func save_world_data() -> void:
+	data = WorldData.new()
 	data.settings = settings.save_data()
 	data.time = time.save_data()
 	data.resources = resources.save_data()

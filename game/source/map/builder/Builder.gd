@@ -13,7 +13,7 @@ onready var popup_place_menu := preload("res://ui/popup/PopupPlaceMenu.tscn")
 onready var sprite := $Sprite
 onready var area_zone := $Area/Zone
 onready var grid := IsoGrid.new()
-onready var map := get_parent()
+onready var map := Scene.search("Map")
 onready var buildings := map.get_node("Buildings")
 onready var terrain := map.get_node("Terrain")
 

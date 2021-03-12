@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://source/buildings/types/Residence.gd" type="Script" id=1]
 [ext_resource path="res://graphics/buildings/residences/Wood.png" type="Texture" id=2]
 [ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=3]
+[ext_resource path="res://graphics/interface/Light.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -38,7 +39,6 @@ people_storage = 10
 [node name="BuildingContainer" type="Node2D" parent="."]
 
 [node name="Tween" type="Tween" parent="BuildingContainer"]
-playback/active = true
 
 [node name="Clock" type="Timer" parent="BuildingContainer"]
 wait_time = 0.3
@@ -57,3 +57,9 @@ polygon = PoolVector2Array( 0, 32, -32, 16, 0, 0, 32, 16 )
 [node name="Zone" type="CollisionShape2D" parent="BuildingArea"]
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="Light" type="Light2D" parent="."]
+position = Vector2( -5.72205e-06, 5.72205e-06 )
+scale = Vector2( 52.9231, 43.0769 )
+texture = ExtResource( 4 )
+mode = 2
