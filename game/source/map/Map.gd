@@ -13,11 +13,15 @@ func load_data(data: Dictionary) -> void:
 	terrain.data = data["terrain"]
 	terrain.draw_terrain()
 
-func save_data() -> Dictionary:
+func save_data(to_save: String) -> Dictionary:
 	var data := {}
-	data["terrain"] = terrain.data
-	data["buildings"] = buildings.save_data()
-	data["entities"] = entities.data
+	match to_save:
+		"terrain":
+			data["terrain"] = terrain.data
+		"buildings":
+			data["buildings"] = buildings.save_data()
+		"entities":
+			data["entities"] = entities.data
 	
 	return data
 
@@ -29,3 +33,5 @@ func create_data(diffic: String) -> void:
 func _input(event):
 	if event.is_action_pressed("ui_home") and !builder.sprite.visible:
 		builder.build("Residence")
+	if event.is_action_pressed("ui_page_up") and !builder.sprite.visible:
+		builder.build("Lumberjack")

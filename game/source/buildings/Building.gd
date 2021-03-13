@@ -4,7 +4,7 @@ class_name Building
 
 onready var cooldown_bar_scene := preload("res://ui/bar/CooldownBar.tscn")
 
-enum TYPE { residence, storage, house }
+enum TYPE { residence, storage, house, worker }
 
 export var alias: String = ""
 export var size := Vector2(1, 1)
@@ -66,6 +66,7 @@ func _ready() -> void:
 				cld_all_min += cld_temp["minute"]
 	
 	cld_all_min_temp = cld_all_min
+	
 	progress.max_value = cld_all_min
 	progress.value = cld_all_min
 

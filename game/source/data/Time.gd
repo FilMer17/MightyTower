@@ -42,12 +42,12 @@ func _on_Clock_timeout():
 	minute += 1
 	
 	if minute % 10 == 0:
-		get_parent().emit_signal("find_person")
+		Scene.search("World").emit_signal("find_person")
 	
 	if minute >= 60:
 		minute = 0
 		hour += 1
-		# call hour changes -> building time
+		Scene.search("Buildings").find_workers()
 		if hour >= 24:
 			hour = 0
 			day += 1

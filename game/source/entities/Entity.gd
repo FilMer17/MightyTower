@@ -6,6 +6,7 @@ enum TYPE { stone, wood, coal, gold, iron }
 
 export var level: int = 1
 export(TYPE) var type: int = TYPE.stone
+export var help: String = ""
 export var alias: String = ""
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1}
 
@@ -46,7 +47,7 @@ func _ready() -> void:
 func _on_Input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if is_hovered and event.is_action_pressed("select_option") and !is_mining and !is_mined:
 		for building in get_tree().get_nodes_in_group("residence"):
-			if area.overlaps_area(building.area):
+			if area.overlaps_area(building.area) and building.is_built:
 				if $MenuContainer.get_child_count() > 0:
 					_clear_menu_container()
 					Scene.search("Map").node_in_menu = false
@@ -93,8 +94,27 @@ func _mine_entity(to_mine: bool) -> void:
 					cld_all_min += cld_temp["minute"]
 		
 		cld_all_min_temp = cld_all_min
-		progress.max_value = cld_all_min
-		progress.value = cld_all_min
+		
+		for building in get_tree().get_nodes_in_group("worker"):
+			if building.worktype == type:
+				if area.overlaps_area(building.area) and building.ready_help:
+					cld_all_min_temp *= building.help_with_cld
+					cld_all_min = cld_all_min_temp
+					var remain = 0
+					for i in range(0, 3):
+						match i:
+							0:
+				# warning-ignore:integer_division
+								cld_temp["day"] = int(cld_all_min_temp / (60 * 24))
+								remain = fmod(cld_all_min_temp, (60 * 24))
+							1:
+								cld_temp["hour"] = int(remain / 60)
+								remain = fmod(remain, 60)
+							2:
+								cld_temp["minute"] = int(remain)
+		
+		progress.max_value = cld_all_min_temp
+		progress.value = cld_all_min_temp
 		
 		is_mining = true
 		
@@ -115,14 +135,15 @@ func _clear_menu_container() -> void:
 
 func _on_Mine_cooldown() -> void:
 	for key in cld_temp.keys():
-		if cld_temp[key] == 0:
+		if cld_temp[key] <= 0:
 			var __ = cld_temp.erase(key)
 			if key == "minute":
 				_mining_is_done()
 				return
 	
+	
 	cld_temp.minute -= 1
-	if cld_temp.minute == 0:
+	if cld_temp.minute <= 0:
 		if cld_temp.keys().size() <= 1:
 			_mining_is_done()
 			return

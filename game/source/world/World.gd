@@ -32,6 +32,7 @@ func _on_Find_person() -> void:
 		if rnum == 1:
 			resources.add_resource("people", 1, "idle")
 			print("idle person added")
+			Scene.search("Console").write("idle person added")
 		else:
 			print("nobody was added")
 
@@ -54,4 +55,6 @@ func save_world_data() -> void:
 	data.settings = settings.save_data()
 	data.time = time.save_data()
 	data.resources = resources.save_data()
-	data.map = map.save_data()
+	data.buildings = map.save_data("buildings")
+	data.entities = map.save_data("entities")
+	data.terrain = map.save_data("terrain")

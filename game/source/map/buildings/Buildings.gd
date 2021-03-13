@@ -15,13 +15,16 @@ func place_building(to_build: String, pos: Vector2) -> bool:
 		for key in building.TYPE.keys():
 			if building.TYPE[key] == building.type:
 				group_name = key
-		
-		building.add_to_group(group_name)
-		return true
+				building.add_to_group(group_name)
+				return true
 	
 	building.queue_free()
 	building = null
 	return false
+
+func find_workers() -> void:
+	for group_building in get_tree().get_nodes_in_group("worker"):
+		group_building.find_worker()
 
 func save_data() -> Array:
 	var data := []

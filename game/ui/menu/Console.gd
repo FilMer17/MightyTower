@@ -9,6 +9,8 @@ onready var text_output := $Container/VBox/TextOutput as RichTextLabel
 export var size := 110
 
 var lines: Array = []
+var last_line: String = ""
+var line_combo: int = 1
 
 func _ready() -> void:
 	container.modulate.a = 0.0
@@ -48,9 +50,19 @@ func write(text: String) -> void:
 	container.modulate.a = 1.0
 	anim_player.stop(true)
 	
-	lines.append(text)
-	text_output.add_text("\n" + text)
-	text_output.scroll_to_line(text_output.get_line_count() - 1)
+	if text == last_line:
+		line_combo += 1
+		lines[lines.size() - 1] = str(line_combo) + "x " + text
+		text_output.text = ""
+		for textin in lines:
+			text_output.add_text("\n" + textin)
+		text_output.scroll_to_line(text_output.get_line_count() - 1)
+	else:
+		line_combo = 1
+		last_line = text
+		lines.append(text)
+		text_output.add_text("\n" + text)
+		text_output.scroll_to_line(text_output.get_line_count() - 1)
 	
 	timer.start()
 
