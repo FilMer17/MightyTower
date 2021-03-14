@@ -34,6 +34,15 @@ func _building_is_built() -> void:
 	resources.add_resource("max_amount", material_storage, "material")
 	resources.add_resource("max_amount", people_storage, "people")
 
+func _change_building_overview() -> void:
+	var infos := {
+		"title" : alias,
+		"Food amount" : food_storage,
+		"People amount" : people_storage,
+		"Material amount" : material_storage
+	}
+	building_overview.update_info(infos)
+
 func _enter_tree() -> void:
 	._enter_tree()
 	

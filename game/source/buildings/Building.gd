@@ -3,6 +3,7 @@ extends StaticBody2D
 class_name Building
 
 onready var cooldown_bar_scene := preload("res://ui/bar/CooldownBar.tscn")
+onready var building_info := preload("res://ui/popup/PopupBuildingInfo.gd")
 
 enum TYPE { residence, storage, house, worker }
 
@@ -12,6 +13,8 @@ export var cost: Dictionary = {}
 export var level: int = 1
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1 }
 export(TYPE) var type: int = TYPE.residence
+
+onready var building_overview := Scene.search("BuildingOverview")
 
 onready var build_cont := $BuildingContainer
 onready var sprite := $BuildingContainer/Sprite as Sprite
@@ -24,6 +27,8 @@ var cld_bar = null
 var progress = null
 
 var is_built: bool = false
+var is_hovered: bool = false
+
 var cld_temp: Dictionary = {}
 var cld_all_min: int = 0
 var cld_all_min_temp: int = 0
@@ -64,6 +69,12 @@ func _ready() -> void:
 				cld_all_min += cld_temp["hour"] * 60
 			2:
 				cld_all_min += cld_temp["minute"]
+	
+	if Scene.search("Buildings").get_child_count() <= 1:
+		cld_all_min = 1
+		cld_temp["day"] = 0
+		cld_temp["hour"] = 0
+		cld_temp["minute"] = 1
 	
 	cld_all_min_temp = cld_all_min
 	
@@ -119,9 +130,16 @@ func _on_cooldown_changed(value: int) -> void:
 func _on_Mouse_entered() -> void:
 	if not Scene.search("Map").in_builder:
 		sprite.material.set_shader_param("is_hovered", true)
+		is_hovered = true
+		_change_building_overview()
 
 func _on_Mouse_exited() -> void:
 	sprite.material.set_shader_param("is_hovered", false)
+	is_hovered = false
+	building_overview.clear_items()
+
+func _change_building_overview() -> void:
+	pass
 
 func _enter_tree():
 	if not $BuildingContainer:

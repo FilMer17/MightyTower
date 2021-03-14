@@ -60,7 +60,7 @@ func _input(event):
 		else:
 			in_menu = true
 			var menu = popup_place_menu.instance()
-			menu.rect_position = position + Vector2(30, -30)
+			menu.rect_position = position + Vector2(-36, -36)
 			$MenuContainer.add_child(menu)
 	
 	if event.is_action_pressed("cancel_action") and sprite.visible:

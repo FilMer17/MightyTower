@@ -1,5 +1,7 @@
 extends Node
 
+onready var resources_overview := Scene.search("ResourcesOverview")
+
 export var food := 0
 export var people := {
 	"idle" : 0,
@@ -7,8 +9,8 @@ export var people := {
 	"employed" : 0
 }
 export var material := {
-	"wood" : 0,
 	"stone" : 0,
+	"wood" : 0,
 	"coal" : 0,
 	"iron" : 0,
 	"gold" : 0
@@ -16,7 +18,7 @@ export var material := {
 export var max_amount := {
 	"food" : 0,
 	"people" : 0,
-	"material" : 0,
+	"material" : 0
 }
 
 var all_people := 0
@@ -28,20 +30,24 @@ func add_resource(group: String, number: int, resource: String = "") -> void:
 			if food > max_amount["food"]:
 				food = max_amount["food"]
 				_check_max_amount("food")
+				resources_overview.update_info("food")
 				return
 		"people":
 			if not resource == "":
 				people[resource] += number
 				_check_max_amount("people", resource)
+				resources_overview.update_info("people", resource)
 				return
 		"material":
 			if not resource == "":
 				material[resource] += number
 				_check_max_amount("material", resource)
+				resources_overview.update_info("material", resource)
 				return
 		"max_amount":
 			if not resource == "":
 				max_amount[resource] += number
+				resources_overview.update_info("max_amount", resource)
 				return
 	
 	print(group + " or " + resource + " is wrong!")

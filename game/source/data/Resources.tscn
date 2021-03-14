@@ -6,7 +6,8 @@
 script = ExtResource( 1 )
 material = {
 "coal": 0,
+"gold": 0,
 "iron": 0,
-"stone": 10,
-"wood": 10
+"stone": 25,
+"wood": 25
 }

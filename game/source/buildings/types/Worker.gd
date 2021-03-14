@@ -29,6 +29,15 @@ func find_worker() -> void:
 		ready_help = false
 	return
 
+func _change_building_overview() -> void:
+	var infos := {
+		"title" : alias,
+		"Work type" : WORKTYPE.keys()[worktype],
+		"Capacity" : capacity,
+		"Reduction" : 100 - (help_with_cld * 100)
+	}
+	building_overview.update_info(infos)
+
 func _enter_tree() -> void:
 	._enter_tree()
 	

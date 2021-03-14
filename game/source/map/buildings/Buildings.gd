@@ -35,12 +35,18 @@ func save_data() -> Array:
 func _pay_building_cost() -> bool:
 	var mater = resources.material
 	var output = "Cost "
+	
+	if get_child_count() <= 0:
+		return true
+	
 	for key in building.cost:
 		if mater[key] - building.cost[key] >= 0:
-			mater[key] -= building.cost[key]
+			resources.add_resource("material", -building.cost[key], key)
 			output += String(building.cost[key]) + "|" + key + " "
 		else:
 			print("Not enough resources!")
+			Scene.search("Console").write("Not enough resources")
 			return false
 	print(output + "was paid")
+	Scene.search("Console").write(output + "was paid")
 	return true

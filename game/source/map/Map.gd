@@ -27,8 +27,8 @@ func save_data(to_save: String) -> Dictionary:
 
 func create_data(diffic: String) -> void:
 	terrain.create_terrain(diffic)
-	builder.build("Residence")
 	entities.create_entities(diffic)
+	builder.build("Residence")
 
 func _input(event):
 	if event.is_action_pressed("ui_home") and !builder.sprite.visible:
