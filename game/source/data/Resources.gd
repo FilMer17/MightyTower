@@ -21,17 +21,16 @@ export var max_amount := {
 	"material" : 0
 }
 
-var all_people := 0
+var all_people: int = 0
+var hungry_people: bool = false
 
 func add_resource(group: String, number: int, resource: String = "") -> void:
 	match group:
 		"food":
 			food += number
-			if food > max_amount["food"]:
-				food = max_amount["food"]
-				_check_max_amount("food")
-				resources_overview.update_info("food")
-				return
+			_check_max_amount("food")
+			resources_overview.update_info("food")
+			return
 		"people":
 			if not resource == "":
 				people[resource] += number

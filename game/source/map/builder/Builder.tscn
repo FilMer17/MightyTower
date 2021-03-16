@@ -9,7 +9,7 @@ shader_param/current_color = null
 
 [node name="Builder" type="Node2D"]
 script = ExtResource( 2 )
-right_color = Color( 0.882353, 0.862745, 0.117647, 0.666667 )
+right_color = Color( 1, 1, 1, 0.666667 )
 wrong_color = Color( 0.901961, 0.0784314, 0.0784314, 0.666667 )
 
 [node name="Sprite" type="Sprite" parent="."]

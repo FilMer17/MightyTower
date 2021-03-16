@@ -20,5 +20,6 @@ func update_info(infos: Dictionary) -> void:
 		info.get_node("Number").text = str(infos[key])
 
 func clear_items() -> void:
+	title.text = "Choose building"
 	for child in items_container.get_children():
 		child.queue_free()

@@ -53,12 +53,14 @@ margin_bottom = 53.0
 text = "Continue"
 
 [node name="SaveGame" type="Button" parent="Background/ButtonContainer"]
+visible = false
 margin_top = 83.0
 margin_right = 308.0
 margin_bottom = 136.0
 text = "Save game"
 
 [node name="Settings" type="Button" parent="Background/ButtonContainer"]
+visible = false
 margin_top = 166.0
 margin_right = 308.0
 margin_bottom = 219.0
@@ -68,9 +70,9 @@ __meta__ = {
 }
 
 [node name="Exit" type="Button" parent="Background/ButtonContainer"]
-margin_top = 249.0
+margin_top = 83.0
 margin_right = 308.0
-margin_bottom = 302.0
+margin_bottom = 136.0
 text = "Exit"
 [connection signal="pressed" from="Background/ButtonContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Background/ButtonContainer/SaveGame" to="." method="_on_SaveGame_pressed"]

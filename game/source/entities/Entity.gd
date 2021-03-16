@@ -11,8 +11,12 @@ export var alias: String = ""
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1}
 
 onready var popup_mine_menu := preload("res://ui/popup/PopupMineMenu.tscn")
-onready var resources := Scene.search("Resources")
 onready var cooldown_bar_scene := preload("res://ui/bar/CooldownBar.tscn")
+
+onready var resources := Scene.search("Resources")
+onready var entities := Scene.search("Entities")
+onready var grid := IsoGrid.new()
+
 
 onready var tween := $Tween as Tween
 onready var clock := $Clock as Timer
@@ -21,6 +25,8 @@ onready var area := $Area as Area2D
 onready var collider := $Area/Collider as CollisionPolygon2D
 onready var gui_container := $GUIContainer as Node2D
 onready var menu_container := $MenuContainer as Node2D
+
+var quantity: int = 0
 
 var is_hovered: bool = false
 var is_mining: bool = false
@@ -43,6 +49,10 @@ func _ready() -> void:
 	__ = area.connect("mouse_entered", self, "_on_Mouse_entered")
 	__ = area.connect("mouse_exited", self, "_on_Mouse_exited")
 	__ = area.connect("input_event", self, "_on_Input_event")
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	quantity = rng.randi_range(5, 11)
 
 func _on_Input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if is_hovered and event.is_action_pressed("select_option") and !is_mining and !is_mined:
@@ -169,25 +179,34 @@ func _on_Mine_cooldown() -> void:
 
 func _mining_is_done() -> void:
 	clock.stop()
-	resources.add_resource("people", -1, "busy")
-	resources.add_resource("people", 1, "idle")
 	
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var rnum = rng.randi_range(5, 11)
-	
-	if not resources.check_with_max_amount("material", rnum):
+	if not resources.check_with_max_amount("material", quantity) and not is_mined:
+		resources.add_resource("people", -1, "busy")
+		resources.add_resource("people", 1, "idle")
 		progress.visible = false
 		cld_bar.get_node("Countdown").text = "Pick up"
 		is_mined = true
 		print("no space")
 		return
 	
-	print(alias, " was mined. Added " + str(rnum))
-	Scene.search("Console").write(alias + " was mined. Added " + str(rnum))
-	resources.add_resource("material", rnum, TYPE.keys()[type])
-	var grid := IsoGrid.new()
-	var __ = Scene.search("Entities").data.erase(grid.world_to_map(position))
+	if not resources.check_with_max_amount("material", quantity) and is_mined:
+		return
+	
+	if not is_mined:
+		resources.add_resource("people", -1, "busy")
+		resources.add_resource("people", 1, "idle")
+	
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	
+	if type == TYPE.wood:
+		var rfood_num = rng.randi_range(0, 6)
+		resources.add_resource("food", rfood_num)
+	
+	print(alias, " was mined. Added " + str(quantity))
+	Scene.search("Console").write(alias + " was mined. Added " + str(quantity))
+	resources.add_resource("material", quantity, TYPE.keys()[type])
+	var __ = entities.data.erase(grid.world_to_map(position))
 	Scene.search("Terrain").data[grid.world_to_map(position)]["placed"] = ""
 	
 	queue_free()
@@ -202,11 +221,24 @@ func _on_Mouse_entered() -> void:
 	if not Scene.search("Map").in_builder and !Scene.search("Map").node_in_menu:
 		sprite.material.set_shader_param("is_hovered", true)
 		is_hovered = true
+		
+		if is_mining:
+			for neigh_coord in grid.NEIGHBOR_TABLE:
+				var neighbor = grid.world_to_map(position) + neigh_coord
+				if entities.data.has(neighbor):
+					yield(get_tree().create_timer(0.01), "timeout")
+					get_node(entities.data[neighbor]["path"]).modulate.a = 0.3
 
 func _on_Mouse_exited() -> void:
 	if !Scene.search("Map").node_in_menu:
 		sprite.material.set_shader_param("is_hovered", false)
 		is_hovered = false
+		
+		if is_mining:
+			for neigh_coord in grid.NEIGHBOR_TABLE:
+				var neighbor = grid.world_to_map(position) + neigh_coord
+				if entities.data.has(neighbor):
+					get_node(entities.data[neighbor]["path"]).modulate.a = 1.0
 
 func _enter_tree():
 	if not $Tween:

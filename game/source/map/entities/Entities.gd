@@ -74,6 +74,7 @@ func _place_entities(grid: IsoGrid) -> void:
 		entity.get_node("Sprite").texture = data[file_data]["sprite"]
 		terrain.data[file_data]["placed"] = entity.name
 		add_child(entity)
+		data[file_data]["path"] = entity.get_path()
 
 func _get_entity_data(_terrain: int, noise_sample: float) -> Dictionary:
 	# grass = 0
@@ -84,9 +85,9 @@ func _get_entity_data(_terrain: int, noise_sample: float) -> Dictionary:
 	
 	if noise_sample > -0.2 and noise_sample < -0.1:
 		if not rnum == 1 and _terrain == 0:
-			return { "type" : GlobalData.entities["Rock"], "sprite" : rock_sprites[1]}
+			return { "type" : GlobalData.entities["Rock"], "sprite" : rock_sprites[1] }
 	if noise_sample > 0 and noise_sample < 0.125:
 		if not rnum == 1 and _terrain == 0:
-			return { "type" : GlobalData.entities["Tree"], "sprite" : tree_sprites[rsprite_num]}
+			return { "type" : GlobalData.entities["Tree"], "sprite" : tree_sprites[rsprite_num] }
 	
 	return {}

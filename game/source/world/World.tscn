@@ -14,5 +14,12 @@ script = ExtResource( 5 )
 [node name="Time" parent="." instance=ExtResource( 3 )]
 
 [node name="Resources" parent="." instance=ExtResource( 4 )]
+material = {
+"coal": 0,
+"gold": 0,
+"iron": 0,
+"stone": 25,
+"wood": 25
+}
 
 [node name="Map" parent="." instance=ExtResource( 1 )]

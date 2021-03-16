@@ -31,7 +31,15 @@ func create_data(diffic: String) -> void:
 	builder.build("Residence")
 
 func _input(event):
-	if event.is_action_pressed("ui_home") and !builder.sprite.visible:
+	if event.is_action_pressed("building1") and !builder.sprite.visible:
 		builder.build("Residence")
-	if event.is_action_pressed("ui_page_up") and !builder.sprite.visible:
+	if event.is_action_pressed("building2") and !builder.sprite.visible:
+		builder.build("FoodStorage")
+	if event.is_action_pressed("building3") and !builder.sprite.visible:
+		builder.build("SmallHouse")
+	if event.is_action_pressed("building4") and !builder.sprite.visible:
 		builder.build("Lumberjack")
+	if event.is_action_pressed("building5") and !builder.sprite.visible:
+		builder.build("Stoneminer")
+	if event.is_action_pressed("ui_home") and !builder.sprite.visible:
+		builder.build("TreeMaker")

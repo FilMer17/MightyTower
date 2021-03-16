@@ -32,9 +32,9 @@ cooldown = {
 "hour": 2,
 "minute": 1
 }
-food_storage = 20
+food_storage = 100
 material_storage = 50
-people_storage = 10
+people_storage = 5
 
 [node name="BuildingContainer" type="Node2D" parent="."]
 

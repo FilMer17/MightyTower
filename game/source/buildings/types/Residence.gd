@@ -33,6 +33,7 @@ func _building_is_built() -> void:
 	resources.add_resource("max_amount", food_storage, "food")
 	resources.add_resource("max_amount", material_storage, "material")
 	resources.add_resource("max_amount", people_storage, "people")
+	resources.add_resource("food", food_storage)
 
 func _change_building_overview() -> void:
 	var infos := {
