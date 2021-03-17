@@ -1,8 +1,15 @@
 extends YSort
 
+# warning-ignore:unused_signal
+signal make_entities
+
 onready var resources := Scene.search("Resources")
 
 var building: Building = null
+
+func _ready() -> void:
+	var __
+	__ = connect("make_entities", self, "_on_Make_entities")
 
 func place_building(to_build: String, pos: Vector2) -> bool:
 	building = GlobalData.buildings[to_build].instance()
@@ -50,3 +57,7 @@ func _pay_building_cost() -> bool:
 	print(output + "was paid")
 	Scene.search("Console").write(output + "was paid")
 	return true
+
+func _on_Make_entities() -> void:
+	for child in get_tree().get_nodes_in_group("maker"):
+		child.emit_signal("make_entity")

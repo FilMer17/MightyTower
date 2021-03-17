@@ -10,6 +10,7 @@ export var speed: float = 0.3
 export var is_paused := true
 
 onready var world := Scene.search("World")
+onready var buildings := Scene.search("Buildings")
 
 onready var clock: Timer = $Clock
 
@@ -51,12 +52,15 @@ func _on_Clock_timeout():
 		hour += 1
 		
 		world.emit_signal("feed_people")
-		Scene.search("Buildings").find_workers()
+		buildings.find_workers()
+		
+		if hour % 1 == 0:
+			buildings.emit_signal("make_entities")
+			
 		if hour >= 24:
 			hour = 0
 			day += 1
-			
-			world.emit_signal("no_people")
+			# call day changed -> new day
 			if day >= 31:
 				day = 1
 				month += 1

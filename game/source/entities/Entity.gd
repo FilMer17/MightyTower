@@ -39,6 +39,8 @@ var cld_temp := {}
 var cld_all_min: int = 0
 var cld_all_min_temp: int = 0
 
+var maker_help: Dictionary = {}
+
 func _ready() -> void:
 	var __
 	
@@ -208,6 +210,10 @@ func _mining_is_done() -> void:
 	resources.add_resource("material", quantity, TYPE.keys()[type])
 	var __ = entities.data.erase(grid.world_to_map(position))
 	Scene.search("Terrain").data[grid.world_to_map(position)]["placed"] = ""
+	
+	if not maker_help == {}:
+		get_node(maker_help["path"]).free_pos.append(maker_help["num"])
+		print("help helped")
 	
 	queue_free()
 
