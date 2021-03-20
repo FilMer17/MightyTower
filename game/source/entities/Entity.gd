@@ -229,11 +229,10 @@ func _on_Mouse_entered() -> void:
 		is_hovered = true
 		
 		if is_mining:
-			for neigh_coord in grid.NEIGHBOR_TABLE:
-				var neighbor = grid.world_to_map(position) + neigh_coord
-				if entities.data.has(neighbor):
-					yield(get_tree().create_timer(0.01), "timeout")
-					get_node(entities.data[neighbor]["path"]).modulate.a = 0.3
+			for neigh_coord in range(3, 6):
+				var neigh_pos = grid.world_to_map(position) + grid.NEIGHBOR_TABLE[neigh_coord]
+				if entities.data.has(neigh_pos):
+					get_node(entities.data[neigh_pos]["path"]).modulate.a = 0.3
 
 func _on_Mouse_exited() -> void:
 	if !Scene.search("Map").node_in_menu:
@@ -241,10 +240,10 @@ func _on_Mouse_exited() -> void:
 		is_hovered = false
 		
 		if is_mining:
-			for neigh_coord in grid.NEIGHBOR_TABLE:
-				var neighbor = grid.world_to_map(position) + neigh_coord
-				if entities.data.has(neighbor):
-					get_node(entities.data[neighbor]["path"]).modulate.a = 1.0
+			for neigh_coord in range(3, 6):
+				var neigh_pos = grid.world_to_map(position) + grid.NEIGHBOR_TABLE[neigh_coord]
+				if entities.data.has(neigh_pos):
+					get_node(entities.data[neigh_pos]["path"]).modulate.a = 1.0
 
 func _enter_tree():
 	if not $Tween:

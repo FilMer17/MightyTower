@@ -6,6 +6,7 @@ onready var cooldown_bar_scene := preload("res://ui/bar/CooldownBar.tscn")
 onready var building_info := preload("res://ui/popup/PopupBuildingInfo.gd")
 
 enum TYPE { residence, storage, house, worker, maker }
+enum BUILD_TERRAIN { grass, sand, stone, water }
 
 export var alias: String = ""
 export var size := Vector2(1, 1)
@@ -13,6 +14,7 @@ export var cost: Dictionary = {}
 export var level: int = 1
 export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1 }
 export(TYPE) var type: int = TYPE.residence
+export(BUILD_TERRAIN) var build_terrain: int = BUILD_TERRAIN.grass
 
 onready var building_overview := Scene.search("BuildingOverview")
 

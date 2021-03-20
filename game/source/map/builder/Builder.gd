@@ -64,13 +64,14 @@ func _input(event):
 			$MenuContainer.add_child(menu)
 	
 	if event.is_action_pressed("cancel_action") and sprite.visible:
-		_clear_menu_container()
-		map.in_builder = false
-		in_menu = false
-		sprite.visible = false
-		area_zone.disabled = true
-		building.queue_free()
-		building = null
+		if not buildings.get_child_count() <= 0:
+			_clear_menu_container()
+			map.in_builder = false
+			in_menu = false
+			sprite.visible = false
+			area_zone.disabled = true
+			building.queue_free()
+			building = null
 
 func _place_building(to_build: bool) -> void:
 	if to_build:
@@ -108,7 +109,7 @@ func _check_placeable(pos: Vector2) -> bool:
 	
 	for terr in terrains:
 		if terrain.data.has(terr):
-			if not terrain.data[terr]["terrain"] == terrain.TERRAINS.grass:
+			if not terrain.data[terr]["terrain"] == building.build_terrain:
 				return false
 			elif not terrain.data[terr]["placed"] == "":
 				return false
