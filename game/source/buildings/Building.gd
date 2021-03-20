@@ -5,7 +5,7 @@ class_name Building
 onready var cooldown_bar_scene := preload("res://ui/bar/CooldownBar.tscn")
 onready var building_info := preload("res://ui/popup/PopupBuildingInfo.gd")
 
-enum TYPE { residence, storage, house, worker, maker }
+enum TYPE { residence, storage, house, worker, maker, tower }
 enum BUILD_TERRAIN { grass, sand, stone, water }
 
 export var alias: String = ""

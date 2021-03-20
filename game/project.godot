@@ -45,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://source/buildings/types/Storage.gd"
 }, {
 "base": "Building",
+"class": "Tower",
+"language": "GDScript",
+"path": "res://source/buildings/types/Tower.gd"
+}, {
+"base": "Building",
 "class": "Worker",
 "language": "GDScript",
 "path": "res://source/buildings/types/Worker.gd"
@@ -62,6 +67,7 @@ _global_script_class_icons={
 "Maker": "",
 "Residence": "",
 "Storage": "",
+"Tower": "",
 "Worker": "",
 "WorldData": ""
 }

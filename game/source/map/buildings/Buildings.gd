@@ -2,6 +2,8 @@ extends YSort
 
 # warning-ignore:unused_signal
 signal make_entities
+# warning-ignore:unused_signal
+signal find_workers
 
 onready var resources := Scene.search("Resources")
 
@@ -10,6 +12,7 @@ var building: Building = null
 func _ready() -> void:
 	var __
 	__ = connect("make_entities", self, "_on_Make_entities")
+	__ = connect("find_workers", self, "_on_Find_workers")
 
 func place_building(to_build: String, pos: Vector2) -> bool:
 	building = GlobalData.buildings[to_build].instance()
@@ -29,8 +32,11 @@ func place_building(to_build: String, pos: Vector2) -> bool:
 	building = null
 	return false
 
-func find_workers() -> void:
+func _on_Find_workers() -> void:
 	for group_building in get_tree().get_nodes_in_group("worker"):
+		group_building.find_worker()
+	
+	for group_building in get_tree().get_nodes_in_group("tower"):
 		group_building.find_worker()
 
 func save_data() -> Array:

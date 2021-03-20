@@ -36,7 +36,7 @@ func _input(event):
 	if event.is_action_pressed("building2") and !builder.sprite.visible:
 		builder.build("FoodStorage")
 	if event.is_action_pressed("building3") and !builder.sprite.visible:
-		builder.build("SmallHouse")
+		builder.build("SmallTower")
 	if event.is_action_pressed("building4") and !builder.sprite.visible:
 		builder.build("Lumberjack")
 	if event.is_action_pressed("building5") and !builder.sprite.visible:

@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://source/buildings/types/Tower.gd" type="Script" id=1]
+[ext_resource path="res://graphics/interface/Light.png" type="Texture" id=2]
+[ext_resource path="res://graphics/interface/white.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 72.0
+height = 48.0
+
+[node name="SmallTower" type="StaticBody2D"]
+script = ExtResource( 1 )
+alias = "Small Tower"
+cost = {
+"stone": 15,
+"wood": 5
+}
+cooldown = {
+"day": 0,
+"hour": 0,
+"minute": 1
+}
+type = 5
+capacity = 2
+
+[node name="BuildingContainer" type="Node2D" parent="."]
+
+[node name="Tween" type="Tween" parent="BuildingContainer"]
+
+[node name="Clock" type="Timer" parent="BuildingContainer"]
+wait_time = 0.3
+
+[node name="Sprite" type="Sprite" parent="BuildingContainer"]
+position = Vector2( 0, -8 )
+scale = Vector2( 0.5, 2 )
+texture = ExtResource( 3 )
+
+[node name="GUIContainer" type="Node2D" parent="BuildingContainer"]
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 0, -16, 8, 0, 16, 16, 8 )
+
+[node name="BuildingArea" type="Area2D" parent="."]
+
+[node name="Zone" type="CollisionShape2D" parent="BuildingArea"]
+rotation = 1.5708
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Light" type="Light2D" parent="."]
+visible = false
+position = Vector2( -7.15256e-07, 2.86102e-06 )
+scale = Vector2( 20.9231, 16 )
+texture = ExtResource( 2 )
+mode = 2

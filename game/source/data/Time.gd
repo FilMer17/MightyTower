@@ -52,7 +52,7 @@ func _on_Clock_timeout():
 		hour += 1
 		
 		world.emit_signal("feed_people")
-		buildings.find_workers()
+		buildings.emit_signal("find_workers")
 		
 		if hour % 1 == 0:
 			buildings.emit_signal("make_entities")

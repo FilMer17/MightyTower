@@ -1,46 +1,39 @@
 tool
 extends Building
-class_name Residence
+class_name Tower
 
-export var food_storage: int = 0
-export var material_storage: int = 0
-export var people_storage: int = 0
+export var capacity: int = 1
 
 onready var resources := Scene.search("Resources")
-onready var builder := Scene.search("Builder")
 
 onready var area := $BuildingArea as Area2D
 onready var area_zone := $BuildingArea/Zone as CollisionShape2D
 onready var light := $Light as Light2D
 
+var people_in: int = 0
+
 func _ready() -> void:
-	var __
-	__ = area.connect("area_entered", self, "_on_Area_entered")
-	__ = area.connect("area_exited", self, "_on_Area_exited")
-	
 	light.color = Color("#f0dc96")
 
-func _on_Area_entered(_area: Area2D) -> void:
-	if _area.get_parent().name == "Builder":
-		builder.emit_signal("entered_build_area")
-
-func _on_Area_exited(_area: Area2D) -> void:
-	if _area.get_parent().name == "Builder":
-		builder.emit_signal("exited_build_area")
-
-func _building_is_built() -> void:
-	._building_is_built()
-	resources.add_resource("max_amount", food_storage, "food")
-	resources.add_resource("max_amount", material_storage, "material")
-	resources.add_resource("max_amount", people_storage, "people")
-	resources.add_resource("food", food_storage)
+func find_worker() -> void:
+	if is_built and people_in < capacity:
+		if not resources.people["idle"] <= 0:
+			resources.add_resource("people", -1, "idle")
+			resources.add_resource("people", 1, "employed")
+			Scene.search("Console").write("Person add to " + alias)
+			people_in += 1
+	if people_in == capacity:
+		area_zone.disabled = false
+		light.visible = true
+	else:
+		area_zone.disabled = true
+		light.visible = false
+	return
 
 func _change_building_overview() -> void:
 	var infos := {
 		"title" : alias,
-		"Food amount" : food_storage,
-		"People amount" : people_storage,
-		"Material amount" : material_storage
+		"Capacity" : capacity
 	}
 	building_overview.update_info(infos)
 
