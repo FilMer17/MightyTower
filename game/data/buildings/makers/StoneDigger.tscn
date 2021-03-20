@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/buildings/types/Maker.gd" type="Script" id=1]
+[ext_resource path="res://graphics/interface/white.png" type="Texture" id=2]
+
+[node name="StoneDigger" type="StaticBody2D"]
+script = ExtResource( 1 )
+alias = "Stone Digger"
+size = Vector2( 3, 3 )
+cost = {
+"stone": 20
+}
+cooldown = {
+"day": 0,
+"hour": 0,
+"minute": 1
+}
+type = 4
+
+[node name="BuildingContainer" type="Node2D" parent="."]
+
+[node name="Tween" type="Tween" parent="BuildingContainer"]
+
+[node name="Clock" type="Timer" parent="BuildingContainer"]
+wait_time = 0.3
+
+[node name="Sprite" type="Sprite" parent="BuildingContainer"]
+position = Vector2( 0, 24 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="GUIContainer" type="Node2D" parent="BuildingContainer"]
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 16, -16, 24, 0, 32, 16, 24 )
