@@ -5,6 +5,7 @@ class_name Tower
 export var capacity: int = 1
 
 onready var resources := Scene.search("Resources")
+onready var builder := Scene.search("Builder")
 
 onready var area := $BuildingArea as Area2D
 onready var area_zone := $BuildingArea/Zone as CollisionShape2D
@@ -13,6 +14,10 @@ onready var light := $Light as Light2D
 var people_in: int = 0
 
 func _ready() -> void:
+	var __
+	__ = area.connect("area_entered", self, "_on_Area_entered")
+	__ = area.connect("area_exited", self, "_on_Area_exited")
+	
 	light.color = Color("#f0dc96")
 
 func find_worker() -> void:
@@ -29,6 +34,14 @@ func find_worker() -> void:
 		area_zone.disabled = true
 		light.visible = false
 	return
+
+func _on_Area_entered(_area: Area2D) -> void:
+	if _area.get_parent().name == "Builder":
+		builder.emit_signal("entered_build_area")
+
+func _on_Area_exited(_area: Area2D) -> void:
+	if _area.get_parent().name == "Builder":
+		builder.emit_signal("exited_build_area")
 
 func _change_building_overview() -> void:
 	var infos := {
