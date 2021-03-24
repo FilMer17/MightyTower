@@ -109,7 +109,7 @@ func _on_build_cooldown() -> void:
 		if  cld_temp.has(key):
 			output.append(String(cld_temp[key]) + key[0])
 	for i in range(0, cld_temp.size()):
-		if str(output[i]).length() == 1:
+		if str(output[i]).length() <= 2:
 			output[i] = "0" + String(output[i])
 	countdown.text = PoolStringArray(output).join(":")
 	

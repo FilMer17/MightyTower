@@ -11,6 +11,7 @@ export var is_paused := true
 
 onready var world := Scene.search("World")
 onready var buildings := Scene.search("Buildings")
+onready var time_overview := Scene.search("TimeOverview")
 
 onready var clock: Timer = $Clock
 

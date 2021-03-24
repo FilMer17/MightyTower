@@ -56,8 +56,6 @@ visible = false
 
 [node name="HUD" type="CanvasLayer" parent="GameUI"]
 
-[node name="TimeOverview" parent="GameUI/HUD" instance=ExtResource( 10 )]
-
 [node name="ResourcesOverview" parent="GameUI/HUD" instance=ExtResource( 8 )]
 margin_top = -305.414
 margin_bottom = -19.4142
@@ -69,6 +67,11 @@ margin_bottom = -169.343
 [node name="BuilderOverview" parent="GameUI/HUD" instance=ExtResource( 9 )]
 margin_left = 3.36353
 margin_right = 3.36353
+
+[node name="TimeOverview" parent="GameUI/HUD" instance=ExtResource( 10 )]
+margin_left = -169.0
+margin_right = 1.0
+margin_bottom = 52.0
 
 [node name="GameCamera" parent="." instance=ExtResource( 2 )]
 pause_mode = 1

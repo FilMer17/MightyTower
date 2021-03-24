@@ -12,6 +12,7 @@ var nodes := {
 	"Console" : "/root/Game/GameUI/Console",
 	"ResourcesOverview" : "/root/Game/GameUI/HUD/ResourcesOverview",
 	"BuildingOverview" : "/root/Game/GameUI/HUD/BuildingOverview",
+	"TimeOverview" : "/root/Game/GameUI/HUD/TimeOverview",
 	"World" : "/root/Game/World",
 	"Settings" : "/root/Game/World/Settings",
 	"Time" : "/root/Game/World/Time",
