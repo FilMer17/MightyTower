@@ -25,6 +25,8 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 869.0
 margin_bottom = 158.0
+mouse_filter = 0
+custom_constants/separation = 11
 
 [node name="NameList" type="ItemList" parent="PanelContainer/VBoxContainer"]
 margin_right = 862.0
@@ -34,12 +36,14 @@ auto_height = true
 max_columns = 6
 
 [node name="BuildingList" type="ItemList" parent="PanelContainer/VBoxContainer"]
-margin_top = 31.0
+margin_top = 38.0
 margin_right = 862.0
-margin_bottom = 126.0
+margin_bottom = 148.0
+rect_min_size = Vector2( 0, 110 )
 items = [ "Small Residence", ExtResource( 1 ), false, "Medium Residence", ExtResource( 1 ), false, "Large Residence", ExtResource( 1 ), false ]
-auto_height = true
 max_columns = 8
 icon_mode = 0
 fixed_icon_size = Vector2( 64, 64 )
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/NameList" to="." method="_on_NameList_item_selected"]
+[connection signal="item_activated" from="PanelContainer/VBoxContainer/BuildingList" to="." method="_on_BuildingList_item_activated"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/BuildingList" to="." method="_on_BuildingList_item_selected"]

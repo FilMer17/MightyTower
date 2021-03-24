@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://source/world/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/game/camera/GameCamera.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/HUD/overview/BuildingOverview.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/HUD/overview/ResourcesOverview.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/HUD/overview/BuilderOverview.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/HUD/overview/TimeOverview.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 54
@@ -55,12 +56,15 @@ visible = false
 
 [node name="HUD" type="CanvasLayer" parent="GameUI"]
 
+[node name="TimeOverview" parent="GameUI/HUD" instance=ExtResource( 10 )]
+
 [node name="ResourcesOverview" parent="GameUI/HUD" instance=ExtResource( 8 )]
-margin_bottom = -72.0
+margin_top = -305.414
+margin_bottom = -19.4142
 
 [node name="BuildingOverview" parent="GameUI/HUD" instance=ExtResource( 7 )]
-margin_top = 293.0
-margin_bottom = -177.0
+margin_top = 343.657
+margin_bottom = -169.343
 
 [node name="BuilderOverview" parent="GameUI/HUD" instance=ExtResource( 9 )]
 margin_left = 3.36353

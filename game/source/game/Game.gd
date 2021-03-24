@@ -4,6 +4,7 @@ onready var game_ui := $GameUI
 onready var game_cam := $GameCamera
 onready var pause_label := $GameUI/Pause
 onready var exit_menu := $GameUI/ExitMenu
+onready var builder_overview := $GameUI/HUD/BuilderOverview
 
 var pause_pause: bool = false
 var pause_exitm: bool = false
@@ -27,3 +28,5 @@ func _input(event) -> void:
 			exit_menu.mouse_filter = Control.MOUSE_FILTER_STOP
 		else:
 			exit_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if event.is_action_pressed("build_menu") and not get_tree().paused:
+		builder_overview.hide_data()
