@@ -4,8 +4,11 @@ extends Node2D
 signal find_person
 # warning-ignore:unused_signal
 signal feed_people
+# warning-ignore:unused_signal
+signal hungry_people
 
 onready var console := Scene.search("Console")
+onready var time_overview := Scene.search("TimeOverview")
 
 var data: WorldData = null
 
@@ -20,6 +23,7 @@ func _ready() -> void:
 	var __
 	__ = connect("find_person", self, "_on_Find_person")
 	__ = connect("feed_people", self, "_on_Feed_people")
+	__ = connect("hungry_people", self, "_on_Hungry_people")
 	
 	if GlobalData.selected_world["is_new"]:
 		_create_world_data(GlobalData.selected_world["size"])
@@ -93,9 +97,16 @@ func _on_Feed_people() -> void:
 		return
 	
 	if need_food > resources.food:
+		resources.add_resource("food", resources.food)
 		console.write("Not enough food")
 		resources.hungry_people = true
 	else:
 		resources.add_resource("food", -need_food)
 		console.write("People are fed")
 		resources.hungry_people = false
+
+func _on_Hungry_people() -> void:
+	if resources.hungry_people:
+		time_overview.happiness_change(-3)
+	else:
+		time_overview.happiness_change(1)

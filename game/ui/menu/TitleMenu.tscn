@@ -113,9 +113,9 @@ __meta__ = {
 
 [node name="Settings" type="Button" parent="ButtonsContainer"]
 visible = false
-margin_top = 395.0
-margin_right = 289.0
-margin_bottom = 448.0
+margin_top = 261.0
+margin_right = 290.0
+margin_bottom = 314.0
 text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false

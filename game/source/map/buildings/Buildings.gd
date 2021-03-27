@@ -50,6 +50,7 @@ func _pay_building_cost() -> bool:
 	var output = "Cost "
 	
 	if get_child_count() <= 0:
+		Scene.search("BuilderOverview").hide_data()
 		return true
 	
 	for key in building.cost:

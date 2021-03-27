@@ -28,5 +28,5 @@ func _input(event) -> void:
 			exit_menu.mouse_filter = Control.MOUSE_FILTER_STOP
 		else:
 			exit_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if event.is_action_pressed("build_menu") and not get_tree().paused:
+	if event.is_action_pressed("build_menu") and not get_tree().paused and Scene.search("Buildings").get_child_count() > 0:
 		builder_overview.hide_data()

@@ -17,6 +17,8 @@ func _ready() -> void:
 	name_list.max_columns = TYPE.keys().size()
 	for item_name in TYPE.keys():
 		name_list.add_item(item_name.to_upper());
+	
+	hide_data()
 
 func hide_data() -> void:
 	visible = not visible

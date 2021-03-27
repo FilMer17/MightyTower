@@ -41,13 +41,15 @@ margin_top = 18.0
 margin_right = 156.0
 margin_bottom = 38.0
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Tween" type="Tween" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 margin_right = 16.0
 margin_bottom = 20.0
 texture = ExtResource( 1 )
 stretch_mode = 4
 
-[node name="TextureProgress" type="TextureProgress" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Progress" type="TextureProgress" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 margin_left = 20.0
 margin_right = 155.0
 margin_bottom = 20.0

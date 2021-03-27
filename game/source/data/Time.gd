@@ -11,7 +11,6 @@ export var is_paused := true
 
 onready var world := Scene.search("World")
 onready var buildings := Scene.search("Buildings")
-onready var time_overview := Scene.search("TimeOverview")
 
 onready var clock: Timer = $Clock
 
@@ -47,6 +46,7 @@ func _on_Clock_timeout():
 	
 	if minute % 10 == 0:
 		world.emit_signal("find_person")
+		world.emit_signal("hungry_people")
 	
 	if minute >= 60:
 		minute = 0
