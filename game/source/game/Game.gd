@@ -4,11 +4,16 @@ onready var game_ui := $GameUI
 onready var game_cam := $GameCamera
 onready var pause_label := $GameUI/Pause
 onready var exit_menu := $GameUI/ExitMenu
+onready var end_label := $GameUI/End
 onready var builder_overview := $GameUI/HUD/BuilderOverview
 
 var pause_pause: bool = false
 var pause_exitm: bool = false
 var cam_unlock: bool = false
+
+func _ready() -> void:
+	end_label.visible = false
+	end_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause") and not pause_exitm:
@@ -30,3 +35,19 @@ func _input(event) -> void:
 			exit_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if event.is_action_pressed("build_menu") and not get_tree().paused and Scene.search("Buildings").get_child_count() > 0:
 		builder_overview.hide_data()
+
+func end_game(win: bool) -> void:
+	if win:
+		end_label.text = "Win"
+	else:
+		end_label.text = "Game over"
+	
+	end_label.visible = true
+	end_label.mouse_filter = Control.MOUSE_FILTER_STOP
+	get_tree().paused = true
+
+
+func _on_End_gui_input(event: InputEvent):
+	if end_label.visible and event.is_action_pressed("select_option"):
+		get_tree().paused = false
+		Scene.change("TitleScreen")

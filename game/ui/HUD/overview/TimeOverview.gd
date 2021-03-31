@@ -6,6 +6,7 @@ onready var tween := $PanelContainer/VBoxContainer/HBoxContainer/Tween
 onready var progress := $PanelContainer/VBoxContainer/HBoxContainer/Progress
 
 onready var time := Scene.search("Time")
+onready var game := Scene.search("Game")
 
 var change: int = 0
 
@@ -36,6 +37,7 @@ func happiness_change(value: int) -> void:
 		return
 	elif change <= 0:
 		print("game over")
+		game.end_game(false)
 	
 	var __
 	__ = tween.stop(progress, "value")

@@ -14,8 +14,12 @@ __meta__ = {
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-margin_left = -876.0
-margin_top = -165.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -870.0
+margin_top = -162.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,13 +27,13 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 869.0
-margin_bottom = 158.0
+margin_right = 863.0
+margin_bottom = 155.0
 mouse_filter = 0
 custom_constants/separation = 11
 
 [node name="NameList" type="ItemList" parent="PanelContainer/VBoxContainer"]
-margin_right = 862.0
+margin_right = 856.0
 margin_bottom = 27.0
 items = [ "Residence", null, false, "House", null, false, "Storage", null, false, "Worker", null, false, "Maker", null, false, "Tower", null, false ]
 auto_height = true
@@ -37,7 +41,7 @@ max_columns = 6
 
 [node name="BuildingList" type="ItemList" parent="PanelContainer/VBoxContainer"]
 margin_top = 38.0
-margin_right = 862.0
+margin_right = 856.0
 margin_bottom = 148.0
 rect_min_size = Vector2( 0, 110 )
 items = [ "Small Residence", ExtResource( 1 ), false, "Medium Residence", ExtResource( 1 ), false, "Large Residence", ExtResource( 1 ), false ]

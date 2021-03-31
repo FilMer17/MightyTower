@@ -97,7 +97,7 @@ func _on_Feed_people() -> void:
 		return
 	
 	if need_food > resources.food:
-		resources.add_resource("food", resources.food)
+		resources.add_resource("food", -resources.food)
 		console.write("Not enough food")
 		resources.hungry_people = true
 	else:

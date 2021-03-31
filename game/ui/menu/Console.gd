@@ -6,14 +6,11 @@ onready var anim_player := $Container/AnimationPlayer as AnimationPlayer
 onready var vbox := $Container/VBox as VBoxContainer
 onready var text_output := $Container/VBox/TextOutput as RichTextLabel
 
-export var size := 110
+export var size := 150
 
 var lines: Array = []
 var last_line: String = ""
 var line_combo: int = 1
-
-func _ready() -> void:
-	container.modulate.a = 0.0
 
 func _input(event) -> void:
 	if event.is_action_pressed("show_console"):
