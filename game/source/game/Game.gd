@@ -14,6 +14,8 @@ var cam_unlock: bool = false
 func _ready() -> void:
 	end_label.visible = false
 	end_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	game_cam.position = Vector2(0, (Scene.search("Terrain").MAP_SIZE[GlobalData.selected_world.size] / 2) * 16)
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause") and not pause_exitm:

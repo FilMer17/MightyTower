@@ -5,7 +5,7 @@ class_name Maker
 # warning-ignore:unused_signal
 signal make_entity
 
-enum MAKETYPE { Rock, Tree, Coal, Gold, Iron }
+enum MAKETYPE { Rock, Tree, Coal, Gold, Iron, Food}
 
 export(MAKETYPE) var maketype := MAKETYPE.Rock
 
@@ -18,7 +18,10 @@ var max_entities: bool = false
 
 func _ready() -> void:
 	var __
-	__ = connect("make_entity", self, "_on_Make_entity")
+	if maketype == MAKETYPE.Food:
+		__  = connect("make_entity", self, "_on_Add_food")
+	else:
+		__ = connect("make_entity", self, "_on_Make_entity")
 
 func _change_building_overview() -> void:
 	var infos := {
@@ -44,3 +47,9 @@ func _on_Make_entity() -> void:
 		entities.data[ent_pos]["path"] = entity.get_path()
 		terrain.data[ent_pos]["placed"] = entity.name
 		Scene.search("Console").write(MAKETYPE.keys()[maketype] + " was made")
+
+func _on_Add_food() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	
+	Scene.search("Resources").add_resource("food", rng.randi_range(5, 12))

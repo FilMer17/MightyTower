@@ -34,6 +34,9 @@ func _building_is_built() -> void:
 	resources.add_resource("max_amount", material_storage, "material")
 	resources.add_resource("max_amount", people_storage, "people")
 	resources.add_resource("food", food_storage)
+	
+	area_zone.disabled = false
+	light.visible = true
 
 func _change_building_overview() -> void:
 	var infos := {
@@ -59,6 +62,7 @@ func _enter_tree() -> void:
 		area_zone.name = "Zone"
 		area.add_child(area_zone)
 		area_zone.owner = get_tree().edited_scene_root
+		area_zone.disabled = true
 		print("Node added: %s" % area_zone.name)
 	
 	if not $Light:
@@ -67,4 +71,5 @@ func _enter_tree() -> void:
 		add_child(light)
 		light.mode = Light2D.MODE_MIX
 		light.owner = get_tree().edited_scene_root
+		light.visible = false
 		print("Node added: %s" % light.name)

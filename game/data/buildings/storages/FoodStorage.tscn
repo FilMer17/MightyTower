@@ -25,6 +25,7 @@ cooldown = {
 "hour": 0,
 "minute": 40
 }
+type = 1
 capacity = 1
 
 [node name="BuildingContainer" type="Node2D" parent="."]

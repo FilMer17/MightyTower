@@ -229,6 +229,7 @@ func _on_Mouse_entered() -> void:
 		is_hovered = true
 		
 		if is_mining:
+			yield(get_tree().create_timer(0.1), "timeout")
 			for neigh_coord in range(3, 6):
 				var neigh_pos = grid.world_to_map(position) + grid.NEIGHBOR_TABLE[neigh_coord]
 				if entities.data.has(neigh_pos):
