@@ -24,6 +24,7 @@ var is_right_color: bool = false
 var building: Building = null
 var det_areas: Array = []
 var const_zone_pos: Array
+var move_pos := 0
 
 func _ready() -> void:
 	var __
@@ -48,15 +49,14 @@ func build(b_name: String) -> void:
 
 func _physics_process(_delta):
 	if sprite.visible and !in_menu:
-		var move_pos = 0
 		if building.size.y < 3:
 			move_pos = 0
 		else:
-			move_pos = -int((building.size.y - building.size.y / 2))
+			move_pos = -int((building.size.y - (building.size.y / 2)))
 		
 		position = grid.map_to_world(grid.world_to_map(get_global_mouse_position()) + Vector2(move_pos, move_pos))
 		var map_pos := grid.world_to_map(get_global_mouse_position())
-		if _check_placeable(map_pos):
+		if _check_placeable(map_pos + Vector2(move_pos, move_pos)):
 			is_right_color = true
 			sprite.material.set_shader_param("current_color", right_color)
 		else:
@@ -91,6 +91,7 @@ func _place_building(to_build: bool) -> void:
 			var terrdir = IsoGrid.NEIGHBOR_TABLE
 			var b_pos = grid.world_to_map(position)
 			var terrains := [b_pos]
+			# change to go by x, y not by neighbor
 			for i in range(1, building.size.x):
 				for j in range(3, 6):
 					terrains.append(b_pos + terrdir[j] * i)
