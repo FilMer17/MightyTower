@@ -52,11 +52,13 @@ func _ready() -> void:
 
 	gui_container.add_child(cld_bar_scene)
 	
+	gui_container.position = build_cont.get_node("Sprite").position
+	
 	cld_bar = gui_container.get_node("CooldownBar")
 	progress = cld_bar.get_node("Progress")
 	
 	var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-	font.size = 6
+	font.size = 5
 	cld_bar.get_node("Countdown").text = ""
 	
 	cld_temp = cooldown.duplicate()

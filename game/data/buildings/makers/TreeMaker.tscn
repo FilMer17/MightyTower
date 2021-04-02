@@ -12,7 +12,7 @@ cost = {
 }
 cooldown = {
 "day": 0,
-"hour": 0,
+"hour": 1,
 "minute": 1
 }
 type = 4

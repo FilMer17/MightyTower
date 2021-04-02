@@ -31,6 +31,9 @@ func _change_building_overview() -> void:
 	building_overview.update_info(infos)
 
 func _on_Make_entity() -> void:
+	if not is_built:
+		return
+	
 	if free_pos.empty():
 		return
 	

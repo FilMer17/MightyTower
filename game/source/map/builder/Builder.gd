@@ -11,7 +11,9 @@ export(Color, RGBA) var wrong_color := Color.black
 onready var popup_place_menu := preload("res://ui/popup/PopupPlaceMenu.tscn")
 
 onready var sprite := $Sprite
+onready var area := $Area
 onready var area_zone := $Area/Zone
+
 onready var grid := IsoGrid.new()
 onready var map := Scene.search("Map")
 onready var buildings := map.get_node("Buildings")
@@ -32,7 +34,10 @@ func _ready() -> void:
 
 func build(b_name: String) -> void:
 	building = GlobalData.buildings[b_name].instance()
-	sprite.texture = building.get_node("BuildingContainer").get_node("Sprite").texture
+	var building_sprite = building.get_node("BuildingContainer").get_node("Sprite")
+	sprite.texture = building_sprite.texture
+	sprite.position = building_sprite.position
+	sprite.scale = building_sprite.scale
 	
 	for i in range(0, 4):
 		area_zone.polygon[i] = const_zone_pos[i] * building.size
@@ -43,7 +48,13 @@ func build(b_name: String) -> void:
 
 func _physics_process(_delta):
 	if sprite.visible and !in_menu:
-		position = grid.map_to_world(grid.world_to_map(get_global_mouse_position()))
+		var move_pos = 0
+		if building.size.y < 3:
+			move_pos = 0
+		else:
+			move_pos = -int((building.size.y - building.size.y / 2))
+		
+		position = grid.map_to_world(grid.world_to_map(get_global_mouse_position()) + Vector2(move_pos, move_pos))
 		var map_pos := grid.world_to_map(get_global_mouse_position())
 		if _check_placeable(map_pos):
 			is_right_color = true

@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://source/buildings/types/Tower.gd" type="Script" id=1]
+[ext_resource path="res://graphics/interface/Light.png" type="Texture" id=2]
+[ext_resource path="res://graphics/buildings/towers/StoneTower.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 40.0
+height = 16.0
+
+[node name="StoneTower" type="StaticBody2D"]
+script = ExtResource( 1 )
+alias = "Stone Tower"
+size = Vector2( 2, 2 )
+cost = {
+
+}
+cooldown = {
+"day": 1,
+"hour": 1,
+"minute": 1
+}
+type = 5
+
+[node name="BuildingContainer" type="Node2D" parent="."]
+
+[node name="Tween" type="Tween" parent="BuildingContainer"]
+
+[node name="Clock" type="Timer" parent="BuildingContainer"]
+wait_time = 0.3
+
+[node name="Sprite" type="Sprite" parent="BuildingContainer"]
+position = Vector2( 0, -6 )
+texture = ExtResource( 3 )
+
+[node name="GUIContainer" type="Node2D" parent="BuildingContainer"]
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 0, -32, 16, 0, 32, 32, 16 )
+
+[node name="BuildingArea" type="Area2D" parent="."]
+
+[node name="Zone" type="CollisionShape2D" parent="BuildingArea"]
+position = Vector2( 0, 16 )
+rotation = 1.5708
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Light" type="Light2D" parent="."]
+visible = false
+position = Vector2( 1.90735e-06, 16 )
+scale = Vector2( 7.38462, 6.15385 )
+texture = ExtResource( 2 )
+mode = 2
