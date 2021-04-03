@@ -88,13 +88,11 @@ func _place_building(to_build: bool) -> void:
 	if to_build:
 		var pos = grid.map_to_world(grid.world_to_map(position))
 		if buildings.place_building(building.name, pos):
-			var terrdir = IsoGrid.NEIGHBOR_TABLE
 			var b_pos = grid.world_to_map(position)
-			var terrains := [b_pos]
-			# change to go by x, y not by neighbor
-			for i in range(1, building.size.x):
-				for j in range(3, 6):
-					terrains.append(b_pos + terrdir[j] * i)
+			var terrains := []
+			for x in range(0, building.size.x):
+				for y in range(0, building.size.y):
+					terrains.append(b_pos + Vector2(x, y))
 			
 			for terr in terrains:
 				terrain.data[terr]["placed"] = building.name
@@ -113,11 +111,10 @@ func _clear_menu_container() -> void:
 		menu.queue_free()
 
 func _check_placeable(pos: Vector2) -> bool:
-	var terrdir = IsoGrid.NEIGHBOR_TABLE
-	var terrains := [pos]
-	for i in range(1, building.size.x):
-		for j in range(3, 6):
-			terrains.append(pos + terrdir[j] * i)
+	var terrains := []
+	for x in range(0, building.size.x):
+		for y in range(0, building.size.y):
+			terrains.append(pos + Vector2(x, y))
 	
 	for terr in terrains:
 		if terrain.data.has(terr):

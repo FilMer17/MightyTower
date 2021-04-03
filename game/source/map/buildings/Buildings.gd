@@ -51,6 +51,7 @@ func _pay_building_cost() -> bool:
 	
 	if get_child_count() <= 0:
 		Scene.search("BuilderOverview").hide_data()
+		Scene.search("Game").get_node("GameShader").visible = true
 		return true
 	
 	for key in building.cost:

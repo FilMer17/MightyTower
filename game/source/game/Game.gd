@@ -2,6 +2,7 @@ extends Node2D
 
 onready var game_ui := $GameUI
 onready var game_cam := $GameCamera
+onready var game_shader := $GameShader
 onready var pause_label := $GameUI/Pause
 onready var exit_menu := $GameUI/ExitMenu
 onready var end_label := $GameUI/End
@@ -16,6 +17,8 @@ func _ready() -> void:
 	end_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	game_cam.position = Vector2(0, (Scene.search("Terrain").MAP_SIZE[GlobalData.selected_world.size] / 2) * 16)
+	
+	game_shader .visible = false
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause") and not pause_exitm:
