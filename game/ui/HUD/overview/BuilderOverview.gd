@@ -47,6 +47,7 @@ func _on_BuildingList_item_selected(index):
 	var file_data = load(buildings[data_name]["path"]).instance()
 	file_data.building_overview = building_overview
 	file_data._change_building_overview()
+	file_data.queue_free()
 
 
 func _on_BuildingList_item_activated(index):

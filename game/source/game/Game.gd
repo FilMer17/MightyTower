@@ -16,7 +16,8 @@ func _ready() -> void:
 	end_label.visible = false
 	end_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-	game_cam.position = Vector2(0, (Scene.search("Terrain").MAP_SIZE[GlobalData.selected_world.size] / 2) * 16)
+	game_cam.position = Vector2(0, (Scene.search("Terrain").\
+		MAP_SIZE[GlobalData.world_data.world_size] / 2) * 16)
 	
 	game_shader .visible = false
 
@@ -50,7 +51,6 @@ func end_game(win: bool) -> void:
 	end_label.visible = true
 	end_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	get_tree().paused = true
-
 
 func _on_End_gui_input(event: InputEvent):
 	if end_label.visible and event.is_action_pressed("select_option"):

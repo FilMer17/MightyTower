@@ -75,6 +75,7 @@ __meta__ = {
 
 [node name="ExitMenu" parent="GameUI" instance=ExtResource( 6 )]
 visible = false
+margin_bottom = -162.0
 
 [node name="HUD" type="CanvasLayer" parent="GameUI"]
 

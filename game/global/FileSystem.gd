@@ -4,6 +4,14 @@ func load_dir(path: String, extentions: Array, load_resource := true) -> Array:
 	return _get_directory_data(path, [], extentions, load_resource)
 
 
+func save_to_file(data, dir_name, file_name) -> void:
+	var file = File.new()
+	file.open("user://"+ dir_name + "/" + GlobalData.world_data.world_name + \
+			  "/" + file_name + ".save", File.WRITE)
+	file.store_var(data, true)
+	file.close()
+
+
 func _get_directory_data(path: String, directory_data: Array, extentions: Array, load_resource: bool) -> Array:
 	var directory := Directory.new()
 

@@ -10,7 +10,7 @@ signal hungry_people
 onready var console := Scene.search("Console")
 onready var time_overview := Scene.search("TimeOverview")
 
-var data: WorldData = null
+var world_data: WorldData = WorldData.new()
 
 onready var settings = $Settings
 onready var time = $Time
@@ -25,37 +25,29 @@ func _ready() -> void:
 	__ = connect("feed_people", self, "_on_Feed_people")
 	__ = connect("hungry_people", self, "_on_Hungry_people")
 	
-	if GlobalData.selected_world["is_new"]:
-		_create_world_data(GlobalData.selected_world["size"])
-		time.change_clock_state()
-		data = WorldData.new()
-	else:
-		data = GlobalData.selected_world["world"]
-		_load_world_data()
-		time.change_clock_state()
+	_create_world_data(GlobalData.world_data.world_size)
+	
+	save_world_data()
+	
+	time.change_clock_state()
 
-func _create_world_data(diffic: String) -> void:
-	# settings default
-	# time default
-	w_name = GlobalData.selected_world["name"]
-	resources.create_data(diffic)
-	map.create_data(diffic)
-
-func _load_world_data() -> void:
-	w_name = GlobalData.selected_world["name"]
-	settings.load_data(data.settings)
-	time.load_data(data.time)
-	resources.load_data(data.resources)
-	map.load_data(data.map)
+func _input(event):
+	if event.is_action_pressed("save_game"):
+		save_world_data()
 
 func save_world_data() -> void:
-	data = WorldData.new()
-	data.settings = settings.save_data()
-	data.time = time.save_data()
-	data.resources = resources.save_data()
-	data.buildings = map.save_data("buildings")
-	data.entities = map.save_data("entities")
-	data.terrain = map.save_data("terrain")
+	var w_data = GlobalData.world_data
+	w_data.settings = settings.save_data()
+	w_data.time = time.save_data()
+	w_data.resources = resources.save_data()
+	
+	FileSystem.save_to_file(w_data, "worlds", "worldata")
+
+func _create_world_data(size: String, diffic: String = "") -> void:
+	# settings default
+	# time default
+	resources.create_data(diffic)
+	map.create_data(size)
 
 func _on_Find_person() -> void:
 	if not resources.max_amount["people"] <= resources.get_all_people():
