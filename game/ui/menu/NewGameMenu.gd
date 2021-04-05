@@ -21,7 +21,8 @@ func _on_Play_pressed():
 			elif not file.begins_with("."):
 				files_count += 1
 		w_data.world_name = "world" + str(files_count)
-		dir.make_dir(w_data.world_name)
+	
+	dir.make_dir(w_data.world_name)
 	
 	GlobalData.world_is_new = true
 	Scene.change("Game")

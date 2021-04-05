@@ -3,26 +3,14 @@ extends Node2D
 const MAP_SIZE := { "S" : 90, "M" : 120, "L" : 150 }
 
 onready var terrain := Scene.search("Terrain")
-onready var tree_sprites := {
-	1 : preload("res://graphics/entities/Tree.png"),
-	2 : preload("res://graphics/entities/Tree2.png"),
-	3 : preload("res://graphics/entities/Tree3.png")
-}
-
-onready var rock_sprites := {
-	1 : preload("res://graphics/entities/Rock.png")
-}
-
-onready var coal_sprites := {
-	1 : preload("res://icon.png")
-}
-
-onready var gold_sprites := {
-	1 : preload("res://icon.png")
-}
-
-onready var iron_sprites := {
-	1 : preload("res://icon.png")
+onready var sprites := {
+	"tree1" : preload("res://graphics/entities/Tree.png"),
+	"tree2" : preload("res://graphics/entities/Tree2.png"),
+	"tree3" : preload("res://graphics/entities/Tree3.png"),
+	"rock1" : preload("res://graphics/entities/Rock.png"),
+	"coal1" : preload("res://icon.png"),
+	"gold1" : preload("res://icon.png"),
+	"iron1" : preload("res://icon.png")
 }
 
 var data: Dictionary = {}
@@ -53,11 +41,11 @@ func place_on_stone(pos: Vector2) -> void:
 	var rnum = rng.randi_range(1, 12)
 
 	if rnum in range(1, 5):
-		data[pos] = { "type" : GlobalData.entities["Coal"], "sprite" : coal_sprites[1]}
+		data[pos] = { "type" : "Coal", "sprite" : "coal" + str(1)}
 	elif rnum in range(4, 7):
-		data[pos] = { "type" : GlobalData.entities["Iron"], "sprite" : iron_sprites[1]}
+		data[pos] = { "type" : "Iron", "sprite" : "iron" + str(1)}
 	elif rnum == 7:
-		data[pos] = { "type" : GlobalData.entities["Gold"], "sprite" : gold_sprites[1]}
+		data[pos] = { "type" : "Gold", "sprite" : "gold" + str(1)}
 
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
@@ -75,7 +63,7 @@ func _place_entities() -> void:
 	for file_data in data.keys():
 		var entity = GlobalData.entities[data[file_data]["type"]].instance()
 		entity.position = grid.map_to_world(file_data)
-		entity.get_node("Sprite").texture = data[file_data]["sprite"]
+		entity.get_node("Sprite").texture = sprites[data[file_data]["sprite"]]
 		terrain.data[file_data]["placed"] = entity.name
 		add_child(entity)
 		data[file_data]["path"] = entity.get_path()
@@ -89,9 +77,9 @@ func _get_entity_data(_terrain: int, noise_sample: float) -> Dictionary:
 	
 	if noise_sample > -0.2 and noise_sample < -0.1:
 		if not rnum == 1 and _terrain == 0:
-			return { "type" : GlobalData.entities["Rock"], "sprite" : rock_sprites[1] }
+			return { "type" : "Rock", "sprite" : "rock" + str(1) }
 	if noise_sample > 0 and noise_sample < 0.125:
 		if not rnum == 1 and _terrain == 0:
-			return { "type" : GlobalData.entities["Tree"], "sprite" : tree_sprites[rsprite_num] }
+			return { "type" : "Tree", "sprite" : "tree" + str(rsprite_num) }
 	
 	return {}
