@@ -4,13 +4,56 @@ func load_dir(path: String, extentions: Array, load_resource := true) -> Array:
 	return _get_directory_data(path, [], extentions, load_resource)
 
 
-func save_to_file(data, dir_name, file_name) -> void:
+func save_world(data, file_name: String, full_obj: bool = false) -> void:
 	var file = File.new()
-	file.open("user://"+ dir_name + "/" + GlobalData.world_data.world_name + \
+	file.open("user://worlds/" + GlobalData.world_data.world_name + \
 			  "/" + file_name + ".save", File.WRITE)
-	file.store_var(data, true)
+	file.store_var(data, full_obj)
 	file.close()
 
+func get_world(world_name: String) -> WorldData:
+	var file = File.new()
+	file.open("user://worlds/" + world_name + "/worlddata.save", File.READ)
+	var world_data = file.get_var(true)
+	var world = WorldData.new()
+	
+	world.world_name = world_data.world_name
+	world.world_size = world_data.world_size
+	world.world_difficulty = world_data.world_difficulty
+	world.settings = world_data.settings
+	world.time = world_data.time
+	world.resources = world_data.resources
+	
+	return world
+
+func get_terrain(world_name: String) -> Dictionary:
+	var file = File.new()
+	file.open("user://worlds/" + world_name + "/terrain.save", File.READ)
+	var terrain_data = file.get_var()
+	
+	return terrain_data
+
+func get_entities(world_name: String) -> Dictionary:
+	var file = File.new()
+	file.open("user://worlds/" + world_name + "/entities.save", File.READ)
+	var entities_data = file.get_var()
+	
+	return entities_data
+
+func delete_world(world_name) -> void:
+	var __
+	
+	var dir = Directory.new()
+	dir.open("user://worlds/" + world_name)
+	__ = dir.list_dir_begin()
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			dir.remove(file)
+	
+	dir.remove("user://worlds/" + world_name)
 
 func _get_directory_data(path: String, directory_data: Array, extentions: Array, load_resource: bool) -> Array:
 	var directory := Directory.new()

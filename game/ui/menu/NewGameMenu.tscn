@@ -1,10 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://graphics/theme/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://graphics/font/Pixeled.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://ui/menu/NewGameMenu.gd" type="Script" id=3]
+[ext_resource path="res://graphics/font/PixelFont.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 1, 0, 0, 1 )
+thickness = 2
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 10
 extra_spacing_top = -1
 font_data = ExtResource( 2 )
@@ -27,10 +36,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-anchor_right = 1.0
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_right = 640.0
 margin_bottom = 333.0
 text = "Choose new game"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Validator" type="Label" parent="."]
+margin_left = 314.0
+margin_top = 395.0
+margin_right = 514.0
+margin_bottom = 410.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
+text = "Not valid name"
 align = 1
 valign = 1
 __meta__ = {
@@ -54,7 +82,7 @@ __meta__ = {
 margin_right = 200.0
 margin_bottom = 53.0
 rect_min_size = Vector2( 200, 0 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 placeholder_text = "name"
 
 [node name="Size" type="OptionButton" parent="HBoxContainer"]
@@ -98,5 +126,6 @@ text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="text_changed" from="HBoxContainer/Name" to="." method="_on_Name_text_changed"]
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

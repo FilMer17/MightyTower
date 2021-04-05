@@ -70,7 +70,6 @@ margin_right = 400.0
 margin_bottom = 160.0
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 2 )
-text = "Place your first building"
 fit_content_height = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="mouse_entered" from="Container" to="." method="_on_Container_mouse_entered"]

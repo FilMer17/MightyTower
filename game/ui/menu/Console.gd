@@ -12,6 +12,10 @@ var lines: Array = []
 var last_line: String = ""
 var line_combo: int = 1
 
+func _ready() -> void:
+	if GlobalData.world_is_new:
+		write("Place your first building")
+
 func _input(event) -> void:
 	if event.is_action_pressed("show_console"):
 		if text_output.rect_size.y < size:

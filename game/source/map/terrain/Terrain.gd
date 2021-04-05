@@ -25,6 +25,10 @@ func draw_terrain() -> void:
 		set_cellv(pos, data[pos]["terrain"])
 		update_bitmask_area(pos)
 
+func load_terrain(t_data: Dictionary) ->  void:
+	data = t_data
+	draw_terrain()
+
 func _create_noise() -> OpenSimplexNoise:
 #	randomize()
 	var _noise := OpenSimplexNoise.new()

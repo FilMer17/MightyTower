@@ -19,7 +19,7 @@ func _ready() -> void:
 	game_cam.position = Vector2(0, (Scene.search("Terrain").\
 		MAP_SIZE[GlobalData.world_data.world_size] / 2) * 16)
 	
-	game_shader .visible = false
+	game_shader.visible = false
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause") and not pause_exitm:

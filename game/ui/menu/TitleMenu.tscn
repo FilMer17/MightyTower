@@ -96,13 +96,12 @@ __meta__ = {
 }
 
 [node name="NewGame" type="Button" parent="ButtonsContainer"]
-margin_top = 200.0
+margin_top = 138.0
 margin_right = 290.0
-margin_bottom = 253.0
+margin_bottom = 191.0
 text = "New Game"
 
 [node name="LoadGame" type="Button" parent="ButtonsContainer"]
-visible = false
 margin_top = 261.0
 margin_right = 290.0
 margin_bottom = 314.0
@@ -122,12 +121,13 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="ButtonsContainer"]
-margin_top = 323.0
+margin_top = 384.0
 margin_right = 290.0
-margin_bottom = 376.0
+margin_bottom = 437.0
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="ButtonsContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="ButtonsContainer/LoadGame" to="." method="_on_LoadGame_pressed"]
 [connection signal="pressed" from="ButtonsContainer/Quit" to="." method="_on_Quit_pressed"]

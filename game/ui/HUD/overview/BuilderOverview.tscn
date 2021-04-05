@@ -35,6 +35,7 @@ custom_constants/separation = 11
 [node name="NameList" type="ItemList" parent="PanelContainer/VBoxContainer"]
 margin_right = 856.0
 margin_bottom = 27.0
+focus_mode = 0
 items = [ "Residence", null, false, "House", null, false, "Storage", null, false, "Worker", null, false, "Maker", null, false, "Tower", null, false ]
 auto_height = true
 max_columns = 6
@@ -44,6 +45,7 @@ margin_top = 38.0
 margin_right = 856.0
 margin_bottom = 148.0
 rect_min_size = Vector2( 0, 110 )
+focus_mode = 0
 items = [ "Small Residence", ExtResource( 1 ), false, "Medium Residence", ExtResource( 1 ), false, "Large Residence", ExtResource( 1 ), false ]
 max_columns = 8
 icon_mode = 0

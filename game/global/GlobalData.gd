@@ -1,13 +1,13 @@
 extends Node
 
-#var selected_world: Dictionary = {
-#	"is_new" : true,
-#	"name" : "world1"
-#}
+var world_is_new: bool = true
 
 var world_data: WorldData = WorldData.new()
+var buildings_data: Dictionary = {}
+var entities_data: Dictionary = {}
+var terrain_data: Dictionary = {}
 
-var worlds: Dictionary = {}
+var worlds: Array = []
 var buildings: Dictionary = {}
 var entities: Dictionary = {}
 
@@ -25,15 +25,25 @@ func _input(event) -> void:
 		OS.window_fullscreen = not OS.window_fullscreen
 
 func scan() -> void:
-	_load_worlds()
+	load_worlds()
 	_load_buildings()
 	_load_entities()
 
-func _load_worlds() -> void:
+func load_worlds() -> void:
 	worlds.clear()
 	
-	for file_data in FileSystem.load_dir("user://worlds", ["save", "data"], false):
-		worlds[file_data.id] = file_data.data
+#	for file_data in FileSystem.load_dir("user://worlds", ["save", "data"], false):
+#		worlds[file_data.id] = file_data.data
+	
+	var dir = Directory.new()
+	dir.open("user://worlds")
+	var __ = dir.list_dir_begin()
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			worlds.append(file)
 
 func _load_buildings() -> void:
 	buildings.clear()

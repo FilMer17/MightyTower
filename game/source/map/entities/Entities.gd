@@ -27,9 +27,9 @@ onready var iron_sprites := {
 
 var data: Dictionary = {}
 var in_menu: bool = false
+var grid = IsoGrid.new()
 
 func create_entities(diffic: String) -> void:
-	var grid = IsoGrid.new()
 	var map_size = MAP_SIZE[diffic]
 	var temp_data: Dictionary = {}
 	
@@ -41,7 +41,11 @@ func create_entities(diffic: String) -> void:
 			if not temp_data[Vector2(x, y)].empty():
 				data[Vector2(x, y)] = temp_data[Vector2(x, y)]
 	
-	_place_entities(grid)
+	_place_entities()
+
+func load_entities(e_data: Dictionary) -> void:
+	data = e_data
+	_place_entities()
 
 func place_on_stone(pos: Vector2) -> void:
 	var rng = RandomNumberGenerator.new()
@@ -67,9 +71,9 @@ func _create_noise() -> OpenSimplexNoise:
 	
 	return _noise
 
-func _place_entities(grid: IsoGrid) -> void:
+func _place_entities() -> void:
 	for file_data in data.keys():
-		var entity = data[file_data]["type"].instance()
+		var entity = GlobalData.entities[data[file_data]["type"]].instance()
 		entity.position = grid.map_to_world(file_data)
 		entity.get_node("Sprite").texture = data[file_data]["sprite"]
 		terrain.data[file_data]["placed"] = entity.name
