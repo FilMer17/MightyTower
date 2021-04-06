@@ -41,8 +41,8 @@ func save_world_data() -> void:
 	w_data.time = time.save_data()
 	w_data.resources = resources.save_data()
 	
-#	var b_data = Scene.search("Buildings").data
-#	GlobalData.buildings_data = b_data
+	var b_data = Scene.search("Buildings").data
+	GlobalData.buildings_data = b_data
 	
 	var e_data: Dictionary = Scene.search("Entities").data
 	GlobalData.entities_data = e_data
@@ -52,10 +52,10 @@ func save_world_data() -> void:
 	
 	var s_data = GlobalData.states_data
 	s_data.entities_state = Scene.search("Entities").states
-#	s_data.buildings_state = Scene.search("Buildings").states
-	
+	s_data.buildings_state = Scene.search("Buildings").states
+	print(s_data.buildings_state)
 	FileSystem.save_world(w_data, "worlddata", true)
-#	FileSystem.save_world(b_data, "buildings")
+	FileSystem.save_world(b_data, "buildings")
 	FileSystem.save_world(e_data, "entities")
 	FileSystem.save_world(t_data, "terrain")
 	FileSystem.save_world(s_data, "states", true)

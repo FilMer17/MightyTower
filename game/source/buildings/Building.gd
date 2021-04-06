@@ -16,6 +16,7 @@ export var cooldown: Dictionary = { "day" : 0, "hour" : 0, "minute" : 1 }
 export(TYPE) var type: int = TYPE.residence
 export(BUILD_TERRAIN) var build_terrain: int = BUILD_TERRAIN.grass
 
+onready var buildings := Scene.search("Buildings")
 onready var building_overview := Scene.search("BuildingOverview")
 
 onready var build_cont := $BuildingContainer
@@ -62,8 +63,6 @@ func _ready() -> void:
 	cld_bar.get_node("Countdown").text = ""
 	
 	cld_temp = cooldown.duplicate()
-	__ = clock.connect("timeout", self, "_on_build_cooldown")
-	clock.start()
 	
 	for i in range(0, 3):
 		match i:
@@ -84,6 +83,15 @@ func _ready() -> void:
 	
 	progress.max_value = cld_all_min
 	progress.value = cld_all_min
+	
+	buildings.states[position] = {
+		"type" : type,
+		"state" : "building",
+		"time" : cld_temp
+	}
+	
+	__ = clock.connect("timeout", self, "_on_build_cooldown")
+	clock.start()
 
 func _on_build_cooldown() -> void:
 	for key in cld_temp.keys():
@@ -92,7 +100,7 @@ func _on_build_cooldown() -> void:
 			if key == "minute":
 				_building_is_built()
 				return
-	
+
 	cld_temp.minute -= 1
 	if cld_temp.minute == 0:
 		if cld_temp.keys().size() <= 1:
@@ -104,7 +112,7 @@ func _on_build_cooldown() -> void:
 			if cld_temp.keys().has("day") and cld_temp.hour <= 0:
 				cld_temp.day -= 1
 				cld_temp.hour = 24
-	
+
 	var output = []
 	var countdown = cld_bar.get_node("Countdown")
 	for key in cld_temp.keys():
@@ -115,6 +123,8 @@ func _on_build_cooldown() -> void:
 			output[i] = "0" + String(output[i])
 	countdown.text = PoolStringArray(output).join(":")
 	
+	buildings.states[position].time = cld_temp
+	
 	cld_all_min_temp -= 1
 	_on_cooldown_changed(cld_all_min_temp)
 
@@ -123,6 +133,7 @@ func _building_is_built() -> void:
 	print(alias, " was build")
 	Scene.search("Console").write(alias + " was build")
 	is_built = true
+	buildings.states.erase(position)
 	cld_bar.visible = false
 
 func _on_cooldown_changed(value: int) -> void:

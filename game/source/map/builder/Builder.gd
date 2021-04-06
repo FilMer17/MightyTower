@@ -87,7 +87,7 @@ func _input(event):
 func _place_building(to_build: bool) -> void:
 	if to_build:
 		var pos = grid.map_to_world(grid.world_to_map(position))
-		if buildings.place_building(building.name, pos):
+		if buildings.place_building(building, pos):
 			var b_pos = grid.world_to_map(position)
 			var terrains := []
 			for x in range(0, building.size.x):
@@ -100,7 +100,6 @@ func _place_building(to_build: bool) -> void:
 			map.in_builder = false
 			area_zone.disabled = true
 			sprite.visible = false
-			building.queue_free()
 			building = null
 
 	_clear_menu_container()

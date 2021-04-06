@@ -83,6 +83,7 @@ _global_script_class_icons={
 config/name="MightyTower"
 run/main_scene="res://ui/menu/TitleMenu.tscn"
 config/use_custom_user_dir=true
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]

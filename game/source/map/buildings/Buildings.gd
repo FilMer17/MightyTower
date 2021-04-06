@@ -7,19 +7,23 @@ signal find_workers
 
 onready var resources := Scene.search("Resources")
 
-var building: Building = null
+var data: Dictionary = {}
+var states: Dictionary = {}
 
 func _ready() -> void:
 	var __
 	__ = connect("make_entities", self, "_on_Make_entities")
 	__ = connect("find_workers", self, "_on_Find_workers")
 
-func place_building(to_build: String, pos: Vector2) -> bool:
-	building = GlobalData.buildings[to_build].instance()
-	
-	if _pay_building_cost():
+func place_building(building: Building, pos: Vector2) -> bool:
+	if _pay_building_cost(building):
 		building.position = pos
 		add_child(building)
+		
+		data[building.position] = {
+			"name" : building.name,
+			"type" : building.type
+		}
 		
 		var group_name
 		for key in building.TYPE.keys():
@@ -32,6 +36,9 @@ func place_building(to_build: String, pos: Vector2) -> bool:
 	building = null
 	return false
 
+func load_buildings(_b_data: Dictionary, _buildings_state: Dictionary) -> void:
+	pass
+
 func _on_Find_workers() -> void:
 	for group_building in get_tree().get_nodes_in_group("worker"):
 		group_building.find_worker()
@@ -39,13 +46,7 @@ func _on_Find_workers() -> void:
 	for group_building in get_tree().get_nodes_in_group("tower"):
 		group_building.find_worker()
 
-func save_data() -> Array:
-	var data := []
-	for child in get_children():
-		data.append(child)
-	return data
-
-func _pay_building_cost() -> bool:
+func _pay_building_cost(building) -> bool:
 	var mater = resources.material
 	var output = "Cost "
 	
