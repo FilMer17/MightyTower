@@ -11,7 +11,7 @@ func save_world(data, file_name: String, full_obj: bool = false) -> void:
 	file.store_var(data, full_obj)
 	file.close()
 
-func get_world(world_name: String) -> WorldData:
+func get_world_data(world_name: String) -> WorldData:
 	var file = File.new()
 	file.open("user://worlds/" + world_name + "/worlddata.save", File.READ)
 	var world_data = file.get_var(true)
@@ -39,6 +39,20 @@ func get_entities(world_name: String) -> Dictionary:
 	var entities_data = file.get_var()
 	
 	return entities_data
+
+func get_buildings(_world_name: String) -> Dictionary:
+	return {}
+
+func get_states_data(world_name: String) -> StatesData:
+	var file = File.new()
+	file.open("user://worlds/" + world_name + "/states.save", File.READ)
+	var states_data = file.get_var(true)
+	var states = StatesData.new()
+	
+	states.entities_state = states_data.entities_state
+	states.buildings_state = states_data.buildings_state
+	
+	return states
 
 func delete_world(world_name) -> void:
 	var __
@@ -89,7 +103,6 @@ func _get_directory_data(path: String, directory_data: Array, extentions: Array,
 	directory.list_dir_end()
 
 	return directory_data
-
 
 func _get_file_data(path: String, load_resource: bool) -> Dictionary:
 	var temp_data

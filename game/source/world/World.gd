@@ -50,10 +50,15 @@ func save_world_data() -> void:
 	var t_data: Dictionary = Scene.search("Terrain").data
 	GlobalData.terrain_data = t_data
 	
+	var s_data = GlobalData.states_data
+	s_data.entities_state = Scene.search("Entities").states
+#	s_data.buildings_state = Scene.search("Buildings").states
+	
 	FileSystem.save_world(w_data, "worlddata", true)
 #	FileSystem.save_world(b_data, "buildings")
 	FileSystem.save_world(e_data, "entities")
 	FileSystem.save_world(t_data, "terrain")
+	FileSystem.save_world(s_data, "states", true)
 
 func _create_world_data(size: String, diffic: String = "") -> void:
 	# settings default

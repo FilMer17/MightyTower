@@ -3,6 +3,7 @@ extends Node
 var world_is_new: bool = true
 
 var world_data: WorldData = WorldData.new()
+var states_data: StatesData = StatesData.new()
 var buildings_data: Dictionary = {}
 var entities_data: Dictionary = {}
 var terrain_data: Dictionary = {}

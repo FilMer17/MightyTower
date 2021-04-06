@@ -55,6 +55,9 @@ func _ready() -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	quantity = rng.randi_range(5, 11)
+	
+	if entities.states.has(grid.world_to_map(position)):
+		_load_entity_state()
 
 func _on_Input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if is_hovered and event.is_action_pressed("select_option") and !is_mining and !is_mined:
@@ -72,6 +75,81 @@ func _on_Input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 					return
 	if is_hovered and event.is_action_pressed("select_option") and is_mined:
 		_mining_is_done()
+
+func _load_entity_state() -> void:
+	if is_mined:
+		var cld_bar_scene = cooldown_bar_scene.instance()
+		cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 5)
+		cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 5)
+		cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 7)
+		cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 7)
+		
+		gui_container.add_child(cld_bar_scene)
+		
+		cld_bar = gui_container.get_node("CooldownBar")
+		progress = cld_bar.get_node("Progress")
+		
+		var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
+		font.size = 4
+		
+		progress.visible = false
+		cld_bar.get_node("Countdown").text = "Pick up"
+		return
+	
+	var cld_bar_scene = cooldown_bar_scene.instance()
+	cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 5)
+	cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 5)
+	cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 7)
+	cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 7)
+	
+	gui_container.add_child(cld_bar_scene)
+	
+	cld_bar = gui_container.get_node("CooldownBar")
+	progress = cld_bar.get_node("Progress")
+	
+	var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
+	font.size = 4
+	
+	var __ = clock.connect("timeout", self, "_on_Mine_cooldown")
+	clock.start()
+	
+	for i in range(0, 3):
+		match i:
+			0:
+				if cld_temp.has("day"):
+					cld_all_min += cld_temp["day"] * 60 * 24
+			1:
+				if cld_temp.has("hour"):
+					cld_all_min += cld_temp["hour"] * 60
+			2:
+				cld_all_min += cld_temp["minute"]
+	
+	cld_all_min_temp = cld_all_min
+	
+	for building in get_tree().get_nodes_in_group("worker"):
+		if building.worktype == type:
+			if area.overlaps_area(building.area) and building.ready_help:
+				cld_all_min_temp *= building.help_with_cld
+				cld_all_min = cld_all_min_temp
+				var remain = 0
+				for i in range(0, 3):
+					match i:
+						0:
+							# warning-ignore:integer_division
+							cld_temp["day"] = int(cld_all_min_temp / (60 * 24))
+							remain = fmod(cld_all_min_temp, (60 * 24))
+						1:
+							cld_temp["hour"] = int(remain / 60)
+							remain = fmod(remain, 60)
+						2:
+							cld_temp["minute"] = int(remain)
+	
+	progress.max_value = cld_all_min_temp
+	progress.value = cld_all_min_temp
+	
+	sprite.material.set_shader_param("is_hovered", false)
+	Scene.search("Map").node_in_menu = false
+	_clear_menu_container()
 
 func _mine_entity(to_mine: bool) -> void:
 	if to_mine and resources.people["idle"] > 0:
@@ -116,7 +194,7 @@ func _mine_entity(to_mine: bool) -> void:
 					for i in range(0, 3):
 						match i:
 							0:
-				# warning-ignore:integer_division
+								# warning-ignore:integer_division
 								cld_temp["day"] = int(cld_all_min_temp / (60 * 24))
 								remain = fmod(cld_all_min_temp, (60 * 24))
 							1:
@@ -129,6 +207,8 @@ func _mine_entity(to_mine: bool) -> void:
 		progress.value = cld_all_min_temp
 		
 		is_mining = true
+		
+		entities.states[grid.world_to_map(position)] = {"is_mined" : false, "time" : {}}
 		
 		print("People added to mine the " + alias)
 		Scene.search("Console").write("People added to mine the " + alias)
@@ -177,6 +257,9 @@ func _on_Mine_cooldown() -> void:
 	countdown.text = PoolStringArray(output).join(":")
 	
 	cld_all_min_temp -= 1
+	
+	entities.states[grid.world_to_map(position)] = {"is_mined" : false, "time" : cld_temp}
+	
 	_on_cooldown_changed(cld_all_min_temp)
 
 func _mining_is_done() -> void:
@@ -188,6 +271,7 @@ func _mining_is_done() -> void:
 		progress.visible = false
 		cld_bar.get_node("Countdown").text = "Pick up"
 		is_mined = true
+		entities.states[grid.world_to_map(position)] = {"is_mined" : true}
 		print("no space")
 		return
 	
@@ -214,6 +298,8 @@ func _mining_is_done() -> void:
 	if not maker_help.empty():
 		get_node(maker_help["path"]).free_pos.append(maker_help["num"])
 		print("help helped")
+	
+	__ = entities.states.erase(grid.world_to_map(position))
 	
 	queue_free()
 

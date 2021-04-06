@@ -16,7 +16,7 @@ func create_data(diffic: String) -> void:
 
 func load_data() -> void:
 	terrain.load_terrain(GlobalData.terrain_data)
-	entities.load_entities(GlobalData.entities_data)
+	entities.load_entities(GlobalData.entities_data, GlobalData.states_data.entities_state)
 	# load buildings
 
 func _input(event):

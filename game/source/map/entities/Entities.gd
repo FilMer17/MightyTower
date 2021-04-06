@@ -14,6 +14,8 @@ onready var sprites := {
 }
 
 var data: Dictionary = {}
+var states: Dictionary = {}
+
 var in_menu: bool = false
 var grid = IsoGrid.new()
 
@@ -31,8 +33,9 @@ func create_entities(diffic: String) -> void:
 	
 	_place_entities()
 
-func load_entities(e_data: Dictionary) -> void:
+func load_entities(e_data: Dictionary, entities_state: Dictionary) -> void:
 	data = e_data
+	states = entities_state
 	_place_entities()
 
 func place_on_stone(pos: Vector2) -> void:
@@ -65,6 +68,12 @@ func _place_entities() -> void:
 		entity.position = grid.map_to_world(file_data)
 		entity.get_node("Sprite").texture = sprites[data[file_data]["sprite"]]
 		terrain.data[file_data]["placed"] = entity.name
+		
+		if states.has(grid.world_to_map(entity.position)):
+			entity.is_mined = states[grid.world_to_map(entity.position)].is_mined
+			if not entity.is_mined:
+				entity.cld_temp = states[grid.world_to_map(entity.position)].time
+		
 		add_child(entity)
 		data[file_data]["path"] = entity.get_path()
 

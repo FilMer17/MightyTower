@@ -25,10 +25,13 @@ func _on_Start_pressed():
 	if world_list.is_anything_selected():
 		GlobalData.world_is_new = false
 		GlobalData.world_data.world_name = selected_world
-		GlobalData.world_data = FileSystem.get_world(GlobalData.world_data.world_name)
+		GlobalData.world_data = FileSystem.get_world_data(GlobalData.world_data.world_name)
 		
 		GlobalData.terrain_data = FileSystem.get_terrain(GlobalData.world_data.world_name)
 		GlobalData.entities_data = FileSystem.get_entities(GlobalData.world_data.world_name)
+#		GlobalData.buildings_data = FileSystem.get_buildings(GlobalData.world_data.world_name)
+		
+		GlobalData.states_data = FileSystem.get_states_data(GlobalData.world_data.world_name)
 		
 		Scene.change("Game")
 
