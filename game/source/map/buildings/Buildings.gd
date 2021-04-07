@@ -22,7 +22,7 @@ func place_building(building: Building, pos: Vector2) -> bool:
 		
 		data[building.position] = {
 			"name" : building.name,
-			"type" : building.type
+			"is_built" : false
 		}
 		
 		var group_name
@@ -36,8 +36,21 @@ func place_building(building: Building, pos: Vector2) -> bool:
 	building = null
 	return false
 
-func load_buildings(_b_data: Dictionary, _buildings_state: Dictionary) -> void:
-	pass
+func load_buildings(b_data: Dictionary, buildings_state: Dictionary) -> void:
+	data = b_data
+	states = buildings_state
+	
+	for building_pos in data:
+		var loaded_building = GlobalData.buildings[data[building_pos].name].instance()
+		loaded_building.position = building_pos
+		loaded_building.is_loaded = true
+		add_child(loaded_building)
+		
+		var group_name
+		for key in loaded_building.TYPE.keys():
+			if loaded_building.TYPE[key] == loaded_building.type:
+				group_name = key
+				loaded_building.add_to_group(group_name)
 
 func _on_Find_workers() -> void:
 	for group_building in get_tree().get_nodes_in_group("worker"):

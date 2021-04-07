@@ -40,8 +40,12 @@ func get_entities(world_name: String) -> Dictionary:
 	
 	return entities_data
 
-func get_buildings(_world_name: String) -> Dictionary:
-	return {}
+func get_buildings(world_name: String) -> Dictionary:
+	var file = File.new()
+	file.open("user://worlds/" + world_name + "/buildings.save", File.READ)
+	var buildings_data = file.get_var()
+	
+	return buildings_data
 
 func get_states_data(world_name: String) -> StatesData:
 	var file = File.new()

@@ -31,6 +31,7 @@ var progress = null
 
 var is_built: bool = false
 var is_hovered: bool = false
+var is_loaded: bool = false
 
 var cld_temp: Dictionary = {}
 var cld_all_min: int = 0
@@ -44,6 +45,10 @@ func _ready() -> void:
 	input_pickable = true
 	__ = connect("mouse_entered", self, "_on_Mouse_entered")
 	__ = connect("mouse_exited", self, "_on_Mouse_exited")
+	
+	if buildings.states.has(position):
+		_load_building_with_state()
+		return
 	
 	var cld_bar_scene = cooldown_bar_scene.instance()
 	cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 4)
@@ -92,6 +97,53 @@ func _ready() -> void:
 	
 	__ = clock.connect("timeout", self, "_on_build_cooldown")
 	clock.start()
+
+func _load_building_with_state() -> void:
+	match buildings.states[position].state:
+		"building":
+			var cld_bar_scene = cooldown_bar_scene.instance()
+			cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 4)
+			cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 4)
+			cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 6)
+			cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 6)
+
+			gui_container.add_child(cld_bar_scene)
+			
+			gui_container.position = build_cont.get_node("Sprite").position
+			
+			cld_bar = gui_container.get_node("CooldownBar")
+			progress = cld_bar.get_node("Progress")
+			
+			var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
+			font.size = 5
+			cld_bar.get_node("Countdown").text = ""
+			
+			cld_temp = buildings.states[position].time
+			
+			cld_all_min = cooldown_to_minutes(cld_temp)
+			
+			cld_all_min_temp = cld_all_min
+			
+			progress.max_value = cooldown_to_minutes(cooldown.duplicate())
+			progress.value = cld_all_min
+			
+			var __ = clock.connect("timeout", self, "_on_build_cooldown")
+			clock.start()
+
+func cooldown_to_minutes(cldown: Dictionary) -> int:
+	var in_mins := 0
+	for i in range(0, 3):
+		match i:
+			0:
+				if cldown.has("day"):
+					in_mins += cldown["day"] * 60 * 24
+			1:
+				if cldown.has("hour"):
+					in_mins += cldown["hour"] * 60
+			2:
+				if cldown.has("minute"):
+					in_mins += cldown["minute"]
+	return in_mins
 
 func _on_build_cooldown() -> void:
 	for key in cld_temp.keys():

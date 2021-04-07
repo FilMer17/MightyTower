@@ -53,7 +53,7 @@ func save_world_data() -> void:
 	var s_data = GlobalData.states_data
 	s_data.entities_state = Scene.search("Entities").states
 	s_data.buildings_state = Scene.search("Buildings").states
-	print(s_data.buildings_state)
+	
 	FileSystem.save_world(w_data, "worlddata", true)
 	FileSystem.save_world(b_data, "buildings")
 	FileSystem.save_world(e_data, "entities")

@@ -11,7 +11,8 @@ export(USAGE) var usage: int = USAGE.food
 
 func _building_is_built() -> void:
 	._building_is_built()
-	resources.add_resource("max_amount", capacity, USAGE.keys()[usage])
+	if not is_loaded:
+		resources.add_resource("max_amount", capacity, USAGE.keys()[usage])
 
 func _change_building_overview() -> void:
 	var infos := {

@@ -29,7 +29,7 @@ func _on_Start_pressed():
 		
 		GlobalData.terrain_data = FileSystem.get_terrain(GlobalData.world_data.world_name)
 		GlobalData.entities_data = FileSystem.get_entities(GlobalData.world_data.world_name)
-#		GlobalData.buildings_data = FileSystem.get_buildings(GlobalData.world_data.world_name)
+		GlobalData.buildings_data = FileSystem.get_buildings(GlobalData.world_data.world_name)
 		
 		GlobalData.states_data = FileSystem.get_states_data(GlobalData.world_data.world_name)
 		

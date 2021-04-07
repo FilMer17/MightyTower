@@ -144,12 +144,27 @@ func _load_entity_state() -> void:
 						2:
 							cld_temp["minute"] = int(remain)
 	
-	progress.max_value = cld_all_min_temp
+	progress.max_value = cooldown_to_minutes(cooldown.duplicate())
 	progress.value = cld_all_min_temp
 	
 	sprite.material.set_shader_param("is_hovered", false)
 	Scene.search("Map").node_in_menu = false
 	_clear_menu_container()
+
+func cooldown_to_minutes(cldown: Dictionary) -> int:
+	var in_mins := 0
+	for i in range(0, 3):
+		match i:
+			0:
+				if cldown.has("day"):
+					in_mins += cldown["day"] * 60 * 24
+			1:
+				if cldown.has("hour"):
+					in_mins += cldown["hour"] * 60
+			2:
+				if cldown.has("minute"):
+					in_mins += cldown["minute"]
+	return in_mins
 
 func _mine_entity(to_mine: bool) -> void:
 	if to_mine and resources.people["idle"] > 0:

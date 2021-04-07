@@ -17,7 +17,7 @@ func create_data(diffic: String) -> void:
 func load_data() -> void:
 	terrain.load_terrain(GlobalData.terrain_data)
 	entities.load_entities(GlobalData.entities_data, GlobalData.states_data.entities_state)
-	# load buildings
+	buildings.load_buildings(GlobalData.buildings_data, GlobalData.states_data.buildings_state)
 
 func _input(event):
 	if event.is_action_pressed("building1") and !builder.sprite.visible:
