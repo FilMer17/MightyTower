@@ -55,6 +55,7 @@ func get_states_data(world_name: String) -> StatesData:
 	
 	states.entities_state = states_data.entities_state
 	states.buildings_state = states_data.buildings_state
+	states.happiness = states_data.happiness
 	
 	return states
 

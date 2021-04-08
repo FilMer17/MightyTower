@@ -16,6 +16,12 @@ onready var resources := Scene.search("Resources")
 var people_in: int = 0
 var ready_help: bool = false
 
+func _ready() -> void:
+	if is_loaded and is_built:
+		people_in = buildings.data[position].people_in
+	else:
+		buildings.data[position]["people_in"] = people_in
+
 func find_worker() -> void:
 	if is_built and people_in < capacity:
 		if not resources.people["idle"] <= 0:
@@ -23,6 +29,7 @@ func find_worker() -> void:
 			resources.add_resource("people", 1, "employed")
 			Scene.search("Console").write("Person add to " + alias)
 			people_in += 1
+			buildings.data[position]["people_in"] = people_in
 	if people_in == capacity:
 		ready_help = true
 	else:

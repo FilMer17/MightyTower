@@ -14,6 +14,12 @@ func _ready() -> void:
 	progress.max_value = 100
 	change = progress.max_value
 	progress.value = progress.max_value
+	
+	if GlobalData.world_is_new:
+		GlobalData.states_data.happiness = change
+	else:
+		change = GlobalData.states_data.happiness
+		progress.value = change
 
 func _process(_delta):
 	var day_data = [str(time.day), str(time.month), str(time.year)]
@@ -34,6 +40,7 @@ func happiness_change(value: int) -> void:
 	change = change + value
 	
 	if change >= 100:
+		change = 100
 		return
 	elif change <= 0:
 		print("game over")

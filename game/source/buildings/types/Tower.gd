@@ -19,6 +19,11 @@ func _ready() -> void:
 	__ = area.connect("area_exited", self, "_on_Area_exited")
 	
 	light.color = Color("#f0dc96")
+	
+	if is_loaded and is_built:
+		people_in = buildings.data[position].people_in
+	else:
+		buildings.data[position]["people_in"] = people_in
 
 func find_worker() -> void:
 	if is_built and people_in < capacity:
@@ -27,6 +32,7 @@ func find_worker() -> void:
 			resources.add_resource("people", 1, "employed")
 			Scene.search("Console").write("Person add to " + alias)
 			people_in += 1
+			buildings.data[position]["people_in"] = people_in
 	if people_in == capacity:
 		area_zone.disabled = false
 		light.visible = true

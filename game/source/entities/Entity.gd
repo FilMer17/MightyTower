@@ -329,22 +329,22 @@ func _on_Mouse_entered() -> void:
 		sprite.material.set_shader_param("is_hovered", true)
 		is_hovered = true
 		
-		if is_mining:
-			for neigh_coord in range(3, 6):
-				var neigh_pos = grid.world_to_map(position) + grid.NEIGHBOR_TABLE[neigh_coord]
-				if entities.data.has(neigh_pos):
-					get_node(entities.data[neigh_pos]["path"]).modulate.a = 0.3
+#		if is_mining:
+#			for neigh_coord in range(3, 6):
+#				var neigh_pos = grid.world_to_map(position) + grid.NEIGHBOR_TABLE[neigh_coord]
+#				if entities.data.has(neigh_pos):
+#					get_node(entities.data[neigh_pos]["path"]).modulate.a = 0.3
 
 func _on_Mouse_exited() -> void:
 	if !Scene.search("Map").node_in_menu:
 		sprite.material.set_shader_param("is_hovered", false)
 		is_hovered = false
 		
-		if is_mining:
-			for neigh_coord in range(3, 6):
-				var neigh_pos = grid.world_to_map(position) + grid.NEIGHBOR_TABLE[neigh_coord]
-				if entities.data.has(neigh_pos):
-					get_node(entities.data[neigh_pos]["path"]).modulate.a = 1.0
+#		if is_mining:
+#			for neigh_coord in range(3, 6):
+#				var neigh_pos = grid.world_to_map(position) + grid.NEIGHBOR_TABLE[neigh_coord]
+#				if entities.data.has(neigh_pos):
+#					get_node(entities.data[neigh_pos]["path"]).modulate.a = 1.0
 
 func _enter_tree():
 	if not $Tween:

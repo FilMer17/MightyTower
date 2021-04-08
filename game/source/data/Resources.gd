@@ -79,6 +79,8 @@ func save_data() -> Dictionary:
 	data["people"] = people
 	data["material"] = material
 	data["max_amount"] = max_amount
+	data["hungry_people"] = hungry_people
+	data["all_people"] = all_people
 	return data
 
 func load_data(data: Dictionary) -> void:
@@ -86,6 +88,8 @@ func load_data(data: Dictionary) -> void:
 	people = data["people"]
 	material = data["material"]
 	max_amount = data["max_amount"]
+	hungry_people = data["hungry_people"]
+	all_people = data["all_people"]
 
 func create_data(_diffic: String) -> void:
 	pass
