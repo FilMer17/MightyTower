@@ -6,6 +6,7 @@
 [node name="TreeMaker" type="StaticBody2D"]
 script = ExtResource( 2 )
 alias = "Tree Maker"
+node_name = "TreeMaker"
 size = Vector2( 3, 3 )
 cost = {
 "wood": 1

@@ -9,6 +9,7 @@ enum TYPE { residence, storage, house, worker, maker, tower }
 enum BUILD_TERRAIN { grass, sand, stone, water }
 
 export var alias: String = ""
+export var node_name: String = ""
 export var size := Vector2(1, 1)
 export var cost: Dictionary = {}
 export var level: int = 1
@@ -50,53 +51,54 @@ func _ready() -> void:
 		_load_building_with_state()
 		return
 	
-	var cld_bar_scene = cooldown_bar_scene.instance()
-	cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 4)
-	cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 4)
-	cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 6)
-	cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 6)
+	if not is_loaded:
+		var cld_bar_scene = cooldown_bar_scene.instance()
+		cld_bar_scene.margin_left = (cld_bar_scene.margin_left / 4)
+		cld_bar_scene.margin_right = (cld_bar_scene.margin_right / 4)
+		cld_bar_scene.margin_top = (cld_bar_scene.margin_top / 6)
+		cld_bar_scene.margin_bottom = (cld_bar_scene.margin_bottom / 6)
 
-	gui_container.add_child(cld_bar_scene)
-	
-	gui_container.position = build_cont.get_node("Sprite").position
-	
-	cld_bar = gui_container.get_node("CooldownBar")
-	progress = cld_bar.get_node("Progress")
-	
-	var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-	font.size = 5
-	cld_bar.get_node("Countdown").text = ""
-	
-	cld_temp = cooldown.duplicate()
-	
-	for i in range(0, 3):
-		match i:
-			0:
-				cld_all_min += cld_temp["day"] * 60 * 24
-			1:
-				cld_all_min += cld_temp["hour"] * 60
-			2:
-				cld_all_min += cld_temp["minute"]
-	
-	if Scene.search("Buildings").get_child_count() <= 1:
-		cld_all_min = 1
-		cld_temp["day"] = 0
-		cld_temp["hour"] = 0
-		cld_temp["minute"] = 1
-	
-	cld_all_min_temp = cld_all_min
-	
-	progress.max_value = cld_all_min
-	progress.value = cld_all_min
-	
-	buildings.states[position] = {
-		"type" : type,
-		"state" : "building",
-		"time" : cld_temp
-	}
-	
-	__ = clock.connect("timeout", self, "_on_build_cooldown")
-	clock.start()
+		gui_container.add_child(cld_bar_scene)
+		
+		gui_container.position = build_cont.get_node("Sprite").position
+		
+		cld_bar = gui_container.get_node("CooldownBar")
+		progress = cld_bar.get_node("Progress")
+		
+		var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
+		font.size = 5
+		cld_bar.get_node("Countdown").text = ""
+		
+		cld_temp = cooldown.duplicate()
+		
+		for i in range(0, 3):
+			match i:
+				0:
+					cld_all_min += cld_temp["day"] * 60 * 24
+				1:
+					cld_all_min += cld_temp["hour"] * 60
+				2:
+					cld_all_min += cld_temp["minute"]
+		
+		if Scene.search("Buildings").get_child_count() <= 1:
+			cld_all_min = 1
+			cld_temp["day"] = 0
+			cld_temp["hour"] = 0
+			cld_temp["minute"] = 1
+		
+		cld_all_min_temp = cld_all_min
+		
+		progress.max_value = cld_all_min
+		progress.value = cld_all_min
+		
+		buildings.states[position] = {
+			"type" : type,
+			"state" : "building",
+			"time" : cld_temp
+		}
+		
+		__ = clock.connect("timeout", self, "_on_build_cooldown")
+		clock.start()
 
 func _load_building_with_state() -> void:
 	match buildings.states[position].state:
@@ -185,6 +187,7 @@ func _building_is_built() -> void:
 	print(alias, " was build")
 	Scene.search("Console").write(alias + " was build")
 	is_built = true
+	buildings.data[position].is_built = true
 	buildings.states.erase(position)
 	cld_bar.visible = false
 

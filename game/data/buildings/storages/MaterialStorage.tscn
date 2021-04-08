@@ -6,6 +6,7 @@
 [node name="MaterialStorage" type="StaticBody2D"]
 script = ExtResource( 1 )
 alias = "Material Storage"
+node_name = "MaterialStorage"
 cost = {
 "stone": 5,
 "wood": 5

@@ -311,7 +311,7 @@ func _mining_is_done() -> void:
 	Scene.search("Terrain").data[grid.world_to_map(position)]["placed"] = ""
 	
 	if not maker_help.empty():
-		get_node(maker_help["path"]).free_pos.append(maker_help["num"])
+		get_node(maker_help["path"]).add_free_pos(maker_help["num"])
 		print("help helped")
 	
 	__ = entities.states.erase(grid.world_to_map(position))

@@ -19,6 +19,10 @@ func _ready() -> void:
 	__ = area.connect("area_exited", self, "_on_Area_exited")
 	
 	light.color = Color("#f0dc96")
+	
+	if is_built:
+		area_zone.disabled = false
+		light.visible = true
 
 func _on_Area_entered(_area: Area2D) -> void:
 	if _area.get_parent().name == "Builder":
@@ -29,12 +33,13 @@ func _on_Area_exited(_area: Area2D) -> void:
 		builder.emit_signal("exited_build_area")
 
 func _building_is_built() -> void:
-	._building_is_built()
-	if not is_loaded:
+	if not is_built:
 		resources.add_resource("max_amount", food_storage, "food")
 		resources.add_resource("max_amount", material_storage, "material")
 		resources.add_resource("max_amount", people_storage, "people")
 		resources.add_resource("food", food_storage)
+	
+	._building_is_built()
 	
 	area_zone.disabled = false
 	light.visible = true

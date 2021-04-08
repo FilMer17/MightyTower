@@ -18,12 +18,13 @@ func _ready() -> void:
 func place_building(building: Building, pos: Vector2) -> bool:
 	if _pay_building_cost(building):
 		building.position = pos
-		add_child(building)
 		
 		data[building.position] = {
-			"name" : building.name,
+			"name" : building.node_name,
 			"is_built" : false
 		}
+		
+		add_child(building)
 		
 		var group_name
 		for key in building.TYPE.keys():
@@ -32,8 +33,6 @@ func place_building(building: Building, pos: Vector2) -> bool:
 				building.add_to_group(group_name)
 				return true
 	
-	building.queue_free()
-	building = null
 	return false
 
 func load_buildings(b_data: Dictionary, buildings_state: Dictionary) -> void:
@@ -44,6 +43,7 @@ func load_buildings(b_data: Dictionary, buildings_state: Dictionary) -> void:
 		var loaded_building = GlobalData.buildings[data[building_pos].name].instance()
 		loaded_building.position = building_pos
 		loaded_building.is_loaded = true
+		loaded_building.is_built = data[building_pos].is_built
 		add_child(loaded_building)
 		
 		var group_name

@@ -6,6 +6,7 @@
 [node name="StoneMaker" type="StaticBody2D"]
 script = ExtResource( 2 )
 alias = "Stone Maker"
+node_name = "StoneMaker"
 size = Vector2( 3, 3 )
 cost = {
 "stone": 20

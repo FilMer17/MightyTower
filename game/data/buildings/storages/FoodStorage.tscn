@@ -17,6 +17,7 @@ shader_param/is_hovered = false
 input_pickable = true
 script = ExtResource( 1 )
 alias = "Food Storage"
+node_name = "FoodStorage"
 cost = {
 
 }

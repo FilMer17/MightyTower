@@ -6,6 +6,7 @@
 [node name="Fisherman" type="StaticBody2D"]
 script = ExtResource( 2 )
 alias = "Fisherman"
+node_name = "Fisherman"
 size = Vector2( 2, 2 )
 cost = {
 "wood": 15

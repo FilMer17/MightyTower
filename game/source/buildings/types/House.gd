@@ -7,9 +7,10 @@ export var people_storage: int = 0
 onready var resources := Scene.search("Resources")
 
 func _building_is_built() -> void:
-	._building_is_built()
-	if not is_loaded:
+	if not is_built:
 		resources.add_resource("max_amount", people_storage, "people")
+	
+	._building_is_built()
 
 func _change_building_overview() -> void:
 	var infos := {

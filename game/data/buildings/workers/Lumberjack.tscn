@@ -21,6 +21,7 @@ height = 48.0
 input_pickable = true
 script = ExtResource( 2 )
 alias = "Lumberjack"
+node_name = "Lumberjack"
 size = Vector2( 2, 2 )
 cost = {
 "wood": 5

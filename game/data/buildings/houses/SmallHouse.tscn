@@ -17,6 +17,7 @@ shader_param/is_hovered = false
 input_pickable = true
 script = ExtResource( 1 )
 alias = "Small House"
+node_name = "SmallHouse"
 size = Vector2( 2, 2 )
 cost = {
 "stone": 5,
@@ -33,7 +34,6 @@ people_storage = 5
 [node name="BuildingContainer" type="Node2D" parent="."]
 
 [node name="Tween" type="Tween" parent="BuildingContainer"]
-playback/active = true
 
 [node name="Clock" type="Timer" parent="BuildingContainer"]
 wait_time = 0.3

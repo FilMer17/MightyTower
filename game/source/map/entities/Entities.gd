@@ -68,6 +68,8 @@ func _place_entities() -> void:
 		entity.position = grid.map_to_world(file_data)
 		entity.get_node("Sprite").texture = sprites[data[file_data]["sprite"]]
 		terrain.data[file_data]["placed"] = entity.name
+		if data[grid.world_to_map(entity.position)].keys().has("maker_help"):
+			entity.maker_help = data[grid.world_to_map(entity.position)].maker_help
 		
 		if states.has(grid.world_to_map(entity.position)):
 			entity.is_mined = states[grid.world_to_map(entity.position)].is_mined

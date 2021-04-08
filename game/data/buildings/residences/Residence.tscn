@@ -22,6 +22,7 @@ height = 96.0
 input_pickable = true
 script = ExtResource( 1 )
 alias = "Residence"
+node_name = "Residence"
 size = Vector2( 2, 2 )
 cost = {
 "stone": 5,
