@@ -2,7 +2,7 @@
 
 [ext_resource path="res://source/buildings/types/House.gd" type="Script" id=1]
 [ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=2]
-[ext_resource path="res://graphics/buildings/residences/Wood.png" type="Texture" id=3]
+[ext_resource path="res://graphics/buildings/residences/Cube2.png" type="Texture" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -39,6 +39,7 @@ people_storage = 5
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
+self_modulate = Color( 0.639216, 0.407843, 0.270588, 1 )
 material = SubResource( 1 )
 texture = ExtResource( 3 )
 

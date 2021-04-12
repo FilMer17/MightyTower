@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/buildings/types/Storage.gd" type="Script" id=1]
-[ext_resource path="res://graphics/terrain/Stone.png" type="Texture" id=2]
+[ext_resource path="res://graphics/buildings/residences/Cube1.png" type="Texture" id=2]
 
 [node name="MaterialStorage" type="StaticBody2D"]
 script = ExtResource( 1 )
@@ -28,6 +28,7 @@ usage = 1
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
+self_modulate = Color( 0.470588, 0.470588, 0.470588, 1 )
 texture = ExtResource( 2 )
 
 [node name="GUIContainer" type="Node2D" parent="BuildingContainer"]

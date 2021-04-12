@@ -19,6 +19,8 @@ var ready_help: bool = false
 func _ready() -> void:
 	if is_loaded and is_built:
 		people_in = buildings.data[position].people_in
+		if people_in == capacity:
+			ready_help = true
 	else:
 		buildings.data[position]["people_in"] = people_in
 

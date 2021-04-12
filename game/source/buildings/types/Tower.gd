@@ -22,6 +22,9 @@ func _ready() -> void:
 	
 	if is_loaded and is_built:
 		people_in = buildings.data[position].people_in
+		if people_in == capacity:
+			area_zone.disabled = false
+			light.visible = true
 	else:
 		buildings.data[position]["people_in"] = people_in
 

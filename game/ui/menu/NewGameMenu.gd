@@ -1,6 +1,30 @@
 extends Control
 
 onready var validator := $Validator
+onready var play_button := $HBoxContainer/Play
+
+var world_names: Array = []
+
+func _ready() -> void:
+	change_validator_data("default")
+	
+	for world_name in GlobalData.worlds:
+		world_names.append(world_name)
+
+func change_validator_data(option: String):
+	match option:
+		"valid":
+			validator.set("self_modulate", Color("#00ff00"))
+			validator.text = "Valid name"
+			play_button.disabled = false
+		"duplicate":
+			validator.set("self_modulate", Color("#ff0000"))
+			validator.text = "Already used name"
+			play_button.disabled = true
+		"default":
+			validator.set("self_modulate", Color("#ffff00"))
+			validator.text = "Default name"
+			play_button.disabled = false
 
 func _on_Play_pressed():
 	var w_data = GlobalData.world_data
@@ -30,6 +54,18 @@ func _on_Play_pressed():
 func _on_Back_pressed():
 	Scene.change("TitleScreen")
 
-
-func _on_Name_text_changed(_new_text):
-	pass # Replace with function body.
+func _on_Name_text_changed(new_text):
+	if new_text == "":
+		change_validator_data("default")
+		return
+	
+	if world_names.empty():
+		change_validator_data("valid")
+		return
+	
+	for w_name in world_names:
+		if new_text == w_name:
+			change_validator_data("duplicate")
+			return
+		else:
+			change_validator_data("valid")
