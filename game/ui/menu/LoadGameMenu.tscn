@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://graphics/theme/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://ui/menu/LoadGameMenu.gd" type="Script" id=2]
+[ext_resource path="res://graphics/entities/Rock.png" type="Texture" id=3]
+[ext_resource path="res://graphics/entities/Tree.png" type="Texture" id=4]
+[ext_resource path="res://graphics/entities/Tree2.png" type="Texture" id=5]
+[ext_resource path="res://graphics/entities/TreeShadow.png" type="Texture" id=6]
 
 [node name="LoadGameMenu" type="Control"]
 anchor_right = 1.0
@@ -21,6 +25,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Decoration" type="Position2D" parent="Background"]
+
+[node name="TreeShadow2" type="Sprite" parent="Background/Decoration"]
+self_modulate = Color( 1, 1, 1, 0.705882 )
+position = Vector2( 196.123, 568.349 )
+scale = Vector2( 2.97078, 2.97078 )
+texture = ExtResource( 6 )
+
+[node name="Tree2" type="Sprite" parent="Background/Decoration"]
+position = Vector2( 192.339, 525.288 )
+scale = Vector2( 2.97078, 2.97078 )
+texture = ExtResource( 5 )
+
+[node name="TreeShadow" type="Sprite" parent="Background/Decoration"]
+self_modulate = Color( 1, 1, 1, 0.705882 )
+position = Vector2( 247.875, 603.322 )
+scale = Vector2( 2.97078, 2.97078 )
+texture = ExtResource( 6 )
+
+[node name="Tree" type="Sprite" parent="Background/Decoration"]
+position = Vector2( 244.735, 557.981 )
+scale = Vector2( 2.97078, 2.97078 )
+texture = ExtResource( 4 )
+
+[node name="Rock" type="Sprite" parent="Background/Decoration"]
+position = Vector2( 177.647, 589.433 )
+scale = Vector2( 2.58691, 2.58691 )
+texture = ExtResource( 3 )
+
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -39,38 +72,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -250.0
-margin_top = -65.0
-margin_right = 250.0
-margin_bottom = 65.0
+margin_left = -310.0
+margin_top = -85.0
+margin_right = 310.0
+margin_bottom = 85.0
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="WorldList" type="ItemList" parent="HBoxContainer"]
-margin_right = 300.0
-margin_bottom = 130.0
-rect_min_size = Vector2( 300, 130 )
+margin_right = 400.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 400, 170 )
 focus_mode = 0
 items = [ "World1", null, false, "World2", null, false, "World3", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false, "Item 6", null, false, "Item 7", null, false, "Item 8", null, false, "Item 9", null, false, "Item 10", null, false, "Item 11", null, false ]
 
 [node name="ButtonContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 320.0
-margin_right = 500.0
-margin_bottom = 130.0
-custom_constants/separation = 20
+margin_left = 420.0
+margin_right = 620.0
+margin_bottom = 170.0
+custom_constants/separation = 21
+alignment = 1
 
 [node name="Start" type="Button" parent="HBoxContainer/ButtonContainer"]
-margin_right = 180.0
-margin_bottom = 53.0
+margin_top = 14.0
+margin_right = 200.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 200, 60 )
 text = "Start"
 
 [node name="Delete" type="Button" parent="HBoxContainer/ButtonContainer"]
-margin_top = 73.0
-margin_right = 180.0
-margin_bottom = 126.0
-rect_min_size = Vector2( 180, 0 )
+margin_top = 95.0
+margin_right = 200.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 200, 60 )
 text = "Delete"
 
 [node name="Back" type="Button" parent="."]

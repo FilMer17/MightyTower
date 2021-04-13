@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://graphics/theme/Menu.theme" type="Theme" id=1]
+[ext_resource path="res://graphics/entities/Tree.png" type="Texture" id=2]
 [ext_resource path="res://ui/menu/NewGameMenu.gd" type="Script" id=3]
 [ext_resource path="res://graphics/font/PixelFont.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://graphics/entities/Tree2.png" type="Texture" id=5]
+[ext_resource path="res://graphics/entities/TreeShadow.png" type="Texture" id=6]
+[ext_resource path="res://graphics/entities/Tree3.png" type="Texture" id=7]
+[ext_resource path="res://graphics/buildings/towers/StoneTower.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 1, 1, 1, 1 )
@@ -29,6 +34,46 @@ margin_bottom = 730.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Decoration" type="Position2D" parent="Background"]
+
+[node name="TreeShadow3" type="Sprite" parent="Background/Decoration"]
+self_modulate = Color( 1, 1, 1, 0.705882 )
+position = Vector2( 1078.63, 244.469 )
+scale = Vector2( 2.83579, 2.83579 )
+texture = ExtResource( 6 )
+
+[node name="Tree3" type="Sprite" parent="Background/Decoration"]
+position = Vector2( 1074.9, 202.804 )
+scale = Vector2( 2.83579, 2.83579 )
+texture = ExtResource( 7 )
+
+[node name="StoneTower" type="Sprite" parent="Background/Decoration"]
+position = Vector2( 1115.74, 204.793 )
+scale = Vector2( 2.7548, 2.7548 )
+texture = ExtResource( 8 )
+
+[node name="TreeShadow" type="Sprite" parent="Background/Decoration"]
+self_modulate = Color( 1, 1, 1, 0.705882 )
+position = Vector2( 1161.09, 296.68 )
+scale = Vector2( 2.83579, 2.83579 )
+texture = ExtResource( 6 )
+
+[node name="Tree" type="Sprite" parent="Background/Decoration"]
+position = Vector2( 1156.37, 254.473 )
+scale = Vector2( 2.83579, 2.83579 )
+texture = ExtResource( 2 )
+
+[node name="TreeShadow2" type="Sprite" parent="Background/Decoration"]
+self_modulate = Color( 1, 1, 1, 0.705882 )
+position = Vector2( 1081.95, 327.405 )
+scale = Vector2( 2.83579, 2.83579 )
+texture = ExtResource( 6 )
+
+[node name="Tree2" type="Sprite" parent="Background/Decoration"]
+position = Vector2( 1078.22, 283.314 )
+scale = Vector2( 2.83579, 2.83579 )
+texture = ExtResource( 5 )
 
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5

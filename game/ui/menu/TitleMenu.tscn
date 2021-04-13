@@ -31,35 +31,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TreeShadow" type="Sprite" parent="Background"]
+[node name="Decoration" type="Position2D" parent="Background"]
+
+[node name="TreeShadow" type="Sprite" parent="Background/Decoration"]
 modulate = Color( 1, 1, 1, 0.705882 )
 position = Vector2( 259.214, 587.793 )
 scale = Vector2( 9, 9 )
 texture = ExtResource( 7 )
 
-[node name="TreeShadow2" type="Sprite" parent="Background"]
+[node name="TreeShadow2" type="Sprite" parent="Background/Decoration"]
 modulate = Color( 1, 1, 1, 0.705882 )
 position = Vector2( 388.986, 504.638 )
 scale = Vector2( 9, 9 )
 texture = ExtResource( 7 )
 
-[node name="TreeShadow3" type="Sprite" parent="Background"]
+[node name="TreeShadow3" type="Sprite" parent="Background/Decoration"]
 modulate = Color( 1, 1, 1, 0.705882 )
 position = Vector2( 514.978, 570.154 )
 scale = Vector2( 9, 9 )
 texture = ExtResource( 7 )
 
-[node name="Tree" type="Sprite" parent="Background"]
+[node name="Tree" type="Sprite" parent="Background/Decoration"]
 position = Vector2( 375.127, 362.497 )
 scale = Vector2( 9, 9 )
 texture = ExtResource( 4 )
 
-[node name="Tree2" type="Sprite" parent="Background"]
+[node name="Tree2" type="Sprite" parent="Background/Decoration"]
 position = Vector2( 500.489, 433.224 )
 scale = Vector2( 9, 9 )
 texture = ExtResource( 5 )
 
-[node name="Tree3" type="Sprite" parent="Background"]
+[node name="Tree3" type="Sprite" parent="Background/Decoration"]
 position = Vector2( 246.615, 454.242 )
 scale = Vector2( 9, 9 )
 texture = ExtResource( 1 )

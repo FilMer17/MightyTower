@@ -41,22 +41,23 @@ anchor_left = 0.15
 anchor_top = 0.25
 anchor_right = 0.85
 anchor_bottom = 0.3
-margin_bottom = 310.0
+margin_bottom = 272.0
 custom_constants/separation = 30
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Continue" type="Button" parent="Background/ButtonContainer"]
+margin_top = 39.0
 margin_right = 308.0
-margin_bottom = 53.0
+margin_bottom = 92.0
 text = "Continue"
 
 [node name="SaveGame" type="Button" parent="Background/ButtonContainer"]
-visible = false
-margin_top = 83.0
+margin_top = 122.0
 margin_right = 308.0
-margin_bottom = 136.0
+margin_bottom = 175.0
 text = "Save game"
 
 [node name="Settings" type="Button" parent="Background/ButtonContainer"]
@@ -70,9 +71,9 @@ __meta__ = {
 }
 
 [node name="Exit" type="Button" parent="Background/ButtonContainer"]
-margin_top = 83.0
+margin_top = 205.0
 margin_right = 308.0
-margin_bottom = 136.0
+margin_bottom = 258.0
 text = "Exit"
 [connection signal="pressed" from="Background/ButtonContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="Background/ButtonContainer/SaveGame" to="." method="_on_SaveGame_pressed"]

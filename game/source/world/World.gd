@@ -60,6 +60,8 @@ func save_world_data() -> void:
 	FileSystem.save_world(e_data, "entities")
 	FileSystem.save_world(t_data, "terrain")
 	FileSystem.save_world(s_data, "states", true)
+	
+	console.write("Game saved")
 
 func _create_world_data(size: String, diffic: String = "") -> void:
 	# settings default
