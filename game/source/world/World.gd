@@ -34,6 +34,7 @@ func _ready() -> void:
 func _input(event):
 	if event.is_action_pressed("save_game"):
 		save_world_data()
+		console.write("Game saved")
 
 func save_world_data() -> void:
 	var w_data = GlobalData.world_data
@@ -60,8 +61,6 @@ func save_world_data() -> void:
 	FileSystem.save_world(e_data, "entities")
 	FileSystem.save_world(t_data, "terrain")
 	FileSystem.save_world(s_data, "states", true)
-	
-	console.write("Game saved")
 
 func _create_world_data(size: String, diffic: String = "") -> void:
 	# settings default

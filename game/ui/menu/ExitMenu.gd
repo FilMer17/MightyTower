@@ -9,9 +9,7 @@ func _on_Continue_pressed():
 
 func _on_SaveGame_pressed():
 	Scene.search("World").save_world_data()
-#	visible = false
-#	get_tree().paused = false
-#	mouse_filter = MOUSE_FILTER_IGNORE
+	Scene.search("Console").write("Game saved")
 
 
 func _on_Exit_pressed():
