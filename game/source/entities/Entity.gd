@@ -90,7 +90,7 @@ func _load_entity_state() -> void:
 		progress = cld_bar.get_node("Progress")
 		
 		var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-		font.size = 4
+		font.size = 8
 		
 		progress.visible = false
 		cld_bar.get_node("Countdown").text = "Pick up"
@@ -108,7 +108,7 @@ func _load_entity_state() -> void:
 	progress = cld_bar.get_node("Progress")
 	
 	var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-	font.size = 4
+	font.size = 8
 	
 	var __ = clock.connect("timeout", self, "_on_Mine_cooldown")
 	clock.start()
@@ -183,7 +183,7 @@ func _mine_entity(to_mine: bool) -> void:
 		progress = cld_bar.get_node("Progress")
 		
 		var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-		font.size = 4
+		font.size = 8
 		
 		cld_temp = cooldown.duplicate()
 		var __ = clock.connect("timeout", self, "_on_Mine_cooldown")

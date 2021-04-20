@@ -38,9 +38,9 @@ func _input(event):
 
 func save_world_data() -> void:
 	var w_data = GlobalData.world_data
-	w_data.settings = settings.save_data()
-	w_data.time = time.save_data()
-	w_data.resources = resources.save_data()
+	w_data["settings"] = settings.save_data()
+	w_data["time"] = time.save_data()
+	w_data["resources"] = resources.save_data()
 	
 	var b_data = Scene.search("Buildings").data
 	GlobalData.buildings_data = b_data
@@ -52,9 +52,9 @@ func save_world_data() -> void:
 	GlobalData.terrain_data = t_data
 	
 	var s_data = GlobalData.states_data
-	s_data.entities_state = Scene.search("Entities").states
-	s_data.buildings_state = Scene.search("Buildings").states
-	s_data.happiness = Scene.search("TimeOverview").change
+	s_data["entities_state"] = Scene.search("Entities").states
+	s_data["buildings_state"] = Scene.search("Buildings").states
+	s_data["happiness"] = Scene.search("TimeOverview").change
 	
 	FileSystem.save_world(w_data, "worlddata", true)
 	FileSystem.save_world(b_data, "buildings")

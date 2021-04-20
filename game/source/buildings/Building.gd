@@ -66,7 +66,7 @@ func _ready() -> void:
 		progress = cld_bar.get_node("Progress")
 		
 		var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-		font.size = 5
+		font.size = 10
 		cld_bar.get_node("Countdown").text = ""
 		
 		cld_temp = cooldown.duplicate()
@@ -117,7 +117,7 @@ func _load_building_with_state() -> void:
 			progress = cld_bar.get_node("Progress")
 			
 			var font = cld_bar.get_node("Countdown").get("custom_fonts/font")
-			font.size = 5
+			font.size = 10
 			cld_bar.get_node("Countdown").text = ""
 			
 			cld_temp = buildings.states[position].time

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/HUD/overview/BuildingOverview.gd" type="Script" id=1]
+[ext_resource path="res://graphics/theme/Overview.theme" type="Theme" id=2]
 
 [node name="BuildingOverview" type="Control"]
 anchor_left = 1.0
@@ -8,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -170.0
 margin_bottom = 6.10352e-05
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -15,7 +17,7 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 margin_right = 170.0
-margin_bottom = 207.0
+margin_bottom = 204.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -24,17 +26,17 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 163.0
-margin_bottom = 200.0
+margin_bottom = 197.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="PanelContainer/Container"]
 margin_right = 156.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Building name"
 
 [node name="ItemsContainer" type="VBoxContainer" parent="PanelContainer/Container"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 156.0
-margin_bottom = 18.0
+margin_bottom = 22.0

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://source/buildings/types/Tower.gd" type="Script" id=1]
 [ext_resource path="res://graphics/interface/Light.png" type="Texture" id=2]
-[ext_resource path="res://graphics/buildings/residences/Cube1.png" type="Texture" id=3]
+[ext_resource path="res://graphics/buildings/towers/WoodenTower.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 72.0
@@ -32,9 +32,8 @@ capacity = 2
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
-self_modulate = Color( 0.0431373, 0.12549, 0.34902, 1 )
-position = Vector2( 0, -8 )
-scale = Vector2( 1, 1.5 )
+position = Vector2( 0, -19.3303 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="GUIContainer" type="Node2D" parent="BuildingContainer"]

@@ -2,8 +2,10 @@ extends Node
 
 var world_is_new: bool = true
 
-var world_data: WorldData = WorldData.new()
-var states_data: StatesData = StatesData.new()
+#var world_data: WorldData = WorldData.new()
+#var states_data: StatesData = StatesData.new()
+var world_data: Dictionary = {}
+var states_data: Dictionary = {}
 var buildings_data: Dictionary = {}
 var entities_data: Dictionary = {}
 var terrain_data: Dictionary = {}
@@ -32,9 +34,6 @@ func scan() -> void:
 
 func load_worlds() -> void:
 	worlds.clear()
-	
-#	for file_data in FileSystem.load_dir("user://worlds", ["save", "data"], false):
-#		worlds[file_data.id] = file_data.data
 	
 	var dir = Directory.new()
 	dir.open("user://worlds")

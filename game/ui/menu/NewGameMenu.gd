@@ -28,9 +28,9 @@ func change_validator_data(option: String):
 
 func _on_Play_pressed():
 	var w_data = GlobalData.world_data
-	w_data.world_name = $HBoxContainer/Name.text
-	w_data.world_size = $HBoxContainer/Size.text
-	w_data.world_difficulty = $HBoxContainer/Difficulty.text
+	w_data["world_name"] = $HBoxContainer/Name.text
+	w_data["world_size"] = $HBoxContainer/Size.text
+	w_data["world_difficulty"] = $HBoxContainer/Difficulty.text
 	
 	var dir = Directory.new()
 	dir.open("user://worlds")

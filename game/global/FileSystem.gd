@@ -11,18 +11,18 @@ func save_world(data, file_name: String, full_obj: bool = false) -> void:
 	file.store_var(data, full_obj)
 	file.close()
 
-func get_world_data(world_name: String) -> WorldData:
+func get_world_data(world_name: String) -> Dictionary:
 	var file = File.new()
 	file.open("user://worlds/" + world_name + "/worlddata.save", File.READ)
-	var world_data = file.get_var(true)
-	var world = WorldData.new()
+	var world_data = file.get_var()
+	var world = {}
 	
-	world.world_name = world_data.world_name
-	world.world_size = world_data.world_size
-	world.world_difficulty = world_data.world_difficulty
-	world.settings = world_data.settings
-	world.time = world_data.time
-	world.resources = world_data.resources
+	world["world_name"] = world_data.world_name
+	world["world_size"] = world_data.world_size
+	world["world_difficulty"] = world_data.world_difficulty
+	world["settings"] = world_data.settings
+	world["time"] = world_data.time
+	world["resources"] = world_data.resources
 	
 	return world
 
@@ -47,15 +47,15 @@ func get_buildings(world_name: String) -> Dictionary:
 	
 	return buildings_data
 
-func get_states_data(world_name: String) -> StatesData:
+func get_states_data(world_name: String) -> Dictionary:
 	var file = File.new()
 	file.open("user://worlds/" + world_name + "/states.save", File.READ)
-	var states_data = file.get_var(true)
-	var states = StatesData.new()
+	var states_data = file.get_var()
+	var states = {}
 	
-	states.entities_state = states_data.entities_state
-	states.buildings_state = states_data.buildings_state
-	states.happiness = states_data.happiness
+	states["entities_state"] = states_data.entities_state
+	states["buildings_state"] = states_data.buildings_state
+	states["happiness"] = states_data.happiness
 	
 	return states
 

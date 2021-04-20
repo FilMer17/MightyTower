@@ -2,11 +2,12 @@
 
 [ext_resource path="res://graphics/theme/Info.theme" type="Theme" id=1]
 [ext_resource path="res://ui/game/item/InfoItem.gd" type="Script" id=2]
-[ext_resource path="res://graphics/font/PixelFont.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://graphics/font/WagnerModern-OJE8.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 resource_local_to_scene = true
-size = 10
+size = 12
+use_mipmaps = true
 font_data = ExtResource( 3 )
 
 [node name="InfoItem" type="Panel"]
@@ -21,8 +22,8 @@ __meta__ = {
 
 [node name="Item" type="Label" parent="."]
 anchor_bottom = 1.0
-margin_left = 1.0
-margin_right = 49.0
+margin_left = 0.833145
+margin_right = 48.8331
 text = "stone"
 valign = 1
 __meta__ = {
@@ -30,13 +31,14 @@ __meta__ = {
 }
 
 [node name="Number" type="Label" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
+anchor_left = 0.99828
+anchor_right = 0.99828
 anchor_bottom = 1.0
-margin_left = -38.0
+margin_left = -37.8331
+margin_right = 0.166855
 custom_fonts/font = SubResource( 1 )
 text = "0"
-valign = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
