@@ -21,11 +21,11 @@ node_name = "SmallHouse"
 size = Vector2( 2, 2 )
 cost = {
 "stone": 5,
-"wood": 5
+"wood": 15
 }
 cooldown = {
 "day": 0,
-"hour": 1,
+"hour": 3,
 "minute": 1
 }
 type = 2

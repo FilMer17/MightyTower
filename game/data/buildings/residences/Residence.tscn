@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://source/buildings/types/Residence.gd" type="Script" id=1]
-[ext_resource path="res://graphics/buildings/residences/Cube2.png" type="Texture" id=2]
+[ext_resource path="res://graphics/buildings/residences/Residence.png" type="Texture" id=2]
 [ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=3]
 [ext_resource path="res://graphics/interface/Light.png" type="Texture" id=4]
 
@@ -23,19 +23,22 @@ input_pickable = true
 script = ExtResource( 1 )
 alias = "Residence"
 node_name = "Residence"
-size = Vector2( 2, 2 )
+size = Vector2( 4, 4 )
 cost = {
-"stone": 5,
-"wood": 5
+"coal": 15,
+"gold": 10,
+"iron": 20,
+"stone": 100,
+"wood": 70
 }
 cooldown = {
-"day": 0,
-"hour": 2,
+"day": 1,
+"hour": 6,
 "minute": 1
 }
-food_storage = 100
-material_storage = 50
-people_storage = 5
+food_storage = 300
+material_storage = 200
+people_storage = 10
 
 [node name="BuildingContainer" type="Node2D" parent="."]
 
@@ -45,14 +48,15 @@ people_storage = 5
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
-self_modulate = Color( 0.666667, 0.0470588, 0.0196078, 1 )
 material = SubResource( 1 )
+position = Vector2( 0, 25.9321 )
+scale = Vector2( 0.52, 0.52 )
 texture = ExtResource( 2 )
 
 [node name="GUIContainer" type="Node2D" parent="BuildingContainer"]
 
 [node name="Collider" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 0, 32, -32, 16, 0, 0, 32, 16 )
+polygon = PoolVector2Array( 0, 64, -64, 32, 0, 0, 64, 32 )
 
 [node name="BuildingArea" type="Area2D" parent="."]
 

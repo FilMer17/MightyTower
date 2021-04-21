@@ -16,8 +16,8 @@ onready var area_zone := $Area/Zone
 
 onready var grid := IsoGrid.new()
 onready var map := Scene.search("Map")
-onready var buildings := map.get_node("Buildings")
-onready var terrain := map.get_node("Terrain")
+onready var buildings := Scene.search("Buildings")
+onready var terrain := Scene.search("Terrain")
 
 var in_menu: bool = false
 var is_right_color: bool = false

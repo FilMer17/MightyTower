@@ -18,8 +18,8 @@ material = {
 "coal": 0,
 "gold": 0,
 "iron": 0,
-"stone": 25,
-"wood": 25
+"stone": 0,
+"wood": 0
 }
 
 [node name="Map" parent="." instance=ExtResource( 1 )]

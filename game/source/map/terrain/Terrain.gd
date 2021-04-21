@@ -30,7 +30,7 @@ func load_terrain(t_data: Dictionary) ->  void:
 	draw_terrain()
 
 func _create_noise() -> OpenSimplexNoise:
-#	randomize()
+	randomize()
 	var _noise := OpenSimplexNoise.new()
 	
 	_noise.seed = randi()

@@ -103,6 +103,6 @@ margin_bottom = 55.0
 [node name="GameCamera" parent="." instance=ExtResource( 2 )]
 pause_mode = 1
 current = true
-zoom_step = 0.2
+zoom_step = 0.13
 zoom_max_in = 0.2
 [connection signal="gui_input" from="GameUI/End" to="." method="_on_End_gui_input"]

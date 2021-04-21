@@ -22,8 +22,8 @@ var nodes := {
 	"Map" : "/root/Game/World/Map",
 	"Builder" : "/root/Game/World/Map/Builder",
 	"Terrain" : "/root/Game/World/Map/Terrain",
-	"Entities" : "/root/Game/World/Map/Entities",
-	"Buildings" : "/root/Game/World/Map/Buildings"
+	"Entities" : "/root/Game/World/Map/EntBuild/Entities",
+	"Buildings" : "/root/Game/World/Map/EntBuild/Buildings"
 }
 
 func change(scene_name: String) -> void:

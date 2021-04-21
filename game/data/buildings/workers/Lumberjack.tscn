@@ -2,7 +2,7 @@
 
 [ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=1]
 [ext_resource path="res://source/buildings/types/Worker.gd" type="Script" id=2]
-[ext_resource path="res://graphics/buildings/residences/Cube2.png" type="Texture" id=3]
+[ext_resource path="res://graphics/buildings/workers/Lumberjack.png" type="Texture" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -24,16 +24,16 @@ alias = "Lumberjack"
 node_name = "Lumberjack"
 size = Vector2( 2, 2 )
 cost = {
-"wood": 5
+"wood": 80
 }
 cooldown = {
 "day": 0,
-"hour": 3,
+"hour": 15,
 "minute": 1
 }
 type = 3
 capacity = 3
-help_with_cld = 0.9
+help_with_cld = 0.85
 
 [node name="BuildingContainer" type="Node2D" parent="."]
 
@@ -43,8 +43,9 @@ help_with_cld = 0.9
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
-self_modulate = Color( 0.917647, 0.819608, 0.427451, 1 )
 material = SubResource( 1 )
+position = Vector2( 0, 8 )
+scale = Vector2( 0.43, 0.43 )
 texture = ExtResource( 3 )
 
 [node name="GUIContainer" type="Node2D" parent="BuildingContainer"]

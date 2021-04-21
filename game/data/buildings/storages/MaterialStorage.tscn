@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/buildings/types/Storage.gd" type="Script" id=1]
-[ext_resource path="res://graphics/buildings/residences/Cube1.png" type="Texture" id=2]
+[ext_resource path="res://graphics/buildings/storages/MaterialStorage.png" type="Texture" id=2]
 
 [node name="MaterialStorage" type="StaticBody2D"]
 script = ExtResource( 1 )
@@ -9,15 +9,15 @@ alias = "Material Storage"
 node_name = "MaterialStorage"
 cost = {
 "stone": 5,
-"wood": 5
+"wood": 25
 }
 cooldown = {
 "day": 0,
-"hour": 2,
+"hour": 3,
 "minute": 1
 }
 type = 1
-capacity = 10
+capacity = 25
 usage = 1
 
 [node name="BuildingContainer" type="Node2D" parent="."]
@@ -28,7 +28,8 @@ usage = 1
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
-self_modulate = Color( 0.470588, 0.470588, 0.470588, 1 )
+position = Vector2( 0, 5.5 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 2 )
 
 [node name="GUIContainer" type="Node2D" parent="BuildingContainer"]

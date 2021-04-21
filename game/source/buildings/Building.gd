@@ -211,6 +211,9 @@ func _on_Mouse_exited() -> void:
 func _change_building_overview() -> void:
 	pass
 
+func _change_buy_option() -> void:
+	pass
+
 func _enter_tree():
 	if not $BuildingContainer:
 		build_cont = Node2D.new()

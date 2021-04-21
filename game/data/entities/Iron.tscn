@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://source/entities/Entity.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://graphics/entities/Iron.png" type="Texture" id=2]
+[ext_resource path="res://graphics/entities/RockShadow.png" type="Texture" id=3]
 
 [node name="Iron" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,9 +19,16 @@ cooldown = {
 [node name="Clock" type="Timer" parent="."]
 wait_time = 0.3
 
+[node name="Shadow" type="Sprite" parent="."]
+self_modulate = Color( 0.564706, 0.564706, 0.564706, 0.470588 )
+position = Vector2( -0.312498, 6.375 )
+rotation = 0.172788
+scale = Vector2( 0.42, 0.25 )
+texture = ExtResource( 3 )
+
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 8 )
-scale = Vector2( 0.125, 0.25 )
+position = Vector2( 0.5, 5.5 )
+scale = Vector2( 0.32, 0.32 )
 texture = ExtResource( 2 )
 
 [node name="MenuContainer" type="Node2D" parent="."]

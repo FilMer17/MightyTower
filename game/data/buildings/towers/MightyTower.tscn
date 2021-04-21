@@ -1,23 +1,27 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://source/buildings/types/Tower.gd" type="Script" id=1]
-[ext_resource path="res://graphics/interface/Light.png" type="Texture" id=2]
-[ext_resource path="res://graphics/buildings/towers/StoneTower.png" type="Texture" id=3]
+[ext_resource path="res://graphics/interface/Light.png" type="Texture" id=1]
+[ext_resource path="res://graphics/buildings/towers/StoneTower.png" type="Texture" id=2]
+[ext_resource path="res://source/buildings/types/Tower.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 40.0
 height = 16.0
 
-[node name="StoneTower" type="StaticBody2D"]
-script = ExtResource( 1 )
-alias = "Stone Tower"
-node_name = "StoneTower"
+[node name="MightyTower" type="StaticBody2D"]
+script = ExtResource( 3 )
+alias = "Mighty Tower"
+node_name = "MightyTower"
 size = Vector2( 2, 2 )
 cost = {
-
+"coal": 50,
+"gold": 70,
+"iron": 100,
+"stone": 200,
+"wood": 50
 }
 cooldown = {
-"day": 1,
+"day": 3,
 "hour": 1,
 "minute": 1
 }
@@ -31,8 +35,9 @@ type = 5
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
-position = Vector2( 0, -6 )
-texture = ExtResource( 3 )
+position = Vector2( 0, -9.19599 )
+scale = Vector2( 1, 1.09987 )
+texture = ExtResource( 2 )
 
 [node name="GUIContainer" type="Node2D" parent="BuildingContainer"]
 
@@ -48,8 +53,7 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="Light" type="Light2D" parent="."]
-visible = false
-position = Vector2( 1.90735e-06, 16 )
-scale = Vector2( 7.38462, 6.15385 )
-texture = ExtResource( 2 )
+position = Vector2( 0, 6.70288 )
+scale = Vector2( 260.368, 188.598 )
+texture = ExtResource( 1 )
 mode = 2

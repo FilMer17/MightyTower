@@ -2,10 +2,11 @@
 
 [ext_resource path="res://graphics/theme/Menu.theme" type="Theme" id=1]
 [ext_resource path="res://ui/menu/LoadGameMenu.gd" type="Script" id=2]
-[ext_resource path="res://graphics/entities/Rock.png" type="Texture" id=3]
+[ext_resource path="res://graphics/entities/Coal.png" type="Texture" id=3]
 [ext_resource path="res://graphics/entities/Tree.png" type="Texture" id=4]
 [ext_resource path="res://graphics/entities/Tree2.png" type="Texture" id=5]
 [ext_resource path="res://graphics/entities/TreeShadow.png" type="Texture" id=6]
+
 
 [node name="LoadGameMenu" type="Control"]
 anchor_right = 1.0

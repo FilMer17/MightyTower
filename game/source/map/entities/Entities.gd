@@ -8,9 +8,11 @@ onready var sprites := {
 	"tree2" : preload("res://graphics/entities/Tree2.png"),
 	"tree3" : preload("res://graphics/entities/Tree3.png"),
 	"rock1" : preload("res://graphics/entities/Rock.png"),
-	"coal1" : preload("res://icon.png"),
-	"gold1" : preload("res://icon.png"),
-	"iron1" : preload("res://icon.png")
+	"rock2" : preload("res://graphics/entities/Rock2.png"),
+	"rock3" : preload("res://graphics/entities/Rock3.png"),
+	"coal1" : preload("res://graphics/entities/Coal.png"),
+	"gold1" : preload("res://graphics/entities/Gold.png"),
+	"iron1" : preload("res://graphics/entities/Iron.png")
 }
 
 var data: Dictionary = {}
@@ -51,7 +53,7 @@ func place_on_stone(pos: Vector2) -> void:
 		data[pos] = { "type" : "Gold", "sprite" : "gold" + str(1)}
 
 func _create_noise() -> OpenSimplexNoise:
-#	randomize()
+	randomize()
 	var _noise := OpenSimplexNoise.new()
 	
 	_noise.seed = randi()
@@ -88,7 +90,7 @@ func _get_entity_data(_terrain: int, noise_sample: float) -> Dictionary:
 	
 	if noise_sample > -0.2 and noise_sample < -0.1:
 		if not rnum == 1 and _terrain == 0:
-			return { "type" : "Rock", "sprite" : "rock" + str(1) }
+			return { "type" : "Rock", "sprite" : "rock" + str(rsprite_num) }
 	if noise_sample > 0 and noise_sample < 0.125:
 		if not rnum == 1 and _terrain == 0:
 			return { "type" : "Tree", "sprite" : "tree" + str(rsprite_num) }

@@ -52,6 +52,11 @@ func _on_Area_exited(_area: Area2D) -> void:
 	if _area.get_parent().name == "Builder":
 		builder.emit_signal("exited_build_area")
 
+func _building_is_built() -> void:
+	._building_is_built()
+	if node_name == "MightyTower":
+		Scene.search("Game").end_game(true)
+
 func _change_building_overview() -> void:
 	var infos := {
 		"title" : alias,

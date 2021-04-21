@@ -38,6 +38,18 @@ func _building_is_built() -> void:
 		resources.add_resource("max_amount", material_storage, "material")
 		resources.add_resource("max_amount", people_storage, "people")
 		resources.add_resource("food", food_storage)
+		
+		if GlobalData.world_is_new and buildings.get_child_count() <= 1:
+			match GlobalData.world_data.world_difficulty:
+				"EASY":
+					resources.add_resource("material", 100, "wood")
+					resources.add_resource("material", 100, "stone")
+				"MEDIUM":
+					resources.add_resource("material", 75, "wood")
+					resources.add_resource("material", 75, "stone")
+				"HARD":
+					resources.add_resource("material", 50, "wood")
+					resources.add_resource("material", 50, "stone")
 	
 	._building_is_built()
 	

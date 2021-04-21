@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/buildings/types/Storage.gd" type="Script" id=1]
-[ext_resource path="res://graphics/buildings/residences/Cube1.png" type="Texture" id=2]
+[ext_resource path="res://graphics/buildings/storages/FoodStorage.png" type="Texture" id=2]
 [ext_resource path="res://graphics/shader/BuildingHover.shader" type="Shader" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -19,15 +19,15 @@ script = ExtResource( 1 )
 alias = "Food Storage"
 node_name = "FoodStorage"
 cost = {
-
+"wood": 20
 }
 cooldown = {
 "day": 0,
-"hour": 0,
-"minute": 40
+"hour": 2,
+"minute": 30
 }
 type = 1
-capacity = 1
+capacity = 20
 
 [node name="BuildingContainer" type="Node2D" parent="."]
 
@@ -37,8 +37,9 @@ capacity = 1
 wait_time = 0.3
 
 [node name="Sprite" type="Sprite" parent="BuildingContainer"]
-self_modulate = Color( 0, 0.882353, 1, 1 )
 material = SubResource( 1 )
+position = Vector2( 0, 5.50008 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 2 )
 
 [node name="GUIContainer" type="Node2D" parent="BuildingContainer"]

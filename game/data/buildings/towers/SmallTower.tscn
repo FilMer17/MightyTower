@@ -13,12 +13,12 @@ script = ExtResource( 1 )
 alias = "Small Tower"
 node_name = "SmallTower"
 cost = {
-"stone": 15,
-"wood": 5
+"stone": 10,
+"wood": 30
 }
 cooldown = {
 "day": 0,
-"hour": 0,
+"hour": 8,
 "minute": 1
 }
 type = 5
